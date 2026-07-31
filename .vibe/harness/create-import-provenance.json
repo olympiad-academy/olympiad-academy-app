@@ -1,0 +1,44 @@
+{
+  "schemaVersion": "vibe-engineer.create-import-provenance.v1",
+  "repo": "olympiad-academy-app",
+  "mode": "create",
+  "vibeConfig": {
+    "path": "vibe-engineer.config.json",
+    "agenticHarness": "pi"
+  },
+  "selectedHarnessMetadata": {
+    "path": ".vibe/harness/selected-harness.json",
+    "adapterId": "pi",
+    "noFallbackToPi": true
+  },
+  "cliResult": {
+    "schemaVersion": "vibe-engineer.cli.result.v1",
+    "emittedBy": "create/import"
+  },
+  "sourceIdentity": {
+    "package": "vibe-engineer",
+    "packageVersion": "unknown",
+    "generator": "packages/cli/src/commands/create/selected-harness.ts",
+    "currentSourceRequired": true,
+    "importAdoptionRecordRequired": false
+  },
+  "starterOrImportBaseline": {
+    "type": "current-source-starter-template",
+    "starterScope": "default",
+    "baseline": "current packages/cli/templates/starter materialized before first create git commit"
+  },
+  "nativeAssetManifest": {
+    "path": ".vibe/harness/native-asset-manifest.json"
+  },
+  "wrongHarnessAbsence": {
+    "checked": [".claude", ".codex"],
+    "passed": true
+  },
+  "claudeCommandsOnlyBaseline": {
+    "applies": false,
+    "skillsRequired": false,
+    "requiredCommands": []
+  },
+  "reviewedDeviationRecords": [],
+  "verdict": "pass"
+}

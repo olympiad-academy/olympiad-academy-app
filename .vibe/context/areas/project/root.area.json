@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "vibe-engineer.atlas-area.v1",
+  "carrierKind": "atlas_area",
+  "reservedNamespace": "project",
+  "folder": "",
+  "mapRef": {
+    "path": "MAP.md",
+    "id": "project-root-map",
+    "digest": "f1fccbae9ecb34f51921c53e358a55ee02cffaf4e30f8f6e923e6bde455c6953"
+  },
+  "contextRef": {
+    "path": "CONTEXT.md",
+    "id": "project-root-context",
+    "digest": "f321f190695bc273261bb1c75a5ff05398bc25995c57cf591b9a138e2fddde1f"
+  },
+  "childFolders": [],
+  "childTopics": [],
+  "treeFingerprint": "73bee9dfa2565e9bacdc04f34545c69404d350b091581608fc3008e9c65babf8"
+}

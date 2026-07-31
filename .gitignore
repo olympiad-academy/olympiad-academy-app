@@ -1,0 +1,86 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+coverage/
+.turbo/
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local env / machine files
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+
+# Durable workflow memory (DL-33): canonical JSON, digests, lineage, and
+# retention manifests under .vibe/work/** and .vibe/evidence/**/*.json are
+# intentionally tracked. Ignore only bulky archive-tier sidecars/objects.
+.vibe/archive/**
+.vibe/evidence/**/sidecars/**
+.vibe/evidence/**/*.png
+.vibe/evidence/**/*.jpg
+.vibe/evidence/**/*.jpeg
+.vibe/evidence/**/*.gif
+.vibe/evidence/**/*.webp
+.vibe/evidence/**/*.mp4
+.vibe/evidence/**/*.webm
+.vibe/evidence/**/*.mov
+.vibe/evidence/**/*.zip
+.vibe/evidence/**/*.tar
+.vibe/evidence/**/*.gz
+.vibe/evidence/**/*.har
+.vibe/evidence/**/*.trace
+.vibe/evidence/**/*.bin
+
+# Release JSON summaries/manifests remain versioned; bulky package sidecars do not.
+.vibe/release/**/*.tgz
+.vibe/release/**/*.zip
+.vibe/release/**/*.tar
+.vibe/release/**/*.gz
+.vibe/release/**/sidecars/**
+
+# Native/mobile generated build products
+.expo/
+apps/mobile/.expo/
+ios/build/
+android/.gradle/
+android/app/build/
+
+# vibe-engineer:local-qa-ignore:start
+# Local DB/data stores
+.data/
+data/
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+apps/api/prisma/*.db
+apps/api/prisma/*.sqlite
+
+# Tool/build caches
+.cache/
+**/.cache/
+.vite/
+apps/web/dist/
+apps/api/dist/
+
+# Generated local evidence/work caches
+.vibe/evidence/**
+!.vibe/evidence/
+!.vibe/evidence/README.md
+.vibe/work/**
+!.vibe/work/
+!.vibe/work/README.md
+.vibe/cache/
+.vibe/tmp/
+# vibe-engineer:local-qa-ignore:end

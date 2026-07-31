@@ -1,0 +1,43 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactKind": "context_area",
+  "areaId": "bootstrap",
+  "title": "Bootstrap Project Context",
+  "owner": "vibe-engineer-context",
+  "level": 1,
+  "mandatory": true,
+  "sourceRefs": [
+    "src:bootstrap-brief"
+  ],
+  "context": [
+    {
+      "contextId": "ctx:bootstrap:setup",
+      "level": 1,
+      "mandatory": true,
+      "text": "Project 'olympiad-academy-app' initialized with selected agentic harness 'pi'. Brief status: skipped.",
+      "sourceRefs": [
+        "src:bootstrap-brief"
+      ],
+      "citationRefs": [
+        "src:bootstrap-brief:sha256"
+      ]
+    }
+  ],
+  "scope": {
+    "kind": "repo",
+    "paths": [
+      "."
+    ],
+    "description": "Domain-neutral bootstrap project context (DL-17)."
+  },
+  "updateMetadata": {
+    "invalidationStatus": "current"
+  },
+  "driftMetadata": {
+    "driftStatus": "clean",
+    "sourceRefs": [
+      "src:bootstrap-brief"
+    ]
+  },
+  "schemaRef": "https://schemas.vibe-engineer.dev/context/v1/context-area.schema.json"
+}

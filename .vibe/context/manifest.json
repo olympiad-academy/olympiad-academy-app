@@ -1,0 +1,9 @@
+{
+  "schemaStatus": "needs_user_context",
+  "inferenceLimit": "intentional-neutral-placeholders-only",
+  "starterSurface": {
+    "publicEndpoints": ["/health", "/health/ready"],
+    "notes": "Bootstrap context placeholder per DL-17. No business domain, roadmap, users, schema, demo data, or static store is inferred."
+  },
+  "vibeAreas": ["context", "work", "evidence", "registry"]
+}

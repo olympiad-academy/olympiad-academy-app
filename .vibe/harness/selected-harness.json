@@ -1,0 +1,1342 @@
+{
+  "schemaVersion": "vibe-engineer.selected-harness.v1",
+  "generatedAt": "2026-07-31T16:07:19.673Z",
+  "producer": {
+    "kind": "agent",
+    "id": "i-15a-create-command",
+    "name": "vibe-engineer",
+    "version": "unknown",
+    "runId": "eda3d70c-85a2-470d-847d-b2f0aec0da4e"
+  },
+  "project": {
+    "name": "olympiad-academy-app",
+    "slug": "olympiad-academy-app",
+    "briefStatus": "skipped"
+  },
+  "adapter": {
+    "id": "pi",
+    "displayName": "Pi Coding Agent",
+    "capabilityMatrixSchemaVersion": "vibe-harness-adapter-contract/v1",
+    "adapterCapabilityVersion": "pi-adapter-capability-matrix/v1",
+    "generatedFileManifestVersion": "pi-generated-file-manifest/v1",
+    "noFallbackToPi": true
+  },
+  "config": {
+    "agenticHarness": "pi",
+    "supportedHarnesses": ["pi", "claude-code", "codex"],
+    "noSilentFallback": true
+  },
+  "assetWriter": {
+    "strategy": "pi-native-assets-and-context",
+    "contextFiles": ["AGENTS.md", "CLAUDE.md"],
+    "nativeAssetFamilies": ["pi-skill-files", "pi-prompt-templates"],
+    "piSkillPromptFamilies": ["pi-skill-files", "pi-prompt-templates"],
+    "governedCapabilityAssetFamily": "pi-governed-capability-skills",
+    "blockedAssetFamilies": ["pi-extensions", "pi-package-manifest", "agents", "plan-mode"],
+    "unsupportedFeaturePolicy": "block",
+    "noFallbackToPi": true
+  },
+  "governedCapabilities": {
+    "authority": "docs/decisions/DL-25-skill-protocols-v2.md#7",
+    "family": "pi-governed-capability-skills",
+    "noFallbackToPi": true,
+    "liveExecution": "pending-live",
+    "catalog": [
+      {
+        "capabilityId": "grilling",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/grilling/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "research",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/research/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "prototype",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/prototype/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "domain-modeling",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/domain-modeling/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "diagnosing-bugs",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/diagnosing-bugs/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "tdd",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/tdd/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "code-review",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/code-review/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "codebase-design",
+        "role": "model_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/codebase-design/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "wayfinder",
+        "role": "advanced_entrypoint",
+        "invocationPolicy": "user_invoked",
+        "nativePath": ".pi/skills/wayfinder/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "triage",
+        "role": "advanced_entrypoint",
+        "invocationPolicy": "user_invoked",
+        "nativePath": ".pi/skills/triage/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "handoff",
+        "role": "advanced_entrypoint",
+        "invocationPolicy": "user_invoked",
+        "nativePath": ".pi/skills/handoff/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "improve-codebase-architecture",
+        "role": "advanced_entrypoint",
+        "invocationPolicy": "user_invoked",
+        "nativePath": ".pi/skills/improve-codebase-architecture/SKILL.md",
+        "kind": "pi_capability_skill"
+      },
+      {
+        "capabilityId": "writing-great-skills",
+        "role": "internal_authoring_discipline",
+        "invocationPolicy": "model_invoked",
+        "nativePath": ".pi/skills/writing-great-skills/SKILL.md",
+        "kind": "pi_capability_skill"
+      }
+    ]
+  },
+  "generatedFileManifest": {
+    "schemaVersion": "vibe-harness-generated-file-manifest/v1",
+    "adapterCapabilityVersion": "vibe-harness-adapter-contract/v1",
+    "noFallbackToPi": true,
+    "families": [
+      {
+        "familyId": "harness-config",
+        "pathPatterns": ["generated harness config field: agenticHarness=pi"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writeGeneratedArtifacts",
+        "reason": "Create/import records the selected adapter id in vibe-engineer.config.json.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "context-files",
+        "pathPatterns": ["AGENTS.md", "CLAUDE.md"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writeGeneratedArtifacts",
+        "reason": "Existing Pi behavior emits both context files.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "pi-skill-files",
+        "pathPatterns": [".pi/skills/<skill>/SKILL.md"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writePiHarnessAssets",
+        "reason": "Existing Pi behavior emits six validated skill files.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "pi-prompt-templates",
+        "pathPatterns": [".pi/prompts/vibe-<skill>.md"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writePiHarnessAssets",
+        "reason": "Existing Pi behavior emits six validated prompt templates.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "selected-harness-metadata",
+        "pathPatterns": [".vibe/harness/selected-harness.json"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writeGeneratedArtifacts",
+        "reason": "Create/import emits machine-readable selected harness metadata, native/blocked asset assertions, and runtime prerequisite diagnostics.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "selected-harness-guidance",
+        "pathPatterns": [".vibe/harness/README.md", ".vibe/harness/handoff.md"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writeGeneratedArtifacts",
+        "reason": "Create/import emits human-readable security, trust, unsupported-surface, and task/plan/build/ship handoff guidance for the selected harness.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "runner-catalog-harness-metadata",
+        "pathPatterns": [".vibe/registry/runner-catalog.json#vibeEngineerHarness"],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writeGeneratedArtifacts",
+        "reason": "Generated starter runner catalog entries carry selected-harness contract states, live invocation placeholders, dirty-tree runner expectations, and no-Pi-fallback assertions.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "starter-preset-harness-metadata",
+        "pathPatterns": [
+          ".vibe/generated/nest-react-rn-preset/manifest.json#layout.agenticHarness"
+        ],
+        "support": "ready",
+        "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+        "writer": "writeGeneratedArtifacts",
+        "reason": "Generated starter preset metadata is rewritten to the selected harness instead of retaining the pi template default.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "pi-extensions",
+        "pathPatterns": [".pi/extensions/<name>.ts"],
+        "support": "blocked",
+        "producedByLane": "future-adapter-lane",
+        "writer": "none",
+        "reason": "Executable Pi extensions are blocked until runtime/security proof exists.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      },
+      {
+        "familyId": "pi-package-manifest",
+        "pathPatterns": ["package.json#pi"],
+        "support": "blocked",
+        "producedByLane": "future-adapter-lane",
+        "writer": "none",
+        "reason": "Pi package manifest generation is blocked for create/import.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ],
+        "noFallbackToPi": true
+      }
+    ]
+  },
+  "selectedOwnedFamilies": [
+    {
+      "familyId": "context-files",
+      "pathPatterns": ["AGENTS.md", "CLAUDE.md"],
+      "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+      "support": "ready",
+      "reason": "Context file family is ready as manifest data; actual starter/create writes belong to I-15A.",
+      "evidenceRefs": [],
+      "noFallbackToPi": true
+    },
+    {
+      "familyId": "harness-config",
+      "pathPatterns": [
+        "generated harness config field: agenticHarness=pi",
+        "generated harness config field: adapterCapabilityVersion",
+        "generated harness config field: generatedFileManifestVersion"
+      ],
+      "producedByLane": "I-15A-create-import-cli-ux-selected-harness",
+      "support": "ready",
+      "reason": "Config metadata is ready for downstream consumption after this manifest validates; create/import behavior remains I-15A-owned.",
+      "evidenceRefs": [],
+      "noFallbackToPi": true
+    }
+  ],
+  "contract": {
+    "schemaVersion": "vibe-harness-adapter-contract/v1",
+    "adapterId": "pi",
+    "noFallbackToPi": true,
+    "surfaceStates": {
+      "contextFiles": {
+        "support": "ready",
+        "summary": "Pi project context uses AGENTS.md and optional CLAUDE.md.",
+        "downstreamConsequence": "Create/import may emit the existing Pi context files.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "nativeSkills": {
+        "support": "ready",
+        "summary": "Agent Skills-compatible .pi/skills/<skill>/SKILL.md resources expose the six skills.",
+        "downstreamConsequence": "Create/import may copy validated Pi skill templates through writePiHarnessAssets.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "nativeCommands": {
+        "support": "ready",
+        "summary": "Pi exposes generated skills as /skill:<skill> slash commands from .pi/skills resources.",
+        "downstreamConsequence": "Pi command affordances may be documented only for the generated Pi skill assets.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "promptTemplates": {
+        "support": "ready",
+        "summary": ".pi/prompts/*.md prompt templates are evidenced.",
+        "downstreamConsequence": "Create/import may copy validated Pi prompt templates through writePiHarnessAssets.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "hooks": {
+        "support": "blocked",
+        "summary": ".pi/extensions hooks are executable and intentionally not generated by create/import.",
+        "downstreamConsequence": "Hook/extension generation must block until a later security/runtime lane proves it.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "plugins": {
+        "support": "blocked",
+        "summary": "Pi package/extension distribution is executable and not generated by create/import.",
+        "downstreamConsequence": "Plugin/package generation must block until trust, install/update, and runtime loading are proven.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "mcp": {
+        "support": "unsupported",
+        "summary": "No Pi MCP generated-resource surface is evidenced for this contract.",
+        "downstreamConsequence": "MCP-dependent generation must block instead of inventing a Pi fallback.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "agents": {
+        "support": "blocked",
+        "summary": "Pi has no built-in agent/subagent surface in current evidence.",
+        "downstreamConsequence": "Agent-dependent generation must block instead of falling back to prompt-only behavior silently.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "planMode": {
+        "support": "blocked",
+        "summary": "Pi has no built-in plan mode in current evidence.",
+        "downstreamConsequence": "Plan-mode behavior must be prompt/extension-built only after separate proof.",
+        "evidence": {
+          "state": "blocked",
+          "source": "existing Pi adapter capability matrix",
+          "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "invocation": {
+        "support": "ready",
+        "summary": "Use pi --approve --no-session --mode json -p for future non-interactive witnesses.",
+        "downstreamConsequence": "Automation must parse JSON events and fail closed on missing final evidence.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "structuredOutput": {
+        "support": "ready",
+        "summary": "Pi has JSON event/RPC carriers but no CLI JSON Schema final-response flag.",
+        "downstreamConsequence": "Structured output requires adapter-side event parsing and schema validation.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      },
+      "verificationRunner": {
+        "support": "pending-live",
+        "summary": "Recommended future runner is pi --approve --no-session --mode json -p <prompt>.",
+        "downstreamConsequence": "Missing binary/auth/unparseable output must produce a blocked missing-prerequisite result with dirty-tree delta evidence included.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements-final/statuses/fix-architecture-runner-dirty-tree-delta.fix.attempt-1.json",
+            "description": "Implementation status for committed/staged/unstaged/untracked architecture-runner delta evidence."
+          },
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements-final/statuses/validate-architecture-runner-dirty-tree-delta.validate.attempt-1.json",
+            "description": "Accepted validation status for dirty-tree architecture-runner facts and no-fallback diagnostics."
+          }
+        ]
+      },
+      "securityTrustPolicy": {
+        "support": "ready",
+        "summary": "Project trust and default-deny command policy are modeled; no OS sandbox is claimed.",
+        "downstreamConsequence": "Generated metadata must expose trust boundaries and keep executable extension/plugin families blocked.",
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      }
+    },
+    "rendererExtensionPoints": [
+      {
+        "rendererId": "renderPiSkill",
+        "adapterId": "pi",
+        "support": "ready",
+        "outputKind": "pi-skill",
+        "generatedAssetFamilies": ["pi-skill-files", "pi-prompt-templates"],
+        "blockedAssetFamilies": ["pi-extensions", "pi-package-manifest", "agents", "plan-mode"],
+        "summary": "Renderer extension point for existing validated Pi skill/prompt template assets.",
+        "implementationBoundary": "The renderer boundary delegates to the existing Pi template/writePiHarnessAssets path; it does not broaden executable extension support.",
+        "noFallbackToPi": true,
+        "evidence": {
+          "state": "known",
+          "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+          "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+        },
+        "evidenceRefs": [
+          {
+            "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+            "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+          },
+          {
+            "path": "packages/adapters/pi/src/capabilities/index.ts",
+            "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+          },
+          {
+            "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+            "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+          }
+        ]
+      }
+    ],
+    "generatedFileManifest": {
+      "schemaVersion": "vibe-harness-generated-file-manifest/v1",
+      "noFallbackToPi": true
+    }
+  },
+  "capabilities": {
+    "contextFiles": {
+      "support": "ready",
+      "summary": "Pi project context uses AGENTS.md and optional CLAUDE.md.",
+      "downstreamConsequence": "Create/import may emit the existing Pi context files.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "nativeSkills": {
+      "support": "ready",
+      "summary": "Agent Skills-compatible .pi/skills/<skill>/SKILL.md resources expose the six skills.",
+      "downstreamConsequence": "Create/import may copy validated Pi skill templates through writePiHarnessAssets.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "nativeCommands": {
+      "support": "ready",
+      "summary": "Pi exposes generated skills as /skill:<skill> slash commands from .pi/skills resources.",
+      "downstreamConsequence": "Pi command affordances may be documented only for the generated Pi skill assets.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "promptTemplates": {
+      "support": "ready",
+      "summary": ".pi/prompts/*.md prompt templates are evidenced.",
+      "downstreamConsequence": "Create/import may copy validated Pi prompt templates through writePiHarnessAssets.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "hooks": {
+      "support": "blocked",
+      "summary": ".pi/extensions hooks are executable and intentionally not generated by create/import.",
+      "downstreamConsequence": "Hook/extension generation must block until a later security/runtime lane proves it.",
+      "evidence": {
+        "state": "blocked",
+        "source": "existing Pi adapter capability matrix",
+        "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "plugins": {
+      "support": "blocked",
+      "summary": "Pi package/extension distribution is executable and not generated by create/import.",
+      "downstreamConsequence": "Plugin/package generation must block until trust, install/update, and runtime loading are proven.",
+      "evidence": {
+        "state": "blocked",
+        "source": "existing Pi adapter capability matrix",
+        "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "mcp": {
+      "support": "unsupported",
+      "summary": "No Pi MCP generated-resource surface is evidenced for this contract.",
+      "downstreamConsequence": "MCP-dependent generation must block instead of inventing a Pi fallback.",
+      "evidence": {
+        "state": "blocked",
+        "source": "existing Pi adapter capability matrix",
+        "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "agents": {
+      "support": "blocked",
+      "summary": "Pi has no built-in agent/subagent surface in current evidence.",
+      "downstreamConsequence": "Agent-dependent generation must block instead of falling back to prompt-only behavior silently.",
+      "evidence": {
+        "state": "blocked",
+        "source": "existing Pi adapter capability matrix",
+        "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "planMode": {
+      "support": "blocked",
+      "summary": "Pi has no built-in plan mode in current evidence.",
+      "downstreamConsequence": "Plan-mode behavior must be prompt/extension-built only after separate proof.",
+      "evidence": {
+        "state": "blocked",
+        "source": "existing Pi adapter capability matrix",
+        "notes": "Pi extension/package, built-in agent/subagent, and built-in plan-mode generation require separate live runtime and security proof."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "invocation": {
+      "support": "ready",
+      "summary": "Use pi --approve --no-session --mode json -p for future non-interactive witnesses.",
+      "downstreamConsequence": "Automation must parse JSON events and fail closed on missing final evidence.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "structuredOutput": {
+      "support": "ready",
+      "summary": "Pi has JSON event/RPC carriers but no CLI JSON Schema final-response flag.",
+      "downstreamConsequence": "Structured output requires adapter-side event parsing and schema validation.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    },
+    "verificationRunner": {
+      "support": "pending-live",
+      "summary": "Recommended future runner is pi --approve --no-session --mode json -p <prompt>.",
+      "downstreamConsequence": "Missing binary/auth/unparseable output must produce a blocked missing-prerequisite result with dirty-tree delta evidence included.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements-final/statuses/fix-architecture-runner-dirty-tree-delta.fix.attempt-1.json",
+          "description": "Implementation status for committed/staged/unstaged/untracked architecture-runner delta evidence."
+        },
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements-final/statuses/validate-architecture-runner-dirty-tree-delta.validate.attempt-1.json",
+          "description": "Accepted validation status for dirty-tree architecture-runner facts and no-fallback diagnostics."
+        }
+      ]
+    },
+    "securityTrustPolicy": {
+      "support": "ready",
+      "summary": "Project trust and default-deny command policy are modeled; no OS sandbox is claimed.",
+      "downstreamConsequence": "Generated metadata must expose trust boundaries and keep executable extension/plugin families blocked.",
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    }
+  },
+  "rendererExtensionPoints": [
+    {
+      "rendererId": "renderPiSkill",
+      "adapterId": "pi",
+      "support": "ready",
+      "outputKind": "pi-skill",
+      "generatedAssetFamilies": ["pi-skill-files", "pi-prompt-templates"],
+      "blockedAssetFamilies": ["pi-extensions", "pi-package-manifest", "agents", "plan-mode"],
+      "summary": "Renderer extension point for existing validated Pi skill/prompt template assets.",
+      "implementationBoundary": "The renderer boundary delegates to the existing Pi template/writePiHarnessAssets path; it does not broaden executable extension support.",
+      "noFallbackToPi": true,
+      "evidence": {
+        "state": "known",
+        "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+        "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+      },
+      "evidenceRefs": [
+        {
+          "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+          "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+        },
+        {
+          "path": "packages/adapters/pi/src/capabilities/index.ts",
+          "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+        },
+        {
+          "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+          "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+        }
+      ]
+    }
+  ],
+  "unsupportedFeatureBehavior": {
+    "policy": "block",
+    "diagnosticCode": "UNSUPPORTED_HARNESS_FEATURE",
+    "message": "Unsupported Pi adapter features block instead of silently no-oping.",
+    "blockedFamilies": ["pi-extensions", "pi-package-manifest", "agents", "plan-mode"]
+  },
+  "runtimePrerequisiteDiagnostic": {
+    "diagnosticCode": "HARNESS_RUNTIME_UNAVAILABLE",
+    "classification": "missing_prerequisite",
+    "binary": "pi",
+    "versionCommand": ["pi", "--version"],
+    "authPrerequisite": "Operator-managed local CLI authentication/subscription is required before any live model/runtime invocation; create/import do not perform auth probes.",
+    "liveProbePolicy": "not-run-by-create-import",
+    "unavailableRuntimeBehavior": "blocked-missing-prerequisite",
+    "message": "Pi CLI/auth/runtime unavailable for selected harness.",
+    "missingBinaryMessage": "Pi Coding Agent binary 'pi' is required for live harness runs; install it or select a supported installed harness explicitly. No Pi fallback is allowed.",
+    "missingAuthMessage": "Pi Coding Agent authentication/subscription is required for live harness runs; authenticate the 'pi' CLI before invoking a live runner. No Pi fallback is allowed.",
+    "noFallbackToPi": true
+  },
+  "invocationModel": {
+    "support": "ready",
+    "binary": "pi",
+    "nonInteractiveCommand": [
+      "pi",
+      "--approve",
+      "--no-session",
+      "--mode",
+      "json",
+      "-p",
+      "<prompt>"
+    ],
+    "interactiveCommand": ["pi"],
+    "projectRootFlag": null,
+    "requiresGitRepository": false,
+    "missingRuntimeDiagnostic": "Pi CLI/auth/runtime unavailable for selected harness.",
+    "evidence": {
+      "state": "known",
+      "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+      "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+    },
+    "evidenceRefs": [
+      {
+        "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+        "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+      },
+      {
+        "path": "packages/adapters/pi/src/capabilities/index.ts",
+        "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+      },
+      {
+        "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+        "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+      }
+    ]
+  },
+  "structuredOutput": {
+    "support": "ready",
+    "strategy": "json-event-parse-and-adapter-validation",
+    "schemaFlag": null,
+    "finalMessageCarrier": "JSON event stream parsed by adapter-side validator",
+    "failClosedWhenMissing": true,
+    "evidence": {
+      "state": "known",
+      "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+      "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+    },
+    "evidenceRefs": [
+      {
+        "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+        "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+      },
+      {
+        "path": "packages/adapters/pi/src/capabilities/index.ts",
+        "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+      },
+      {
+        "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+        "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+      }
+    ]
+  },
+  "verificationRunnerInvocation": {
+    "support": "pending-live",
+    "recommendedCommand": ["pi", "--approve", "--no-session", "--mode", "json", "-p", "<prompt>"],
+    "defaultPermissionMode": "project trust required; default-deny tools unless explicitly allowed",
+    "expectedStructuredOutput": "json-event-parse-and-adapter-validation",
+    "unavailableRuntimeBehavior": "blocked-missing-prerequisite",
+    "evidence": {
+      "state": "known",
+      "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+      "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+    },
+    "evidenceRefs": [
+      {
+        "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+        "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+      },
+      {
+        "path": ".pi/autopilot/vibe-engineer-improvements-final/statuses/fix-architecture-runner-dirty-tree-delta.fix.attempt-1.json",
+        "description": "Implementation status for committed/staged/unstaged/untracked architecture-runner delta evidence."
+      },
+      {
+        "path": ".pi/autopilot/vibe-engineer-improvements-final/statuses/validate-architecture-runner-dirty-tree-delta.validate.attempt-1.json",
+        "description": "Accepted validation status for dirty-tree architecture-runner facts and no-fallback diagnostics."
+      }
+    ],
+    "runnerImplemented": true,
+    "architectureAgentRunnerId": "architecture-agent-review",
+    "implementationBoundary": "Generated starter includes the single default architecture agent runner; invocation uses this selected harness metadata and no Pi fallback."
+  },
+  "securityTrustPolicy": {
+    "support": "ready",
+    "projectTrustRequired": true,
+    "projectContextAutoload": ["AGENTS.md", "CLAUDE.md"],
+    "sandbox": "not provided by Pi; use OS/container sandbox for unattended runs",
+    "permissionModel": "--approve/--no-approve project trust plus adapter default-deny command policy",
+    "credentials": "operator-auth-required",
+    "destructiveOperations": "forbidden",
+    "externalIntegrations": "disabled-by-default",
+    "trustBoundary": "Project-local .pi resources and TypeScript extensions require project trust; create/import emits only non-executable skills/prompts/context.",
+    "evidence": {
+      "state": "known",
+      "source": "extract-harness-cli-evidence + existing @vibe-engineer/adapter-pi manifests",
+      "notes": "Pi 0.80.2 local help and the existing Pi adapter prove AGENTS.md/CLAUDE.md, .pi skills, .pi prompt templates, JSON event mode, RPC, and project-trust semantics; built-in agents and plan mode remain blocked."
+    },
+    "evidenceRefs": [
+      {
+        "path": ".pi/autopilot/vibe-engineer-improvements/evidence/upstream/extract-harness-cli-evidence/harness-adapter-operator-packet.md",
+        "description": "Accepted local CLI evidence packet for Pi, Claude Code, and Codex harness surfaces."
+      },
+      {
+        "path": "packages/adapters/pi/src/capabilities/index.ts",
+        "description": "Existing Pi adapter capability matrix and trust/security manifest contract."
+      },
+      {
+        "path": "packages/adapters/pi/src/generated-file-manifest/index.ts",
+        "description": "Existing Pi generated-file family manifest for context, skills, prompts, extensions, and config."
+      }
+    ]
+  },
+  "handoffInstructions": [
+    {
+      "stepId": "task",
+      "inputArtifact": "raw-intent",
+      "outputArtifact": "work-brief",
+      "nativeCommand": "/skill:task",
+      "promptInstruction": "Normalize exactly one operator request into a Work Brief before planning.",
+      "persistenceRule": "Persist .vibe/work/<work-id>/raw-intent.md when needed and .vibe/work/<work-id>/work-brief.json as the durable output.",
+      "handoffRule": "Hand exactly one Work Brief to plan; do not produce implementation-plan, build-result, or ship-packet in task.",
+      "unsupportedNativeAssetNote": null
+    },
+    {
+      "stepId": "plan",
+      "inputArtifact": "work-brief",
+      "outputArtifact": "implementation-plan-with-verification-delta",
+      "nativeCommand": "/skill:plan",
+      "promptInstruction": "Consume one Work Brief and produce one Implementation Plan with embedded Verification Delta.",
+      "persistenceRule": "Persist .vibe/work/<work-id>/implementation-plan.json; keep status draft until explicit operator approval.",
+      "handoffRule": "Hand an approved persisted plan to build; do not execute build or ship work from plan.",
+      "unsupportedNativeAssetNote": null
+    },
+    {
+      "stepId": "build",
+      "inputArtifact": "approved-implementation-plan",
+      "outputArtifact": "build-result",
+      "nativeCommand": "/skill:build",
+      "promptInstruction": "Implement only the approved plan scope and record deterministic evidence references.",
+      "persistenceRule": "Persist .vibe/work/<work-id>/build-result.json with changed files, evidence refs, and any blockers.",
+      "handoffRule": "Hand the Build Result plus evidence to ship; do not claim release readiness without the persisted packet.",
+      "unsupportedNativeAssetNote": null
+    },
+    {
+      "stepId": "ship",
+      "inputArtifact": "build-result",
+      "outputArtifact": "ship-packet",
+      "nativeCommand": "/skill:ship",
+      "promptInstruction": "Review Build Result evidence and prepare a release/merge handoff packet without inventing missing proofs.",
+      "persistenceRule": "Persist .vibe/work/<work-id>/ship-packet.json with release notes, risks, and final evidence links.",
+      "handoffRule": "Stop if required evidence is missing; do not push, deploy, or open external PRs unless explicitly authorized outside create/import.",
+      "unsupportedNativeAssetNote": null
+    }
+  ],
+  "assertions": {
+    "contextFilesExpected": ["AGENTS.md", "CLAUDE.md"],
+    "piNativeAssetsExpected": true,
+    "sharedPiSkillPromptAssetsExpected": true,
+    "nonPiNativeProjectAssetPolicy": "pi renders every workflow skill/prompt, the project skill, and the governed discipline/entrypoint catalog natively under .pi/; no other harness root is generated",
+    "noFallbackToPi": true,
+    "liveRuntimeUnavailableDiagnostic": "blocked-missing-prerequisite"
+  }
+}

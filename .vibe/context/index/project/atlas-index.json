@@ -1,0 +1,75 @@
+{
+  "schemaVersion": "vibe-engineer.atlas-index.v1",
+  "carrierKind": "atlas_index",
+  "generator": "@vibe-engineer/context atlas projector (VS-21)",
+  "atlasRoot": ".vibe/project",
+  "reservedNamespace": "project",
+  "truthPolicy": "Projection only. Markdown under .vibe/project/ is the sole semantic source; regenerate with `vibe-engineer atlas index`.",
+  "treeFingerprint": "73bee9dfa2565e9bacdc04f34545c69404d350b091581608fc3008e9c65babf8",
+  "documentCount": 2,
+  "folderCount": 1,
+  "documents": [
+    {
+      "id": "project-root-context",
+      "path": "CONTEXT.md",
+      "type": "context",
+      "kind": "context",
+      "folder": "",
+      "status": "exploring",
+      "updated": "2026-07-31",
+      "digest": "f321f190695bc273261bb1c75a5ff05398bc25995c57cf591b9a138e2fddde1f",
+      "approximateBodyTokens": 411,
+      "relations": {
+        "related": [],
+        "dependsOn": [],
+        "supersedes": [],
+        "roadmapRefs": []
+      },
+      "reverseLinks": {
+        "relatedFrom": [],
+        "dependedOnBy": [],
+        "supersededBy": []
+      }
+    },
+    {
+      "id": "project-root-map",
+      "path": "MAP.md",
+      "type": "map",
+      "kind": "map",
+      "folder": "",
+      "status": "exploring",
+      "updated": "2026-07-31",
+      "digest": "f1fccbae9ecb34f51921c53e358a55ee02cffaf4e30f8f6e923e6bde455c6953",
+      "approximateBodyTokens": 75,
+      "relations": {
+        "related": [],
+        "dependsOn": [],
+        "supersedes": [],
+        "roadmapRefs": []
+      },
+      "reverseLinks": {
+        "relatedFrom": [],
+        "dependedOnBy": [],
+        "supersededBy": []
+      }
+    }
+  ],
+  "folders": [
+    {
+      "path": "",
+      "map": {
+        "path": "MAP.md",
+        "id": "project-root-map",
+        "digest": "f1fccbae9ecb34f51921c53e358a55ee02cffaf4e30f8f6e923e6bde455c6953"
+      },
+      "context": {
+        "path": "CONTEXT.md",
+        "id": "project-root-context",
+        "digest": "f321f190695bc273261bb1c75a5ff05398bc25995c57cf591b9a138e2fddde1f"
+      },
+      "childFolders": [],
+      "childTopics": [],
+      "capsuleCitedSources": []
+    }
+  ]
+}

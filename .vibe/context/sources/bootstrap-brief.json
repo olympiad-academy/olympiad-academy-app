@@ -1,0 +1,15 @@
+{
+  "briefStatus": "skipped",
+  "briefText": null,
+  "selectedHarness": "pi",
+  "projectName": "olympiad-academy-app",
+  "projectSlug": "olympiad-academy-app",
+  "producer": {
+    "kind": "agent",
+    "id": "i-15a-create-command",
+    "name": "vibe-engineer",
+    "version": "unknown",
+    "runId": "eda3d70c-85a2-470d-847d-b2f0aec0da4e"
+  },
+  "generatedAt": "2026-07-31T16:07:19.673Z"
+}

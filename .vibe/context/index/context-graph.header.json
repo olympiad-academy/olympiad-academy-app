@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactKind": "context_file_header",
+  "artifactId": "ctx-index-graph",
+  "title": "Context graph header",
+  "createdAt": "2026-06-24T00:00:00.000Z",
+  "updatedAt": "2026-06-24T00:00:00.000Z",
+  "producer": {
+    "kind": "agent",
+    "id": "i-15a-create-command",
+    "name": "vibe-engineer",
+    "version": "unknown",
+    "runId": "eda3d70c-85a2-470d-847d-b2f0aec0da4e"
+  },
+  "status": "current",
+  "ownership": {
+    "ownerLane": "I-08-context-graph-index-drift",
+    "ownedWritePaths": [
+      "packages/context/**",
+      ".vibe/context/schema/**",
+      ".vibe/work/I-08-context-graph-index-drift/**"
+    ],
+    "readOnlyPaths": [
+      "packages/artifacts/**",
+      "packages/config/**"
+    ],
+    "untouchablePaths": [
+      ".git/**",
+      "pnpm-lock.yaml",
+      "package.json",
+      "pnpm-workspace.yaml"
+    ],
+    "concurrencyNotes": "Dirty-tree safe; only explicit I-08 carriers may be written.",
+    "handoffPolicy": "Consumers must use stable ids, citations, and drift findings before relying on context."
+  },
+  "links": [
+    {
+      "rel": "context_for",
+      "artifactKind": "context_file_header",
+      "artifactId": "ctx-index-graph",
+      "path": ".vibe/context/index/ctx-index-graph.json",
+      "required": true,
+      "statusAtLinkTime": "current"
+    }
+  ],
+  "extensions": {
+    "vibe.context": {
+      "schemaVersion": "1.0.0"
+    }
+  },
+  "sourceRefs": [],
+  "contextId": "context-graph-main",
+  "scope": {
+    "kind": "repo",
+    "paths": [
+      "."
+    ],
+    "description": "Domain-neutral repository context."
+  },
+  "owner": "vibe-engineer-context",
+  "dependencies": [],
+  "dependents": [],
+  "relatedDecisions": [],
+  "relatedPlansArtifacts": [],
+  "verificationMetadata": {
+    "lastValidationEvidenceRefs": [],
+    "status": "unknown"
+  },
+  "updateMetadata": {
+    "lastReviewedAt": "2026-06-24T00:00:00.000Z",
+    "lastUpdatedBy": {
+      "kind": "agent",
+      "id": "i-15a-create-command",
+      "name": "vibe-engineer",
+      "version": "unknown",
+      "runId": "eda3d70c-85a2-470d-847d-b2f0aec0da4e"
+    },
+    "updateReason": "context graph/index write"
+  },
+  "driftMetadata": {
+    "driftStatus": "unknown",
+    "lastDriftCheckAt": "2026-06-24T00:00:00.000Z",
+    "evidenceRefs": []
+  },
+  "retrievalHints": [],
+  "summary": "Context graph header"
+}

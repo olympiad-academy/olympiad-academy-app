@@ -1,0 +1,157 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactKind": "context_graph",
+  "graphId": "context-graph-main",
+  "indexVersion": "1.0.0",
+  "producer": {
+    "kind": "agent",
+    "id": "i-15a-create-command",
+    "name": "vibe-engineer",
+    "version": "unknown",
+    "runId": "eda3d70c-85a2-470d-847d-b2f0aec0da4e"
+  },
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "schemaRefs": {
+    "graph": "https://schemas.vibe-engineer.dev/context/v1/context-graph.schema.json",
+    "index": "https://schemas.vibe-engineer.dev/context/v1/context-index.schema.json",
+    "area": "https://schemas.vibe-engineer.dev/context/v1/context-area.schema.json",
+    "summary": "https://schemas.vibe-engineer.dev/context/v1/context-summary.schema.json",
+    "retrievalClosure": "https://schemas.vibe-engineer.dev/context/v1/retrieval-closure.schema.json"
+  },
+  "sources": [
+    {
+      "sourceId": "src:bootstrap-brief",
+      "kind": "source_doc",
+      "path": ".vibe/context/sources/bootstrap-brief.md",
+      "fingerprint": {
+        "algorithm": "sha256",
+        "value": "d26bcf22e1f78ed2751737a7bbbc5b1d2f6bbd890e7ebb1c3d3a0b14233e90a2"
+      },
+      "versionRef": "sha256:d26bcf22e1f78ed2751737a7bbbc5b1d2f6bbd890e7ebb1c3d3a0b14233e90a2",
+      "trust": "trusted",
+      "required": true,
+      "level": 1,
+      "scope": {
+        "kind": "repo",
+        "paths": [
+          ".vibe/context/sources/bootstrap-brief.md"
+        ],
+        "description": "Domain-neutral source context."
+      },
+      "artifactRef": {
+        "artifactKind": "context_file_header",
+        "artifactId": "bootstrap-brief",
+        "path": ".vibe/context/sources/bootstrap-brief.md",
+        "required": true
+      },
+      "citations": [
+        {
+          "citationId": "src:bootstrap-brief:sha256",
+          "sourceId": "src:bootstrap-brief",
+          "path": ".vibe/context/sources/bootstrap-brief.md",
+          "fingerprint": {
+            "algorithm": "sha256",
+            "value": "d26bcf22e1f78ed2751737a7bbbc5b1d2f6bbd890e7ebb1c3d3a0b14233e90a2"
+          }
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "contextId": "ctx:bootstrap",
+      "kind": "area",
+      "areaId": "bootstrap",
+      "title": "Bootstrap Project Context",
+      "level": 1,
+      "mandatory": true,
+      "trust": "trusted",
+      "scope": {
+        "kind": "repo",
+        "paths": [
+          "."
+        ],
+        "description": "Domain-neutral bootstrap project context (DL-17)."
+      },
+      "owner": "vibe-engineer-context",
+      "headerRef": {
+        "artifactId": "ctx-area-bootstrap",
+        "path": ".vibe/context/areas/bootstrap.header.json"
+      },
+      "sourceRefs": [
+        "src:bootstrap-brief"
+      ],
+      "artifactPath": ".vibe/context/areas/bootstrap.context.json"
+    },
+    {
+      "contextId": "ctx-summary:bootstrap-high-level",
+      "kind": "summary",
+      "areaId": "bootstrap",
+      "title": "Bootstrap High-Level Context Summary",
+      "level": 2,
+      "mandatory": false,
+      "trust": "trusted",
+      "scope": {
+        "kind": "repo",
+        "paths": [
+          "."
+        ],
+        "description": "Derived summary context."
+      },
+      "owner": "vibe-engineer-context",
+      "headerRef": {
+        "artifactId": "ctx-summary-bootstrap-high-level",
+        "path": ".vibe/context/summaries/bootstrap-high-level.header.json"
+      },
+      "sourceRefs": [
+        "src:bootstrap-brief"
+      ],
+      "artifactPath": ".vibe/context/summaries/bootstrap-high-level.summary.json",
+      "derivedFromNodeIds": [
+        "ctx:bootstrap"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "from": "ctx:bootstrap",
+      "to": "ctx-summary:bootstrap-high-level",
+      "rel": "summarizes"
+    }
+  ],
+  "links": [
+    {
+      "linkId": "work:bootstrap-create",
+      "kind": "work",
+      "ref": {
+        "artifactKind": "implementation_plan",
+        "artifactId": "ip:bootstrap-create",
+        "path": ".vibe/work/bootstrap/create-result.json"
+      },
+      "required": true,
+      "statusAtLinkTime": "current"
+    },
+    {
+      "linkId": "decision:dl17",
+      "kind": "decision",
+      "ref": {
+        "artifactKind": "context_file_header",
+        "artifactId": "dl:17",
+        "path": "docs/decisions/DL-17-bootstrap-context-generation.md"
+      },
+      "required": true,
+      "statusAtLinkTime": "current"
+    }
+  ],
+  "retrievalPolicy": {
+    "requireTaskScope": true,
+    "mandatoryLevel": 1,
+    "allowedLevels": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ]
+  }
+}

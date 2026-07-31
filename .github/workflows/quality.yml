@@ -1,0 +1,85 @@
+# Generated starter quick gate — deterministic, non-mutating, and intentionally small.
+#
+# This workflow mirrors the local starter proof path:
+#   install -> project-local vibe-engineer smoke -> typecheck/lint/format/test/build.
+# It does NOT run full web E2E, mobile E2E, visual baselines, deploys, or
+# infrastructure mutations by default.
+name: quality
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: generated-starter-quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quick-gate:
+    name: generated starter quick-gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        # actions/checkout@v4.3.1
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Setup pnpm
+        # pnpm/action-setup@v4.1.0
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
+
+      - name: Setup Node
+        # actions/setup-node@v4.4.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: |
+          if [ -f pnpm-lock.yaml ]; then
+            pnpm install --frozen-lockfile
+          else
+            pnpm install --no-frozen-lockfile
+          fi
+
+      - name: Project-local vibe-engineer smoke
+        run: |
+          mkdir -p .vibe/evidence/ci
+          pnpm exec vibe-engineer help --json | tee .vibe/evidence/ci/vibe-engineer-help.json
+          node --input-type=module <<'NODE'
+          import { readFileSync } from "node:fs";
+          const envelope = JSON.parse(readFileSync(".vibe/evidence/ci/vibe-engineer-help.json", "utf8"));
+          const commands = envelope?.payload?.data?.commands;
+          if (!Array.isArray(commands)) throw new Error("help --json did not include command data");
+          const names = commands.map((command) => command.id);
+          const required = ["help", "version", "create", "import", "doctor", "config", "verify", "security", "schematic"];
+          for (const name of required) {
+            if (!names.includes(name)) throw new Error(`missing command ${name}`);
+          }
+          for (const skill of ["brainstorm", "grill-me", "task", "plan", "build", "ship"]) {
+            if (names.includes(skill)) throw new Error(`skill leaked into CLI help: ${skill}`);
+          }
+          NODE
+
+      - name: Starter quick quality
+        run: |
+          set -o pipefail
+          for command in typecheck lint format:check test:unit build quality:quick; do
+            log_name="${command//:/-}"
+            pnpm run "$command" 2>&1 | tee ".vibe/evidence/ci/${log_name}.log"
+          done
+
+      - name: Upload generated-starter CI evidence
+        if: always()
+        # actions/upload-artifact@v4.6.1
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1
+        with:
+          name: generated-starter-ci-evidence-${{ github.run_id }}
+          path: .vibe/evidence/ci
+          if-no-files-found: error
+          retention-days: 14

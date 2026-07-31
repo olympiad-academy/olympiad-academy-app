@@ -1,0 +1,22 @@
+// Prisma schema for the @olympiad-academy-app/api app.
+// The starter ships one domain-neutral infrastructure table so Prisma Client is generated
+// and typecheckable before product features add their own schematic-owned models.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model SystemMetadata {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+// vibe-engineer:prisma-generated-models:start
+// Generated Prisma model sections owned by vibe-engineer schematics are inserted above the end marker.
+// vibe-engineer:prisma-generated-models:end

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": "vibe-engineer.starter-readiness/2.0.0",
+  "kind": "starter-readiness-descriptor",
+  "descriptorId": "starter-readiness",
+  "title": "Starter readiness verification descriptor",
+  "note": "This is a starter-local readiness descriptor, NOT an artifact-chain Implementation Plan. It names the deterministic gate layers run by `.tooling/scripts/starter-verify-runner.mjs <layer>`; it is NOT passed to `vibe-engineer verify`. `vibe-engineer verify --implementation-plan <path>` consumes ONLY a real, operator-approved Implementation Plan 2.0.0 (a v2-only intake gate runs first); pointing verify at this descriptor fails closed with the stable CLI code VE_VERIFY_PLAN_INTAKE_VERSION_REJECTED (typed gate code ARTIFACT_KIND_MISMATCH). A real Implementation Plan 2.0.0 is produced by the plan skill for actual work, never shipped as a starter fixture.",
+  "evidencePacketSchema": "2.0.0",
+  "objective": "Run the generated starter's deterministic local-only quality gates through `.tooling/scripts/starter-verify-runner.mjs <layer>`; this is not public, live, package, hosted, or product proof.",
+  "scope": [
+    "apps",
+    "packages",
+    ".tooling/scripts/starter-verify-runner.mjs",
+    ".vibe/registry/runner-catalog.json"
+  ],
+  "nonScope": [
+    "external deployment",
+    "device/browser E2E",
+    "model-backed/live agent architecture review"
+  ],
+  "readinessGates": [
+    {
+      "layer": "typecheck",
+      "runnerId": "starter:typecheck",
+      "blocking": true,
+      "evidenceArtifact": ".vibe/evidence/vibe-runner/typecheck.json",
+      "evidencePacketSchema": "2.0.0"
+    },
+    {
+      "layer": "lint_format",
+      "runnerId": "starter:lint-format",
+      "blocking": true,
+      "evidenceArtifact": ".vibe/evidence/vibe-runner/lint_format.json",
+      "evidencePacketSchema": "2.0.0"
+    },
+    {
+      "layer": "unit",
+      "runnerId": "starter:unit",
+      "blocking": true,
+      "evidenceArtifact": ".vibe/evidence/vibe-runner/unit.json",
+      "evidencePacketSchema": "2.0.0"
+    },
+    {
+      "layer": "build_package",
+      "runnerId": "starter:build-package",
+      "blocking": true,
+      "evidenceArtifact": ".vibe/evidence/vibe-runner/build_package.json",
+      "evidencePacketSchema": "2.0.0"
+    }
+  ],
+  "notApplicableLayers": [
+    {
+      "layer": "safety_hooks",
+      "rationale": "No generated safety hook runner; add one per-project when needed."
+    },
+    {
+      "layer": "mechanical_gate",
+      "rationale": "Deterministic package gates fail closed on runner/evidence errors; no separate mechanical gate is generated."
+    },
+    {
+      "layer": "integration",
+      "rationale": "The starter self-check starts no external services."
+    },
+    {
+      "layer": "contract_adapter",
+      "rationale": "Compile/unit coverage covers generated contracts; no separate adapter runner is generated."
+    },
+    {
+      "layer": "e2e",
+      "rationale": "Full E2E is excluded from the default local verify command."
+    },
+    {
+      "layer": "ui_verification",
+      "rationale": "Browser/device UI verification is excluded from the default local verify command."
+    },
+    {
+      "layer": "ai_eval",
+      "rationale": "No AI evaluation runner is generated for the starter self-check."
+    },
+    {
+      "layer": "context_drift",
+      "rationale": "No separate context drift runner is generated for the starter self-check."
+    },
+    {
+      "layer": "observability",
+      "rationale": "No observability runner is generated for the starter self-check."
+    },
+    {
+      "layer": "advisory_review",
+      "rationale": "architecture-agent-review is a separate selected-harness surface; live/model-backed review is outside this deterministic offline readiness verify."
+    },
+    {
+      "layer": "final_dod",
+      "rationale": "Only local deterministic starter DoD is recorded; public/live/package/product DoD requires separate evidence."
+    },
+    {
+      "layer": "schema_validation",
+      "rationale": "The starter descriptor and evidence packets are schema-validated by vibe-engineer verify at execution time."
+    }
+  ],
+  "durableMemory": {
+    "note": "Evidence Packet 2.0.0 JSON + digests are tracked; only archive-tier bulky sidecars are ignored (DL-33 two-tier).",
+    "carrier": ".vibe/evidence"
+  },
+  "rerunHints": ["Use --rerun-of with a prior run-id when comparing readiness attempts."]
+}

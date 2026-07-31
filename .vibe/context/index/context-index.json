@@ -1,0 +1,58 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactKind": "context_index",
+  "indexId": "context-index-main",
+  "indexVersion": "1.0.0",
+  "producer": {
+    "kind": "agent",
+    "id": "i-15a-create-command",
+    "name": "vibe-engineer",
+    "version": "unknown",
+    "runId": "eda3d70c-85a2-470d-847d-b2f0aec0da4e"
+  },
+  "generatedAt": "2026-06-24T00:00:00.000Z",
+  "graphRef": {
+    "graphId": "context-graph-main",
+    "path": ".vibe/context/index/context-graph.json",
+    "headerPath": ".vibe/context/index/context-graph.header.json"
+  },
+  "headerRef": {
+    "artifactId": "ctx-index-main",
+    "path": ".vibe/context/index/context-index.header.json"
+  },
+  "nodeRefs": [
+    {
+      "contextId": "ctx:bootstrap",
+      "areaId": "bootstrap",
+      "level": 1,
+      "mandatory": true,
+      "path": ".vibe/context/areas/bootstrap.context.json",
+      "headerPath": ".vibe/context/areas/bootstrap.header.json",
+      "sourceRefs": [
+        "src:bootstrap-brief"
+      ]
+    },
+    {
+      "contextId": "ctx-summary:bootstrap-high-level",
+      "areaId": "bootstrap",
+      "level": 2,
+      "mandatory": false,
+      "path": ".vibe/context/summaries/bootstrap-high-level.summary.json",
+      "headerPath": ".vibe/context/summaries/bootstrap-high-level.header.json",
+      "sourceRefs": [
+        "src:bootstrap-brief"
+      ]
+    }
+  ],
+  "sourceRefs": [
+    {
+      "sourceId": "src:bootstrap-brief",
+      "path": ".vibe/context/sources/bootstrap-brief.md",
+      "fingerprint": {
+        "algorithm": "sha256",
+        "value": "d26bcf22e1f78ed2751737a7bbbc5b1d2f6bbd890e7ebb1c3d3a0b14233e90a2"
+      }
+    }
+  ],
+  "schemaRef": "https://schemas.vibe-engineer.dev/context/v1/context-index.schema.json"
+}

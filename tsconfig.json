@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "files": [],
+  "references": [
+    {
+      "path": "./apps/api"
+    },
+    {
+      "path": "./apps/web"
+    },
+    {
+      "path": "./apps/mobile"
+    },
+    {
+      "path": "./packages/domain"
+    },
+    {
+      "path": "./packages/contracts"
+    },
+    {
+      "path": "./packages/api-client"
+    },
+    {
+      "path": "./packages/config"
+    },
+    {
+      "path": "./packages/testing"
+    },
+    {
+      "path": "./packages/ui"
+    }
+  ]
+}

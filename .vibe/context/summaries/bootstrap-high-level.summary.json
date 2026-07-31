@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "artifactKind": "context_summary",
+  "summaryId": "bootstrap-high-level",
+  "title": "Bootstrap High-Level Context Summary",
+  "areaId": "bootstrap",
+  "level": 2,
+  "mandatory": false,
+  "summary": "Intentional skipped-brief placeholder; Use the project skill with `/skill:project` to establish and evolve the project foundation conversationally.",
+  "sourceRefs": [
+    "src:bootstrap-brief"
+  ],
+  "derivedFromNodeIds": [
+    "ctx:bootstrap"
+  ],
+  "updateMetadata": {
+    "invalidationStatus": "current"
+  },
+  "driftMetadata": {
+    "driftStatus": "clean",
+    "sourceRefs": [
+      "src:bootstrap-brief"
+    ]
+  },
+  "expandableToSourceRefs": [
+    "src:bootstrap-brief"
+  ],
+  "schemaRef": "https://schemas.vibe-engineer.dev/context/v1/context-summary.schema.json"
+}

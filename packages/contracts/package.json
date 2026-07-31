@@ -1,0 +1,24 @@
+{
+  "name": "@olympiad-academy-app/contracts",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/index.ts",
+  "react-native": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "eslint .",
+    "format:check": "prettier --check . --ignore-path ../../.prettierignore",
+    "test:unit": "tsx --test test/*.test.ts",
+    "build": "tsc -p tsconfig.json",
+    "quality:quick": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test:unit && pnpm run build"
+  },
+  "dependencies": {
+    "@ts-rest/core": "^3.52.1",
+    "zod": "^3.24.1"
+  },
+  "exports": {
+    ".": "./src/index.ts"
+  }
+}

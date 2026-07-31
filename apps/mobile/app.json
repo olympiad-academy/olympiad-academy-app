@@ -1,0 +1,17 @@
+{
+  "expo": {
+    "name": "olympiad-academy-app",
+    "slug": "olympiad-academy-app",
+    "scheme": "olympiad-academy-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "platforms": ["ios", "android"],
+    "userInterfaceStyle": "automatic",
+    "ios": {
+      "bundleIdentifier": "com.vibeengineer.generated"
+    },
+    "android": {
+      "package": "com.vibeengineer.generated"
+    }
+  }
+}

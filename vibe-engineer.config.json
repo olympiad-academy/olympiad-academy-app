@@ -1,0 +1,30 @@
+{
+  "agenticHarness": "pi",
+  "maxParallelAgents": 8,
+  "maxValidationFixIterations": 3,
+  "agenticWorkPackageTargetHours": 6,
+  "verification": {
+    "deterministicBlocks": true,
+    "advisoryReviewBlocks": false,
+    "webE2E": "playwright",
+    "mobileE2E": {
+      "default": "maestro",
+      "advanced": "detox"
+    }
+  },
+  "uiVerification": {
+    "enabled": true
+  },
+  "agentRegistry": {
+    "validationRequired": true
+  },
+  "workflowMemory": {
+    "versionedCarrier": "git",
+    "archiveCarrier": "filesystem",
+    "archiveCarrierId": "project-filesystem",
+    "versionedRoot": ".vibe/work",
+    "evidenceRoot": ".vibe/evidence",
+    "archiveRoot": ".vibe/archive",
+    "manifestRoot": ".vibe/work/retention"
+  }
+}

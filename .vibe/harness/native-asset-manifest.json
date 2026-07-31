@@ -1,0 +1,455 @@
+{
+  "schemaVersion": "vibe-engineer.native-asset-provenance.v1",
+  "generatedAt": "2026-07-31T16:07:19.673Z",
+  "adapterId": "pi",
+  "expectedFamilies": [
+    "pi-skill-files",
+    "pi-prompt-templates",
+    "pi-project-asset",
+    "pi-governed-capability-skills"
+  ],
+  "actualFiles": [
+    {
+      "path": "AGENTS.md",
+      "familyId": "context-files",
+      "kind": "context_file",
+      "sha256": "sha256:577a1a0f560d041c5980111833452b50d1517bd0415962f78ee5ba94a04630a1",
+      "byte_count": 3426,
+      "shapeMarkers": ["provenance", "pi", "## Invariants (harness_default)"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": "CLAUDE.md",
+      "familyId": "context-files",
+      "kind": "context_file",
+      "sha256": "sha256:7127ed1f21f13d4da13ec47058db98e04068ece8613160e6623160ba31a36b2f",
+      "byte_count": 3426,
+      "shapeMarkers": ["provenance", "pi", "## Invariants (harness_default)"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/project/SKILL.md",
+      "familyId": "pi-project-asset",
+      "kind": "pi_project_skill",
+      "sha256": "sha256:33183602e415dda488661f15795f53252c09ca6e0a8a015ab8913bd9e033b614",
+      "byte_count": 3997,
+      "shapeMarkers": ["name: project", "disable-model-invocation: true", "# project"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/grilling/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:a1aaabdbe057c155d92a2c6416e6f9e67592d6b181a2a9233b08eebf1454d5ec",
+      "byte_count": 2262,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "grilling"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/research/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:f10a0423c6ec6389f7b44a4ee410fa9aef5fb0e3b0b0b9fc6cb84edde6fe9166",
+      "byte_count": 1829,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "research"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/prototype/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:30f2c33661c418da86b90590afa714b2d46d248650e2e488eb385d150feba668",
+      "byte_count": 2004,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "prototype"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/domain-modeling/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:27f6d499e9e04d809c92770dd1f4c5f4b0aa238cb4dbe89e2f52a41ba64425cc",
+      "byte_count": 2005,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "domain-modeling"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/diagnosing-bugs/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:fe4d88b0a96af430f99fbeeb8a373fbca09af1aeb75b04501755b2ac6c35850f",
+      "byte_count": 2013,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "diagnosing-bugs"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/tdd/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:58b79c11bfe9e66cac0e9de7a041e8a7e488ee9995f9ab709d5a480dc2ec56e5",
+      "byte_count": 2477,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "tdd"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/code-review/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:fdfca81a2d44f3e3b7c59c1a71b66f8c685b6005cdb67a4e54622458a5b08a50",
+      "byte_count": 2742,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "code-review"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/codebase-design/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:42d22424638b7042624eaf4925468802e9499a21f2563cad2491d2fff5528e9d",
+      "byte_count": 3195,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "codebase-design"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/wayfinder/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:bde3d534f1ad3eff639bd4f8eee18b3a2dd86dd85353d5adcbf18b806e4cf9ca",
+      "byte_count": 1945,
+      "shapeMarkers": [
+        "runtimeExecutionClaim: pending-live",
+        "wayfinder",
+        "disable-model-invocation: true"
+      ],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/triage/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:2e185b4c4ca20243b60339c8717611e3e225ea089af31549b87f43df683f76e2",
+      "byte_count": 1853,
+      "shapeMarkers": [
+        "runtimeExecutionClaim: pending-live",
+        "triage",
+        "disable-model-invocation: true"
+      ],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/handoff/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:5edddc731a32544403eb4fd247382c1a51030fb99912351f7add3de9ea3375ae",
+      "byte_count": 1805,
+      "shapeMarkers": [
+        "runtimeExecutionClaim: pending-live",
+        "handoff",
+        "disable-model-invocation: true"
+      ],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/improve-codebase-architecture/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:52fb8f8a94da86d92939fc0fd7ab5583bcfcd700031e4cda9498e404bd50decf",
+      "byte_count": 2100,
+      "shapeMarkers": [
+        "runtimeExecutionClaim: pending-live",
+        "improve-codebase-architecture",
+        "disable-model-invocation: true"
+      ],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/writing-great-skills/SKILL.md",
+      "familyId": "pi-governed-capability-skills",
+      "kind": "pi_capability_skill",
+      "sha256": "sha256:ccb139247d74ee1879dc6f2445ed91cffc229916e5deeaae3819128104100e0c",
+      "byte_count": 2292,
+      "shapeMarkers": ["runtimeExecutionClaim: pending-live", "writing-great-skills"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/brainstorm/SKILL.md",
+      "familyId": "pi-skill-files",
+      "kind": "pi_skill_file",
+      "sha256": "sha256:d5947c1949e0a03a58a4262d2c62f260356a32b66c91e710bc14447d17fbdf91",
+      "byte_count": 4102,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", ".vibe/work/<work-id>/"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/grill-me/SKILL.md",
+      "familyId": "pi-skill-files",
+      "kind": "pi_skill_file",
+      "sha256": "sha256:d98942c149584413ff313638fb897492471ae8cc6472af0c508d1a460ada6638",
+      "byte_count": 3395,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", ".vibe/work/<work-id>/"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/task/SKILL.md",
+      "familyId": "pi-skill-files",
+      "kind": "pi_skill_file",
+      "sha256": "sha256:294cc6ff4f0f7613c37046f39f78e81041ffe085d89c412e73d9c42fdd213d82",
+      "byte_count": 3218,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", ".vibe/work/<work-id>/"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/plan/SKILL.md",
+      "familyId": "pi-skill-files",
+      "kind": "pi_skill_file",
+      "sha256": "sha256:68fe2c37df84b5bbd5b67fb9412b539f80d912ed46c97fe7fa242685e9bc3640",
+      "byte_count": 4044,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", ".vibe/work/<work-id>/"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/build/SKILL.md",
+      "familyId": "pi-skill-files",
+      "kind": "pi_skill_file",
+      "sha256": "sha256:685bca3c961be20f1c36b8441d05a992078032cb33a01d3dae5184d2416146ab",
+      "byte_count": 4232,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", ".vibe/work/<work-id>/"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/ship/SKILL.md",
+      "familyId": "pi-skill-files",
+      "kind": "pi_skill_file",
+      "sha256": "sha256:a72d312c6394b63491b3bab08277ff0ba18b91ba038359d25f0d20253098de3b",
+      "byte_count": 3720,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", ".vibe/work/<work-id>/"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-brainstorm.md",
+      "familyId": "pi-prompt-templates",
+      "kind": "pi_prompt_template",
+      "sha256": "sha256:5845eac501657f39f0b0cd9572948f63c0579a49d109d0ca9154e8eba8244733",
+      "byte_count": 910,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", "Load and follow /skill:"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-grill-me.md",
+      "familyId": "pi-prompt-templates",
+      "kind": "pi_prompt_template",
+      "sha256": "sha256:53a26bb35adab0a384bfa3f6f2d2f4a45a0f9da65e4728df8393266b8705c363",
+      "byte_count": 901,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", "Load and follow /skill:"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-task.md",
+      "familyId": "pi-prompt-templates",
+      "kind": "pi_prompt_template",
+      "sha256": "sha256:232431dc9269b47d5944966df8ab71019df105c6bc294cb2633a559446c5dfe5",
+      "byte_count": 889,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", "Load and follow /skill:"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-plan.md",
+      "familyId": "pi-prompt-templates",
+      "kind": "pi_prompt_template",
+      "sha256": "sha256:cf30fa1e09d66ecf9b93d9f020e8c943c542ea828b2ed0960a58f0cf20e0a0a1",
+      "byte_count": 923,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", "Load and follow /skill:"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-build.md",
+      "familyId": "pi-prompt-templates",
+      "kind": "pi_prompt_template",
+      "sha256": "sha256:f6410087421c13d584bddc309321bdd0beb06cb9a3fc74735ad3396c43816e32",
+      "byte_count": 906,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", "Load and follow /skill:"],
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-ship.md",
+      "familyId": "pi-prompt-templates",
+      "kind": "pi_prompt_template",
+      "sha256": "sha256:b36fccc345beeccafcd04ca76ee3e17d3b09e8822daaef61849d624658b84b0d",
+      "byte_count": 899,
+      "shapeMarkers": ["---\n", "runtimeExecutionClaim: pending-live", "Load and follow /skill:"],
+      "shapeParity": "passed"
+    }
+  ],
+  "missingFiles": [],
+  "wrongHarnessFiles": [],
+  "hashShapeComparisons": [
+    {
+      "path": "AGENTS.md",
+      "sha256": "sha256:577a1a0f560d041c5980111833452b50d1517bd0415962f78ee5ba94a04630a1",
+      "byte_count": 3426,
+      "shapeParity": "passed"
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "sha256:7127ed1f21f13d4da13ec47058db98e04068ece8613160e6623160ba31a36b2f",
+      "byte_count": 3426,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/project/SKILL.md",
+      "sha256": "sha256:33183602e415dda488661f15795f53252c09ca6e0a8a015ab8913bd9e033b614",
+      "byte_count": 3997,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/grilling/SKILL.md",
+      "sha256": "sha256:a1aaabdbe057c155d92a2c6416e6f9e67592d6b181a2a9233b08eebf1454d5ec",
+      "byte_count": 2262,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/research/SKILL.md",
+      "sha256": "sha256:f10a0423c6ec6389f7b44a4ee410fa9aef5fb0e3b0b0b9fc6cb84edde6fe9166",
+      "byte_count": 1829,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/prototype/SKILL.md",
+      "sha256": "sha256:30f2c33661c418da86b90590afa714b2d46d248650e2e488eb385d150feba668",
+      "byte_count": 2004,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/domain-modeling/SKILL.md",
+      "sha256": "sha256:27f6d499e9e04d809c92770dd1f4c5f4b0aa238cb4dbe89e2f52a41ba64425cc",
+      "byte_count": 2005,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/diagnosing-bugs/SKILL.md",
+      "sha256": "sha256:fe4d88b0a96af430f99fbeeb8a373fbca09af1aeb75b04501755b2ac6c35850f",
+      "byte_count": 2013,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/tdd/SKILL.md",
+      "sha256": "sha256:58b79c11bfe9e66cac0e9de7a041e8a7e488ee9995f9ab709d5a480dc2ec56e5",
+      "byte_count": 2477,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/code-review/SKILL.md",
+      "sha256": "sha256:fdfca81a2d44f3e3b7c59c1a71b66f8c685b6005cdb67a4e54622458a5b08a50",
+      "byte_count": 2742,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/codebase-design/SKILL.md",
+      "sha256": "sha256:42d22424638b7042624eaf4925468802e9499a21f2563cad2491d2fff5528e9d",
+      "byte_count": 3195,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/wayfinder/SKILL.md",
+      "sha256": "sha256:bde3d534f1ad3eff639bd4f8eee18b3a2dd86dd85353d5adcbf18b806e4cf9ca",
+      "byte_count": 1945,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/triage/SKILL.md",
+      "sha256": "sha256:2e185b4c4ca20243b60339c8717611e3e225ea089af31549b87f43df683f76e2",
+      "byte_count": 1853,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/handoff/SKILL.md",
+      "sha256": "sha256:5edddc731a32544403eb4fd247382c1a51030fb99912351f7add3de9ea3375ae",
+      "byte_count": 1805,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/improve-codebase-architecture/SKILL.md",
+      "sha256": "sha256:52fb8f8a94da86d92939fc0fd7ab5583bcfcd700031e4cda9498e404bd50decf",
+      "byte_count": 2100,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/writing-great-skills/SKILL.md",
+      "sha256": "sha256:ccb139247d74ee1879dc6f2445ed91cffc229916e5deeaae3819128104100e0c",
+      "byte_count": 2292,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/brainstorm/SKILL.md",
+      "sha256": "sha256:d5947c1949e0a03a58a4262d2c62f260356a32b66c91e710bc14447d17fbdf91",
+      "byte_count": 4102,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/grill-me/SKILL.md",
+      "sha256": "sha256:d98942c149584413ff313638fb897492471ae8cc6472af0c508d1a460ada6638",
+      "byte_count": 3395,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/task/SKILL.md",
+      "sha256": "sha256:294cc6ff4f0f7613c37046f39f78e81041ffe085d89c412e73d9c42fdd213d82",
+      "byte_count": 3218,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/plan/SKILL.md",
+      "sha256": "sha256:68fe2c37df84b5bbd5b67fb9412b539f80d912ed46c97fe7fa242685e9bc3640",
+      "byte_count": 4044,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/build/SKILL.md",
+      "sha256": "sha256:685bca3c961be20f1c36b8441d05a992078032cb33a01d3dae5184d2416146ab",
+      "byte_count": 4232,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/skills/ship/SKILL.md",
+      "sha256": "sha256:a72d312c6394b63491b3bab08277ff0ba18b91ba038359d25f0d20253098de3b",
+      "byte_count": 3720,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-brainstorm.md",
+      "sha256": "sha256:5845eac501657f39f0b0cd9572948f63c0579a49d109d0ca9154e8eba8244733",
+      "byte_count": 910,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-grill-me.md",
+      "sha256": "sha256:53a26bb35adab0a384bfa3f6f2d2f4a45a0f9da65e4728df8393266b8705c363",
+      "byte_count": 901,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-task.md",
+      "sha256": "sha256:232431dc9269b47d5944966df8ab71019df105c6bc294cb2633a559446c5dfe5",
+      "byte_count": 889,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-plan.md",
+      "sha256": "sha256:cf30fa1e09d66ecf9b93d9f020e8c943c542ea828b2ed0960a58f0cf20e0a0a1",
+      "byte_count": 923,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-build.md",
+      "sha256": "sha256:f6410087421c13d584bddc309321bdd0beb06cb9a3fc74735ad3396c43816e32",
+      "byte_count": 906,
+      "shapeParity": "passed"
+    },
+    {
+      "path": ".pi/prompts/vibe-ship.md",
+      "sha256": "sha256:b36fccc345beeccafcd04ca76ee3e17d3b09e8822daaef61849d624658b84b0d",
+      "byte_count": 899,
+      "shapeParity": "passed"
+    }
+  ],
+  "allowedDeviations": [],
+  "verdict": "pass"
+}

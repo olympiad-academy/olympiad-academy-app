@@ -1,0 +1,90 @@
+{
+  "name": "@olympiad-academy-app/workspace",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.33.0",
+  "scripts": {
+    "postinstall": "pnpm --dir apps/api exec prisma generate",
+    "typecheck": "turbo run typecheck",
+    "lint": "pnpm --dir apps/api run prisma:generate && eslint .",
+    "format:check": "prettier --check .",
+    "test:unit": "turbo run test:unit",
+    "test:e2e": "pnpm run test:e2e:web && pnpm run test:e2e:mobile",
+    "e2e:prepare:web": "pnpm run db:start && pnpm run db:migrate && pnpm --filter @olympiad-academy-app/web exec playwright install chromium",
+    "test:e2e:web": "pnpm --filter @olympiad-academy-app/web run test:e2e",
+    "test:e2e:mobile": "pnpm --filter @olympiad-academy-app/mobile run test:e2e",
+    "build": "turbo run build",
+    "quality:quick": "pnpm run lint && pnpm run format:check && turbo run typecheck test:unit build",
+    "dev": "pnpm -r --parallel --filter @olympiad-academy-app/api --filter @olympiad-academy-app/web run dev",
+    "dev:api": "pnpm --filter @olympiad-academy-app/api run dev",
+    "dev:web": "pnpm --filter @olympiad-academy-app/web run dev",
+    "dev:mobile": "pnpm --filter @olympiad-academy-app/mobile run dev",
+    "dev:mobile:ios": "pnpm --filter @olympiad-academy-app/mobile run dev:ios",
+    "dev:mobile:android": "pnpm --filter @olympiad-academy-app/mobile run dev:android",
+    "db:start": "docker compose -f .tooling/dev-services/docker-compose.json up -d --wait postgres",
+    "db:stop": "docker compose -f .tooling/dev-services/docker-compose.json stop postgres",
+    "db:migrate": "pnpm --filter @olympiad-academy-app/api run db:migrate",
+    "db:seed": "pnpm --filter @olympiad-academy-app/api run db:seed",
+    "db:reset:local": "pnpm --filter @olympiad-academy-app/api run db:reset:local"
+  },
+  "vibeEngineer": {
+    "architectureDecision": "DL-16-starter-architecture",
+    "appNames": [
+      "api",
+      "web",
+      "mobile"
+    ],
+    "packageNames": [
+      "domain",
+      "contracts",
+      "api-client",
+      "config",
+      "testing",
+      "ui"
+    ],
+    "authStance": "no-auth public health only until auth is generated",
+    "persistence": "PostgreSQL + Prisma",
+    "contractMechanism": "ts-rest + named Zod schemas",
+    "starterScope": {
+      "id": "default",
+      "label": "API + web + mobile",
+      "flags": [],
+      "apps": [
+        "api",
+        "web",
+        "mobile"
+      ],
+      "packages": [
+        "domain",
+        "contracts",
+        "api-client",
+        "config",
+        "testing",
+        "ui"
+      ],
+      "generatedSurfaces": [
+        "NestJS API with Prisma migrations",
+        "React web app",
+        "Expo React Native mobile app",
+        "shared domain/contracts/api-client/config/testing/ui packages"
+      ],
+      "omittedSurfaces": [],
+      "omittedChecks": [],
+      "includesApi": true,
+      "includesWeb": true,
+      "includesMobile": true,
+      "includesPrisma": true
+    }
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/node": "^22.10.7",
+    "eslint": "^9.19.0",
+    "prettier": "3.8.4",
+    "tsx": "^4.19.2",
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.21.0",
+    "vibe-engineer": "0.3.1"
+  }
+}
