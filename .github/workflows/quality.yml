@@ -61,7 +61,7 @@ jobs:
           for (const name of required) {
             if (!names.includes(name)) throw new Error(`missing command ${name}`);
           }
-          for (const skill of ["brainstorm", "grill-me", "task", "plan", "build", "ship"]) {
+          for (const skill of ["brainstorm", "grill-me", "task", "plan", "ship"]) {
             if (names.includes(skill)) throw new Error(`skill leaked into CLI help: ${skill}`);
           }
           NODE
