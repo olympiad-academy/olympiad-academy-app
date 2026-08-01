@@ -1,12 +1,18 @@
 ---
 id: project-root-map
-status: exploring
-updated: 2026-07-31
+status: current
+updated: 2026-08-01
 ---
 # olympiad-academy-app — project map
 
-Navigation for this project's foundation knowledge. Nothing is documented yet —
-this root pair is an intentional bootstrap placeholder, not missing content.
+Root foundation locked 2026-08-01 from the team's pilot decision brief and
+team chat (see CONTEXT.md for the full record). No dedicated sub-area
+documents exist yet — knowledge is consolidated at this root pair until a
+specific area needs its own deep-dive topic.
 
-No foundation areas exist yet; they are created lazily as real conversations
-establish real knowledge.
+## Candidate areas (not yet split out into their own documents)
+
+- content-pipeline
+- ai-tutor
+- diagnostics
+- localization
