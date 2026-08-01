@@ -20,7 +20,10 @@ test("api health and readiness routes resolve through Nest DI in the tsx dev run
     const readiness = await fetch(`http://127.0.0.1:${address.port}/health/ready`);
 
     assert.equal(health.status, 200);
-    assert.deepEqual(await health.json(), { status: "ok" });
+    const healthBody = (await health.json()) as { status: string; contractRouteCount: number };
+    assert.equal(healthBody.status, "ok");
+    // Proves apps/api can resolve @olympiad-academy-app/contracts at runtime, not just typecheck.
+    assert.ok(healthBody.contractRouteCount > 0);
     assert.equal(readiness.status, 200);
     assert.deepEqual(await readiness.json(), { status: "ready" });
   } finally {
