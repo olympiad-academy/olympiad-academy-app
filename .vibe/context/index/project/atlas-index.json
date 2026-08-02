@@ -5,7 +5,7 @@
   "atlasRoot": ".vibe/project",
   "reservedNamespace": "project",
   "truthPolicy": "Projection only. Markdown under .vibe/project/ is the sole semantic source; regenerate with `vibe-engineer atlas index`.",
-  "treeFingerprint": "73bee9dfa2565e9bacdc04f34545c69404d350b091581608fc3008e9c65babf8",
+  "treeFingerprint": "8ee4edaf0ae4f6699a328ca0c0ebb74bcbfbffb3a6e42fff11245ff132c9aa88",
   "documentCount": 2,
   "folderCount": 1,
   "documents": [
@@ -15,10 +15,10 @@
       "type": "context",
       "kind": "context",
       "folder": "",
-      "status": "exploring",
-      "updated": "2026-07-31",
-      "digest": "f321f190695bc273261bb1c75a5ff05398bc25995c57cf591b9a138e2fddde1f",
-      "approximateBodyTokens": 411,
+      "status": "current",
+      "updated": "2026-08-01",
+      "digest": "96bf74530f0c099c38491d838d4b79ece9455753aa987220c8649d49b1a94e02",
+      "approximateBodyTokens": 617,
       "relations": {
         "related": [],
         "dependsOn": [],
@@ -37,10 +37,10 @@
       "type": "map",
       "kind": "map",
       "folder": "",
-      "status": "exploring",
-      "updated": "2026-07-31",
-      "digest": "f1fccbae9ecb34f51921c53e358a55ee02cffaf4e30f8f6e923e6bde455c6953",
-      "approximateBodyTokens": 75,
+      "status": "current",
+      "updated": "2026-08-01",
+      "digest": "43c7bb6eacba2cc2cd3ee43909de742e93b3f2d82938f089add5946ddd8c7560",
+      "approximateBodyTokens": 107,
       "relations": {
         "related": [],
         "dependsOn": [],
@@ -60,12 +60,12 @@
       "map": {
         "path": "MAP.md",
         "id": "project-root-map",
-        "digest": "f1fccbae9ecb34f51921c53e358a55ee02cffaf4e30f8f6e923e6bde455c6953"
+        "digest": "43c7bb6eacba2cc2cd3ee43909de742e93b3f2d82938f089add5946ddd8c7560"
       },
       "context": {
         "path": "CONTEXT.md",
         "id": "project-root-context",
-        "digest": "f321f190695bc273261bb1c75a5ff05398bc25995c57cf591b9a138e2fddde1f"
+        "digest": "96bf74530f0c099c38491d838d4b79ece9455753aa987220c8649d49b1a94e02"
       },
       "childFolders": [],
       "childTopics": [],
