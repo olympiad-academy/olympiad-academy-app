@@ -17,10 +17,14 @@ export type Topic = z.infer<typeof TopicSchema>;
  * %"; §5.7.C). The exact mastery shape isn't pinned down further in the
  * spec, so this is a first-pass contract fixation, not a literal transcription
  * — flag with product before renaming/removing fields.
+ *
+ * Fields are snake_case (PR review, OLY-8) to stay consistent with every
+ * other entity in this package, which mirrors the Postgres column naming
+ * from MVP doc §12.
  */
 export const TopicWithProgressSchema = TopicSchema.extend({
-  problemsAttempted: z.number().int().nonnegative(),
-  problemsSolvedWithoutHints: z.number().int().nonnegative(),
-  masteryPercent: z.number().min(0).max(100),
+  problems_attempted: z.number().int().nonnegative(),
+  problems_solved_without_hints: z.number().int().nonnegative(),
+  mastery_percent: z.number().min(0).max(100),
 });
 export type TopicWithProgress = z.infer<typeof TopicWithProgressSchema>;

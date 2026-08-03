@@ -4,7 +4,7 @@ import { LanguageSchema } from "../entities/user.js";
 import { TopicWithProgressSchema } from "../entities/topic.js";
 import { PublicProblemSchema } from "../entities/problem.js";
 import { AttemptStatusSchema } from "../entities/attempt.js";
-import { HintTierSchema } from "../entities/hint.js";
+import { HintSchema } from "../entities/hint.js";
 
 const c = initContract();
 
@@ -16,6 +16,22 @@ const AuthSuccessResponseSchema = z.object({
   user_id: z.string().uuid(),
   token: z.string().min(1),
 });
+
+/**
+ * Signup/login accept `phone` and/or `email` (PR review, OLY-8 — see
+ * entities/user.ts for why `User` itself splits these) rather than a single
+ * `phone_or_email` string. The refine requires at least one of the two,
+ * matching the previous single-field requirement.
+ */
+const PhoneOrEmailIdentitySchema = z
+  .object({
+    phone: z.string().min(1).nullable(),
+    email: z.string().email().nullable(),
+  })
+  .refine((identity) => identity.phone !== null || identity.email !== null, {
+    message: "Provide at least one of phone or email",
+    path: ["phone"],
+  });
 
 /**
  * MVP doc §5.7.A / §14 Screen: shown right after the student stops
@@ -70,22 +86,21 @@ export const contract = c.router({
   signup: {
     method: "POST",
     path: "/auth/signup",
-    body: z.object({
-      name: z.string().min(1),
-      phone_or_email: z.string().min(1),
-      password: z.string().min(8),
-      language: LanguageSchema.default("uz"),
-    }),
+    body: z.intersection(
+      z.object({
+        name: z.string().min(1),
+        password: z.string().min(8),
+        language: LanguageSchema.default("uz"),
+      }),
+      PhoneOrEmailIdentitySchema,
+    ),
     responses: { 200: AuthSuccessResponseSchema },
   },
 
   login: {
     method: "POST",
     path: "/auth/login",
-    body: z.object({
-      phone_or_email: z.string().min(1),
-      password: z.string().min(1),
-    }),
+    body: z.intersection(z.object({ password: z.string().min(1) }), PhoneOrEmailIdentitySchema),
     responses: { 200: AuthSuccessResponseSchema },
   },
 
@@ -141,17 +156,17 @@ export const contract = c.router({
     },
   },
 
+  /**
+   * Response reuses `HintSchema` as-is (PR review, OLY-8 — hints are now a
+   * `{tier, content}` shape shared with `Problem.hints`; no reason to
+   * redeclare the same two fields here).
+   */
   requestHint: {
     method: "POST",
     path: "/attempts/:attemptId/hint",
     pathParams: z.object({ attemptId: z.string().uuid() }),
     body: z.object({}),
-    responses: {
-      200: z.object({
-        tier: HintTierSchema,
-        content: z.string().min(1),
-      }),
-    },
+    responses: { 200: HintSchema },
   },
 
   /**
