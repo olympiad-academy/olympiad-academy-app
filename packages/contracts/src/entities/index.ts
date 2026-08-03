@@ -4,3 +4,4 @@ export * from "./problem.js";
 export * from "./hint.js";
 export * from "./attempt.js";
 export * from "./ask-why-log.js";
+export * from "./daily-activity.js";

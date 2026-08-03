@@ -19,4 +19,103 @@ model SystemMetadata {
 
 // vibe-engineer:prisma-generated-models:start
 // Generated Prisma model sections owned by vibe-engineer schematics are inserted above the end marker.
+
+// OLY-10: product tables per the shared contracts (packages/contracts, MVP doc §12).
+// Column names are snake_case to mirror the contract field names one-to-one.
+// `hints` is stored inline on `problems` as a JSON triple (OLY-8 decision, see
+// packages/contracts/src/entities/hint.ts) — there is deliberately no separate
+// `hints` table, matching the fixated ProblemSchema.
+
+model User {
+  id             String   @id @default(uuid()) @db.Uuid
+  name           String
+  phone          String?
+  email          String?
+  password_hash  String
+  grade          Int
+  parent_contact String?
+  language       String
+  created_at     DateTime @default(now())
+
+  attempts       Attempt[]
+  daily_activity DailyActivity[]
+
+  @@map("users")
+}
+
+model Topic {
+  id         String @id @default(uuid()) @db.Uuid
+  name       String
+  slug       String @unique
+  sort_order Int?
+
+  problems Problem[]
+
+  @@map("topics")
+}
+
+model Problem {
+  id             String   @id @default(uuid()) @db.Uuid
+  topic_id       String   @db.Uuid
+  statement      String
+  answer_type    String
+  correct_answer String
+  choices        Json?
+  difficulty     Int
+  explanation    String
+  hints          Json
+  reviewed       Boolean  @default(false)
+  created_at     DateTime @default(now())
+
+  topic    Topic     @relation(fields: [topic_id], references: [id], onDelete: Cascade)
+  attempts Attempt[]
+
+  @@map("problems")
+}
+
+model Attempt {
+  id                 String    @id @default(uuid()) @db.Uuid
+  user_id            String    @db.Uuid
+  problem_id         String    @db.Uuid
+  status             String
+  submitted_answer   String?
+  is_correct         Boolean?
+  max_hint_tier_used Int       @default(0)
+  started_at         DateTime
+  completed_at       DateTime?
+
+  user         User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  problem      Problem     @relation(fields: [problem_id], references: [id], onDelete: Cascade)
+  ask_why_logs AskWhyLog[]
+
+  @@map("attempts")
+}
+
+model AskWhyLog {
+  id          String   @id @default(uuid()) @db.Uuid
+  attempt_id  String   @db.Uuid
+  question    String
+  ai_response String
+  created_at  DateTime @default(now())
+
+  attempt Attempt @relation(fields: [attempt_id], references: [id], onDelete: Cascade)
+
+  @@map("ask_why_log")
+}
+
+model DailyActivity {
+  id                            String   @id @default(uuid()) @db.Uuid
+  user_id                       String   @db.Uuid
+  date                          DateTime
+  problems_attempted            Int      @default(0)
+  problems_solved               Int      @default(0)
+  problems_solved_without_hints Int      @default(0)
+  created_at                    DateTime @default(now())
+
+  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, date])
+  @@map("daily_activity")
+}
+
 // vibe-engineer:prisma-generated-models:end
