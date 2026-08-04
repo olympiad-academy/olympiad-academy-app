@@ -22,13 +22,13 @@ const sampleProblem = {
   correct_answer: "4",
   choices: null,
   difficulty: 1,
-  explanation: "Add the two numbers.",
+  solution_steps: ["Add the two numbers.", "State the result."],
   hints: sampleHints,
   reviewed: true,
   created_at: "2026-08-01T00:00:00.000Z",
 };
 
-test("ProblemSchema accepts the full internal shape, including correct_answer and hints", () => {
+test("ProblemSchema accepts the full internal shape, including correct_answer, solution_steps and hints", () => {
   const parsed = ProblemSchema.parse(sampleProblem);
   assert.equal(parsed.correct_answer, "4");
   assert.deepEqual(
@@ -42,15 +42,22 @@ test("ProblemHintsSchema rejects a problem missing one of the three tiers", () =
   assert.throws(() => ProblemHintsSchema.parse(missingTier3));
 });
 
-test("PublicProblemSchema strips correct_answer, explanation, reviewed, and hints", () => {
+test("difficulty is 1-3 (fluency / standard / challenge), not 1-5 (OLY-10 review)", () => {
+  assert.doesNotThrow(() => ProblemSchema.parse({ ...sampleProblem, difficulty: 3 }));
+  assert.throws(() => ProblemSchema.parse({ ...sampleProblem, difficulty: 4 }));
+  assert.throws(() => ProblemSchema.parse({ ...sampleProblem, difficulty: 0 }));
+  assert.throws(() => PublicProblemSchema.parse({ ...sampleProblem, difficulty: 4 }));
+});
+
+test("PublicProblemSchema strips correct_answer, solution_steps, reviewed, and hints", () => {
   const parsed = PublicProblemSchema.parse(sampleProblem);
   const keys = Object.keys(parsed).sort();
   assert.deepEqual(keys, ["answer_type", "choices", "difficulty", "id", "statement", "topic_id"]);
-  // The exact-keys assertion above already proves correct_answer/explanation/
+  // The exact-keys assertion above already proves correct_answer/solution_steps/
   // reviewed/hints are absent; this just names the safety-critical ones
   // explicitly (MVP doc §13: "never returns correct_answer or hints").
   assert.ok(!keys.includes("correct_answer"));
-  assert.ok(!keys.includes("explanation"));
+  assert.ok(!keys.includes("solution_steps"));
   assert.ok(!keys.includes("hints"));
 });
 
@@ -63,7 +70,7 @@ test("the next-problem contract route response schema is PublicProblemSchema, no
   const routeShape = Object.keys(routeResponseSchema.shape).sort();
   assert.deepEqual(routeShape, publicShape);
   assert.ok(!routeShape.includes("correct_answer"));
-  assert.ok(!routeShape.includes("explanation"));
+  assert.ok(!routeShape.includes("solution_steps"));
   assert.ok(!routeShape.includes("hints"));
 });
 

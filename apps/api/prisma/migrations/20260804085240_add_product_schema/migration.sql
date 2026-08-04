@@ -32,13 +32,18 @@ CREATE TABLE "problems" (
     "correct_answer" TEXT NOT NULL,
     "choices" JSONB,
     "difficulty" INTEGER NOT NULL,
-    "explanation" TEXT NOT NULL,
+    "solution_steps" JSONB NOT NULL,
     "hints" JSONB NOT NULL,
     "reviewed" BOOLEAN NOT NULL DEFAULT false,
     "created_at" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "problems_pkey" PRIMARY KEY ("id")
 );
+
+-- CheckConstraint: difficulty is 1-3 (fluency / standard / challenge), not 1-5
+-- (OLY-10 review). Prisma cannot express CHECK constraints, so this lives only
+-- here in the migration SQL.
+ALTER TABLE "problems" ADD CONSTRAINT "problems_difficulty_check" CHECK ("difficulty" BETWEEN 1 AND 3);
 
 -- CreateTable
 CREATE TABLE "attempts" (
@@ -78,6 +83,12 @@ CREATE TABLE "daily_activity" (
 
     CONSTRAINT "daily_activity_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_phone_key" ON "users"("phone");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "users_email_key" ON "users"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "topics_slug_key" ON "topics"("slug");
