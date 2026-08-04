@@ -15,7 +15,9 @@
     "quality:quick": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test:unit && pnpm run build"
   },
   "dependencies": {
-    "@olympiad-academy-app/domain": "workspace:^0.1.0"
+    "@olympiad-academy-app/contracts": "workspace:^0.1.0",
+    "@olympiad-academy-app/domain": "workspace:^0.1.0",
+    "zod": "^3.24.1"
   },
   "exports": {
     ".": "./src/index.ts"

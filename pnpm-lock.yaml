@@ -162,9 +162,15 @@ importers:
 
   packages/testing:
     dependencies:
+      '@olympiad-academy-app/contracts':
+        specifier: workspace:^0.1.0
+        version: link:../contracts
       '@olympiad-academy-app/domain':
         specifier: workspace:^0.1.0
         version: link:../domain
+      zod:
+        specifier: ^3.24.1
+        version: 3.25.76
 
   packages/ui: {}
 

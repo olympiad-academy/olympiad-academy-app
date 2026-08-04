@@ -139,8 +139,10 @@ export const contract = c.router({
   },
 
   /**
-   * `explanation` is present only when `is_correct` is true (MVP doc §14,
-   * Screen 3: shown on correct submission, withheld otherwise).
+   * `solution_steps` (the worked solution) is present only when `is_correct`
+   * is true (MVP doc §14, Screen 3: shown on correct submission, withheld
+   * otherwise). The task bank stores the worked solution as `solution_steps`
+   * rather than a separate `explanation` field (OLY-10 review).
    */
   submitAttempt: {
     method: "POST",
@@ -150,7 +152,7 @@ export const contract = c.router({
     responses: {
       200: z.object({
         is_correct: z.boolean(),
-        explanation: z.string().nullable(),
+        solution_steps: z.array(z.string().min(1)).nullable(),
         status: AttemptStatusSchema,
       }),
     },

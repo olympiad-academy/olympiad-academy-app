@@ -8,3 +8,5 @@ export function describeStarterWorkspace(name: string): StarterWorkspaceDescript
   if (normalized.length === 0) throw new Error("Starter workspace name is required.");
   return Object.freeze({ name: normalized, generatedBy: "vibe-engineer" });
 }
+
+export { normalizeDecimalAnswer } from "./answer-normalization.js";
