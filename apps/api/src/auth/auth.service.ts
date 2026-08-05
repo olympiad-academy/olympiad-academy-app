@@ -21,13 +21,15 @@ export class AuthService {
 
   public async signup(dto: SignupDto): Promise<AuthResult> {
     const passwordHash = await bcrypt.hash(dto.password, SALT_ROUNDS);
+    const email = dto.email?.trim().toLowerCase() ?? null;
+    const phone = dto.phone?.trim() ?? null;
 
     try {
       const user = await this.prisma.user.create({
         data: {
           name: dto.name,
-          phone: dto.phone,
-          email: dto.email,
+          phone,
+          email,
           password_hash: passwordHash,
           language: dto.language,
           // FLAG (D10): signup contract does not collect `grade` (§14 Screen 1),
@@ -55,7 +57,9 @@ export class AuthService {
   }
 
   public async login(dto: LoginDto): Promise<AuthResult> {
-    const where = dto.phone ? { phone: dto.phone } : dto.email ? { email: dto.email } : null;
+    const email = dto.email?.trim().toLowerCase() ?? null;
+    const phone = dto.phone?.trim() ?? null;
+    const where = phone ? { phone } : email ? { email } : null;
 
     if (!where) {
       throw new UnauthorizedException(INVALID_CREDENTIALS_MESSAGE);

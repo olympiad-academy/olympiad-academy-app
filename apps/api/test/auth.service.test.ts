@@ -231,3 +231,81 @@ test("login with email as identity works", async () => {
   assert.match(result.user_id, UUID_RE);
   assert.match(result.token, JWT_RE);
 });
+
+test("signup normalizes email to lowercase", async () => {
+  const users = new Map<string, { id: string; password_hash: string }>();
+  const service = new AuthService(
+    makePrismaService(users) as unknown as Parameters<typeof AuthService.prototype.constructor>[0],
+    makeJwtService() as unknown as Parameters<typeof AuthService.prototype.constructor>[1],
+  );
+
+  await service.signup({
+    name: "Case User",
+    password: "password123",
+    language: "en",
+    phone: null,
+    email: "User@Example.COM",
+  });
+
+  assert.ok(users.has("user@example.com"), "Email should be stored as lowercase");
+});
+
+test("signup trims whitespace from email", async () => {
+  const users = new Map<string, { id: string; password_hash: string }>();
+  const service = new AuthService(
+    makePrismaService(users) as unknown as Parameters<typeof AuthService.prototype.constructor>[0],
+    makeJwtService() as unknown as Parameters<typeof AuthService.prototype.constructor>[1],
+  );
+
+  await service.signup({
+    name: "Trim User",
+    password: "password123",
+    language: "en",
+    phone: null,
+    email: "  test@example.com  ",
+  });
+
+  assert.ok(users.has("test@example.com"), "Email should be stored trimmed");
+});
+
+test("login with different email casing finds the same account", async () => {
+  const users = new Map<string, { id: string; password_hash: string }>();
+  const service = new AuthService(
+    makePrismaService(users) as unknown as Parameters<typeof AuthService.prototype.constructor>[0],
+    makeJwtService() as unknown as Parameters<typeof AuthService.prototype.constructor>[1],
+  );
+
+  await service.signup({
+    name: "Case Login",
+    password: "correct",
+    language: "en",
+    phone: null,
+    email: "User@Example.COM",
+  });
+
+  const result = await service.login({
+    password: "correct",
+    phone: null,
+    email: "user@example.com",
+  });
+
+  assert.match(result.user_id, UUID_RE);
+});
+
+test("signup trims whitespace from phone", async () => {
+  const users = new Map<string, { id: string; password_hash: string }>();
+  const service = new AuthService(
+    makePrismaService(users) as unknown as Parameters<typeof AuthService.prototype.constructor>[0],
+    makeJwtService() as unknown as Parameters<typeof AuthService.prototype.constructor>[1],
+  );
+
+  await service.signup({
+    name: "Phone Trim",
+    password: "password123",
+    language: "uz",
+    phone: "  +998901234567  ",
+    email: null,
+  });
+
+  assert.ok(users.has("+998901234567"), "Phone should be stored trimmed");
+});
