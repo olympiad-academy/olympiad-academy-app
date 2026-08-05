@@ -1,0 +1,104 @@
+/*
+ * Base stylesheet (OLY-39 S3e). Everything here is either a reset or a
+ * document-level default; component styling lives in CSS Modules next to its
+ * component (D3). No colour is written literally — values come from the
+ * generated custom properties in @olympiad-academy-app/ui.
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--oa-bg);
+  color: var(--oa-text);
+  font-family: var(--oa-font-family-body);
+  font-size: var(--oa-font-size-16);
+  line-height: var(--oa-line-height-relaxed);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--oa-font-family-display);
+  line-height: var(--oa-line-height-tight);
+}
+
+/* Form controls do not inherit typography on their own. */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+img,
+picture,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+/*
+ * The component library gives us keyboard behaviour and ARIA semantics but not
+ * visual accessibility — a visible focus ring is our responsibility (ADR
+ * OLY-19, "Boundaries"). `:focus-visible` keeps it off pointer interactions.
+ */
+:focus-visible {
+  outline: 2px solid var(--oa-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--oa-radius-8);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/*
+ * Colour-mode switching should feel like a transition, not a repaint — but only
+ * for users who have not asked for less motion.
+ */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    transition:
+      background-color 0.25s ease,
+      color 0.25s ease;
+  }
+}
