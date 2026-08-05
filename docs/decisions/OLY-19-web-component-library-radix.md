@@ -3,6 +3,15 @@
 **Status:** accepted (operator: helgazhizhka, 2026-08-04)
 **Context:** OLY-19 discovery, `.vibe/work/oly-19/decision-register.md` (D3)
 
+> **Fact correction, 2026-08-05 (operator: helgazhizhka).** The "Locked MVP
+> scope" bullet under Context listed diagnostics and the topic list as in
+> scope. The 4 August call deferred both past 8 August (diagnostics: "we don't
+> have diagnostics right now"; the topic taxonomy was dropped and what replaces
+> the entry screen is still open). This ADR was written earlier the same day,
+> before that call. The decision itself is unaffected — neither diagnostics nor
+> the topic taxonomy needs a component Radix lacks — but the fact it rests on
+> is corrected so the scope list is not read later as something that was agreed.
+
 ## Decision
 
 Web UI builds on **Radix UI Primitives + CSS Modules**, with design tokens from
@@ -14,9 +23,10 @@ properties). Only the primitives actually used are added as dependencies
 
 - Milestones: working demo 8 August 2026; full internal demo 12 September 2026
   (`.vibe/project/CONTEXT.md`).
-- Locked MVP scope: auth, topic list, guided practice with 3-tier hints,
-  diagnostics, profile with statistics. No tables, date pickers, RTL,
-  drag-and-drop.
+- Locked MVP scope: auth, guided practice with 3-tier hints then the full
+  walkthrough, one Ask Why per attempt, profile with statistics. No tables,
+  date pickers, RTL, drag-and-drop. Diagnostics and the topic taxonomy were
+  deferred past 8 August on the 4 August call.
 - Ready-made Figma designs require full styling control; a foreign visual
   language (MUI/Mantine-style suites) conflicts.
 - Starter architecture (DL-16): `packages/ui` holds cross-platform tokens with
