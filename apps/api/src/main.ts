@@ -3,6 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import "reflect-metadata";
 import { NestFactory } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 const apiRoot = dirname(dirname(fileURLToPath(import.meta.url)));
 const workspaceRoot = resolve(apiRoot, "../..");
@@ -55,6 +56,15 @@ export async function bootstrap(): Promise<void> {
   loadLocalEnvFiles();
   const { AppModule } = await import("./app.module.js");
   const app = await NestFactory.create(AppModule);
+
+  const config = new DocumentBuilder()
+    .setTitle("Olympiad Academy API")
+    .setDescription("API for the Olympiad Academy application")
+    .setVersion("1.0")
+    .build();
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup("docs", app, document);
+
   const apiPortRaw = process.env["API_PORT"];
   const apiPort = apiPortRaw === undefined ? 3000 : Number(apiPortRaw);
   if (!Number.isFinite(apiPort)) throw new Error("API_PORT must be a finite number");
