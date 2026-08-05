@@ -25,10 +25,10 @@ const AuthSuccessResponseSchema = z.object({
  */
 const PhoneOrEmailIdentitySchema = z
   .object({
-    phone: z.string().min(1).nullable(),
-    email: z.string().email().nullable(),
+    phone: z.string().min(1).nullable().optional(),
+    email: z.string().email().nullable().optional(),
   })
-  .refine((identity) => identity.phone !== null || identity.email !== null, {
+  .refine((identity) => identity.phone != null || identity.email != null, {
     message: "Provide at least one of phone or email",
     path: ["phone"],
   });

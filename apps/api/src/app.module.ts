@@ -2,7 +2,9 @@ import { Module } from "@nestjs/common";
 import type { ModuleMetadata } from "@nestjs/common";
 import { HealthModule } from "./health/health.module.js";
 
-const generatedApiModules: NonNullable<ModuleMetadata["imports"]> = [];
+import { AuthModule } from "./auth/auth.module.js";
+
+const generatedApiModules: NonNullable<ModuleMetadata["imports"]> = [AuthModule];
 // vibe-engineer:api-module-integrations:end
 
 // Root application module composing the public health surface and
