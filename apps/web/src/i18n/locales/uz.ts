@@ -18,6 +18,15 @@ export const uz = {
     toLight: "Yorug' rejimga o'tish",
     toDark: "Qorong'i rejimga o'tish",
   },
+  // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
+  // screens land. Copy is ours (stubs are not in the design of record).
+  stubs: {
+    signupTitle: "Ro'yxatdan o'tish",
+    loginTitle: "Kirish",
+    topicsTitle: "Mavzular",
+    authNote: "To'liq shakl OLY-40 qadamida — marshrut allaqachon zaxiralangan.",
+    topicsNote: "To'liq mavzular ekrani — alohida vazifa. Quyida dizayn ruhidagi ko'rik.",
+  },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.
   landing: {

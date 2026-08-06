@@ -18,6 +18,16 @@ export const en = {
     toLight: "Switch to light theme",
     toDark: "Switch to dark theme",
   },
+  // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
+  // screens land. Copy is ours (stubs are not in the design of record).
+  stubs: {
+    signupTitle: "Sign up",
+    loginTitle: "Log in",
+    topicsTitle: "Topics",
+    authNote: "The full form arrives with OLY-40 — the route is already reserved.",
+    topicsNote:
+      "The full Topic List screen is a separate task. Below — a preview in the spirit of the design.",
+  },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.
   landing: {

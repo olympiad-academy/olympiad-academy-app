@@ -8,6 +8,8 @@ import {
   type RouteObject,
 } from "react-router-dom";
 import { LandingRoute } from "../routes/landing/landing.js";
+import { AuthStubRoute } from "../routes/stubs/auth-stub.js";
+import { TopicsStubRoute } from "../routes/stubs/topics-stub.js";
 
 // These bindings are reassigned by managed schematic integration blocks.
 // eslint-disable-next-line prefer-const
@@ -47,6 +49,11 @@ const appRoutes: RouteObject[] = [
     element: <AppShell />,
     children: [
       { index: true, element: <LandingRoute /> },
+      // Routing skeleton (D2/D8): real targets for the landing CTAs and the
+      // post-auth redirect from day one; the screens themselves land later.
+      { path: "signup", element: <AuthStubRoute kind="signup" /> },
+      { path: "login", element: <AuthStubRoute kind="login" /> },
+      { path: "topics", element: <TopicsStubRoute /> },
       ...generatedPublicRoutes,
       { element: <ProtectedRoutes />, children: generatedProtectedRoutes },
     ],

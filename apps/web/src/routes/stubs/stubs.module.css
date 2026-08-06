@@ -1,0 +1,97 @@
+/* Routing-skeleton stubs (D2/D8). Token-only colours (D3). */
+
+.page {
+  min-height: 100vh;
+  background: var(--oa-bg);
+  color: var(--oa-text);
+  font-family: var(--oa-font-family-body);
+  display: flex;
+  flex-direction: column;
+}
+
+.nav {
+  border-bottom: 1px solid var(--oa-border2);
+  background: var(--oa-nav-bg);
+  backdrop-filter: blur(16px);
+}
+
+.navInner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: var(--oa-space-12) var(--oa-space-20);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: var(--oa-space-8);
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--oa-space-48) var(--oa-space-20);
+}
+
+.card,
+.topicsCard {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  border-radius: var(--oa-radius-24);
+  padding: var(--oa-space-48);
+  background: var(--oa-surface);
+  border: 1px solid var(--oa-border);
+}
+
+.title {
+  font-family: var(--oa-font-family-display);
+  font-weight: var(--oa-font-weight-black);
+  font-size: var(--oa-font-size-30);
+  margin-bottom: var(--oa-space-12);
+}
+
+.note {
+  font-size: var(--oa-font-size-14);
+  line-height: var(--oa-line-height-relaxed);
+  color: var(--oa-text-muted);
+  margin-bottom: var(--oa-space-24);
+}
+
+.homeLink {
+  font-size: var(--oa-font-size-14);
+  font-weight: var(--oa-font-weight-bold);
+  color: var(--oa-primary);
+  text-decoration: none;
+}
+
+.homeLink:hover {
+  opacity: 0.8;
+}
+
+.topicsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: var(--oa-space-12);
+  text-align: left;
+}
+
+.topicCard {
+  border-radius: var(--oa-radius-12);
+  padding: var(--oa-space-14) var(--oa-space-16);
+  font-size: var(--oa-font-size-14);
+  font-weight: var(--oa-font-weight-bold);
+  color: var(--topic-accent);
+  background: color-mix(in srgb, var(--topic-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--topic-accent) 19%, transparent);
+}
