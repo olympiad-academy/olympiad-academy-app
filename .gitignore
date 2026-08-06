@@ -78,12 +78,10 @@ apps/api/dist/
 .vibe/evidence/**
 !.vibe/evidence/
 !.vibe/evidence/README.md
-# Design-of-record snapshots are team-shared evidence (operator decision,
-# 2026-08-06, OLY-19): code and the design source it was built from travel
-# together. Media captures stay ignored via the extension rules above.
-!.vibe/evidence/*/
-!.vibe/evidence/*/design/
-!.vibe/evidence/*/design/**
+# Design-of-record snapshots are LOCAL to the frontend owner's machine
+# (operator decision, 2026-08-06, second pass): she is the only frontend
+# developer and the design owner, so snapshots do not travel with the repo.
+# Rebuild them from their documented source (see .vibe/evidence/README.md).
 .vibe/work/**
 !.vibe/work/
 !.vibe/work/README.md
