@@ -41,6 +41,11 @@ export default tseslint.config(
       "**/dist/**",
       "**/.turbo/**",
       "**/node_modules/**",
+      // Workflow memory and design evidence, not project source: gitignored,
+      // outside every tsconfig, and sometimes verbatim snapshots of foreign
+      // code. Linting them fails on the project service before any rule runs.
+      // .prettierignore already excludes the same directories.
+      ".vibe/**",
       "apps/mobile/babel.config.cjs",
       "apps/mobile/index.js",
       "apps/mobile/metro.config.cjs",
