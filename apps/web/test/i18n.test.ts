@@ -15,7 +15,7 @@ function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
   const data = { ...initial };
   return {
     data,
-    getItem: (key: string) => (key in data ? data[key] : null),
+    getItem: (key: string) => data[key] ?? null,
     setItem: (key: string, value: string) => {
       data[key] = value;
     },

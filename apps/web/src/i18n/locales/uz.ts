@@ -14,4 +14,8 @@ export const uz = {
     ru: "Русский",
     en: "English",
   },
+  themeToggle: {
+    toLight: "Yorug' rejimga o'tish",
+    toDark: "Qorong'i rejimga o'tish",
+  },
 } as const;

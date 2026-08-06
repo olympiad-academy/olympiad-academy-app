@@ -9,6 +9,8 @@ import {
   type RouteObject,
 } from "react-router-dom";
 import { HomeRoute } from "../routes/home/home.js";
+import { LanguageSwitcher } from "../components/language-switcher/language-switcher.js";
+import { ThemeToggle } from "../components/theme-toggle/theme-toggle.js";
 
 // These bindings are reassigned by managed schematic integration blocks.
 // eslint-disable-next-line prefer-const
@@ -34,6 +36,10 @@ function AppShell(): ReactElement {
       <nav aria-label="Application navigation">
         <Link to="/">Home</Link>
         {generatedNavLinks}
+        {/* D1 + D12: both preference controls live in the navigation of every
+            screen, per the design of record. S5 restyles the shell/landing. */}
+        <LanguageSwitcher />
+        <ThemeToggle />
       </nav>
       <Outlet />
     </main>

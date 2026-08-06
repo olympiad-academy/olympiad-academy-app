@@ -14,4 +14,8 @@ export const ru = {
     ru: "Русский",
     en: "English",
   },
+  themeToggle: {
+    toLight: "Переключить на светлую тему",
+    toDark: "Переключить на тёмную тему",
+  },
 } as const;

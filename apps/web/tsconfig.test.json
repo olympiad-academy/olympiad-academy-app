@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    // Tests live next to src/ (test/**), so the src-scoped rootDir from the
+    // app config cannot apply; this config is typecheck/runner-only, no emit.
+    "rootDir": ".",
+    "noEmit": true,
+    "declaration": false,
+    "declarationMap": false,
+    "types": ["react", "react-dom", "node"],
+    // happy-dom's .d.ts references node:stream/web types newer than the
+    // installed @types/node; lib checking adds nothing to our own tests.
+    "skipLibCheck": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "test/**/*.ts", "test/**/*.tsx"]
+}
