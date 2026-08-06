@@ -14,7 +14,9 @@ import styles from "./language-switcher.module.css";
  * the plan's S4 wording ("Radix Select") predates. The locale list comes from
  * the contract via SUPPORTED_LOCALES; a new contract locale appears here with
  * no code change. Visible labels are the codes per design; accessible names
- * are the full translated language names (languageSwitcher.* keys).
+ * carry BOTH the code and the full translated name ("RU — Русский") so the
+ * name contains the visible label (WCAG 2.5.3 Label in Name — voice-control
+ * users speak what they see).
  */
 export function LanguageSwitcher(): ReactElement {
   const { t, i18n } = useTranslation();
@@ -41,7 +43,7 @@ export function LanguageSwitcher(): ReactElement {
         <ToggleGroup.Item
           key={locale}
           value={locale}
-          aria-label={t(`languageSwitcher.${locale}`)}
+          aria-label={`${locale.toUpperCase()} — ${t(`languageSwitcher.${locale}`)}`}
           className={styles["item"]}
         >
           {locale.toUpperCase()}

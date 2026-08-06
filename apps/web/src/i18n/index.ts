@@ -22,11 +22,10 @@ export const SUPPORTED_LOCALES = LanguageSchema.options;
 export const DEFAULT_LOCALE: Language = "uz";
 export const LOCALE_STORAGE_KEY = "oa.locale";
 
-/** Minimal storage seam so the module is testable outside the browser. */
-export interface LocaleStorage {
-  getItem(key: string): string | null;
-  setItem(key: string, value: string): void;
-}
+import type { PreferenceStorage } from "../preferences/preference-storage.js";
+
+/** Storage seam for the locale preference (shared shape, see preferences/). */
+export type LocaleStorage = PreferenceStorage;
 
 const resources = {
   uz: { translation: uz },

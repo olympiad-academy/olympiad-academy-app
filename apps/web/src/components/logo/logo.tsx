@@ -1,9 +1,11 @@
 import type { ReactElement } from "react";
+import styles from "./logo.module.css";
 
 /**
- * Brand mark, byte-copied from the design of record (D11-A1 snapshot,
- * App.tsx OALogo): a hexagon with a stylised summit/delta. Used in the
- * landing nav now, in auth screens later (OLY-40).
+ * Brand mark from the design of record (D11-A1 snapshot, App.tsx OALogo): a
+ * hexagon with a stylised summit/delta. Colours come from brand tokens
+ * (brandGradFrom/brandGradTo/brandMark — mode-independent by design), never
+ * literals (ADR single-source rule). Same SVG ships as the favicon.
  */
 export function Logo({ size = 32 }: { size?: number }): ReactElement {
   return (
@@ -17,8 +19,8 @@ export function Logo({ size = 32 }: { size?: number }): ReactElement {
     >
       <defs>
         <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stopColor="#6366f1" />
-          <stop offset="100%" stopColor="#a855f7" />
+          <stop offset="0%" className={styles["gradFrom"]} />
+          <stop offset="100%" className={styles["gradTo"]} />
         </linearGradient>
       </defs>
       {/* Hexagon background */}
@@ -27,12 +29,12 @@ export function Logo({ size = 32 }: { size?: number }): ReactElement {
       <path
         d="M16 8 L23 22 H9 Z"
         fill="none"
-        stroke="white"
         strokeWidth="1.8"
         strokeLinejoin="round"
+        className={styles["markStroke"]}
       />
       {/* Inner dot — the answer */}
-      <circle cx="16" cy="18" r="1.6" fill="white" />
+      <circle cx="16" cy="18" r="1.6" className={styles["markFill"]} />
     </svg>
   );
 }

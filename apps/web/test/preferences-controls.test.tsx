@@ -48,13 +48,19 @@ describe("LanguageSwitcher (D1, AC1)", () => {
     assert.equal(options.length, SUPPORTED_LOCALES.length);
 
     // Full translated names as accessible labels (design shows short codes visually).
-    screen.getByRole("radio", { name: "O'zbekcha" });
-    screen.getByRole("radio", { name: "Русский" });
-    screen.getByRole("radio", { name: "English" });
+    screen.getByRole("radio", { name: "UZ — O'zbekcha" });
+    screen.getByRole("radio", { name: "RU — Русский" });
+    screen.getByRole("radio", { name: "EN — English" });
 
     // Default locale uz is the active segment.
-    assert.equal(screen.getByRole("radio", { name: "O'zbekcha" }).getAttribute("data-state"), "on");
-    assert.equal(screen.getByRole("radio", { name: "Русский" }).getAttribute("data-state"), "off");
+    assert.equal(
+      screen.getByRole("radio", { name: "UZ — O'zbekcha" }).getAttribute("data-state"),
+      "on",
+    );
+    assert.equal(
+      screen.getByRole("radio", { name: "RU — Русский" }).getAttribute("data-state"),
+      "off",
+    );
   });
 
   it("switches the language, moves the active segment and persists the choice", async () => {
@@ -66,12 +72,15 @@ describe("LanguageSwitcher (D1, AC1)", () => {
       </I18nextProvider>,
     );
 
-    fireEvent.click(screen.getByRole("radio", { name: "Русский" }));
+    fireEvent.click(screen.getByRole("radio", { name: "RU — Русский" }));
 
     await waitFor(() => assert.equal(i18n.language, "ru"));
     assert.equal(storage.data[LOCALE_STORAGE_KEY], "ru");
     await waitFor(() =>
-      assert.equal(screen.getByRole("radio", { name: "Русский" }).getAttribute("data-state"), "on"),
+      assert.equal(
+        screen.getByRole("radio", { name: "RU — Русский" }).getAttribute("data-state"),
+        "on",
+      ),
     );
     // Group label re-translates into the newly active locale.
     await waitFor(() => screen.getByRole("radiogroup", { name: "Язык" }));

@@ -1,0 +1,17 @@
+/* Brand mark colours — tokens only (ADR). */
+
+.gradFrom {
+  stop-color: var(--oa-brand-grad-from);
+}
+
+.gradTo {
+  stop-color: var(--oa-brand-grad-to);
+}
+
+.markStroke {
+  stroke: var(--oa-brand-mark);
+}
+
+.markFill {
+  fill: var(--oa-brand-mark);
+}

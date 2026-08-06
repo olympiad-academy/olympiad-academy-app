@@ -57,6 +57,10 @@ export const uz = {
     targetDesc:
       "O'zbekistondagi 5-sinf o'quvchilari uchun. Olimpiadaga tayyorgarlik ko'rayotgan, lekin maxsus maktab yoki repetitor imkoniyati bo'lmagan bolalar.",
     footerNote: "Hozircha faqat matematika. Keyinchalik fizika, kimyo, informatika.",
+    // CTA block title — same words as hero line 1, but an own key: deriving it
+    // by splitting hero on "\n" would silently break if a translator drops the
+    // newline (independent review, 2026-08-06).
+    ctaTitle: "Olimpiada matematikasini",
     aiTutorKicker: "AI tutor",
     aiTutorTitle: "Javobni bermaydigan AI tutor",
     aiTutorDesc:

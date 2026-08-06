@@ -55,6 +55,8 @@ export const ru = {
     targetDesc:
       "Для учеников 5 класса в Узбекистане. Готовятся к олимпиадам, но нет доступа к специализированной школе или репетитору.",
     footerNote: "Пока только математика. Позже — физика, химия, информатика.",
+    // CTA block title — own key, not hero.split("\n")[0]; see uz.ts comment.
+    ctaTitle: "Олимпиадная математика",
     aiTutorKicker: "ИИ-помощник",
     aiTutorTitle: "ИИ-помощник, который не выдаёт ответ",
     aiTutorDesc:

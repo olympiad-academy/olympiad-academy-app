@@ -57,6 +57,8 @@ export const en = {
     targetDesc:
       "Grade 5 students in Uzbekistan preparing for olympiads without access to specialised schools or private tutors.",
     footerNote: "Math only for now. Physics, chemistry, and informatics coming later.",
+    // CTA block title — own key, not hero.split("\n")[0]; see uz.ts comment.
+    ctaTitle: "Master olympiad math",
     aiTutorKicker: "AI tutor",
     aiTutorTitle: "An AI tutor that never hands over the answer",
     aiTutorDesc:

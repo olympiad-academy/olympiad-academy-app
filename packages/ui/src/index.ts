@@ -8,8 +8,9 @@ export {
   lineHeightTokens,
   letterSpacingTokens,
   fontFamilyTokens,
+  topicAccentTokens,
 } from "./tokens/tokens.js";
-export type { ThemeMode, ColorTokenName } from "./tokens/tokens.js";
+export type { ThemeMode, ColorTokenName, TopicId } from "./tokens/tokens.js";
 export type { BoxProps } from "./primitives/primitives.js";
 
 // `./tokens/css.js` is deliberately NOT re-exported. It imports Prettier, which

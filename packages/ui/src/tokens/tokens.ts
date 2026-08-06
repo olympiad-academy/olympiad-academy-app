@@ -74,6 +74,11 @@ export const colorTokens = Object.freeze({
     askWhyInputBg: "rgba(247,247,251,0.065)",
     statCardBg: "rgba(247,247,251,0.055)",
     progressBg: "rgba(247,247,251,0.085)",
+    // Brand mark gradient + glyph — mode-independent by design (the logo does
+    // not change with the colour mode in the design of record).
+    brandGradFrom: "#6366f1",
+    brandGradTo: "#a855f7",
+    brandMark: "#ffffff",
   }),
   light: Object.freeze({
     bg: "#f2f2f8",
@@ -116,10 +121,33 @@ export const colorTokens = Object.freeze({
     askWhyInputBg: "#ffffff",
     statCardBg: "rgba(23,23,34,0.045)",
     progressBg: "rgba(23,23,34,0.09)",
+    brandGradFrom: "#6366f1",
+    brandGradTo: "#a855f7",
+    brandMark: "#ffffff",
   }),
 });
 
 export type ColorTokenName = keyof (typeof colorTokens)["dark"];
+
+/**
+ * Per-topic accent colours from the design of record (snapshot TOPIC_META).
+ * These are runtime values, not CSS custom properties: per D12 they are set
+ * inline as `--topic-accent` on the element, and translucent backgrounds and
+ * borders derive from it via color-mix() at the call site. The palette itself
+ * lives HERE, not in app code — the ADR's single-source rule covers runtime
+ * values too.
+ */
+export const topicAccentTokens = Object.freeze({
+  numbers: "#60a5fa",
+  fractions: "#a78bfa",
+  decimals: "#2dd4bf",
+  measurement: "#fbbf24",
+  geometry: "#fb923c",
+  algebra: "#f472b6",
+  percentages: "#34d399",
+});
+
+export type TopicId = keyof typeof topicAccentTokens;
 
 /**
  * Spacing ramp in px, keyed by its own value. Every step is one the reference

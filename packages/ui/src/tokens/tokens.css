@@ -51,6 +51,9 @@
   --oa-ask-why-input-bg: rgba(247, 247, 251, 0.065);
   --oa-stat-card-bg: rgba(247, 247, 251, 0.055);
   --oa-progress-bg: rgba(247, 247, 251, 0.085);
+  --oa-brand-grad-from: #6366f1;
+  --oa-brand-grad-to: #a855f7;
+  --oa-brand-mark: #ffffff;
 
   --oa-space-2: 2px;
   --oa-space-4: 4px;
@@ -150,4 +153,7 @@
   --oa-ask-why-input-bg: #ffffff;
   --oa-stat-card-bg: rgba(23, 23, 34, 0.045);
   --oa-progress-bg: rgba(23, 23, 34, 0.09);
+  --oa-brand-grad-from: #6366f1;
+  --oa-brand-grad-to: #a855f7;
+  --oa-brand-mark: #ffffff;
 }
