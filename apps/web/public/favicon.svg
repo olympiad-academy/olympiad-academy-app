@@ -1,3 +1,7 @@
+<!-- Standalone asset: a favicon renders outside the document and cannot
+     consume CSS custom properties, so the brand stops are hardcoded here —
+     a recorded exception to the tokens-only rule (D3). test/favicon.test.ts
+     pins these literals to brandGradFrom/brandGradTo/brandMark. -->
 <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <linearGradient id="logoGrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">

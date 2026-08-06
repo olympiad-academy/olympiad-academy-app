@@ -65,6 +65,31 @@ describe("Landing `/` (D11 + D11-A1, copy from the design snapshot)", () => {
     screen.getByText(/Hozircha faqat matematika/);
   });
 
+  it("resolves every flow-step key — no raw i18n key may leak into the document", async () => {
+    await renderLanding();
+
+    // Regression guard for the class of bug where a key rename in the
+    // locales is not mirrored at the call site: i18next silently returns
+    // the key itself, and only this assertion sees it.
+    screen.getByText("Mavzu tanla");
+    screen.getByText("Masala yech");
+    screen.getByText("AI tutordan so'ra");
+    const body = document.body.textContent ?? "";
+    assert.equal(
+      /landing\.\w+/.test(body),
+      false,
+      `raw i18n key leaked: ${body.match(/landing\.\w+/)}`,
+    );
+  });
+
+  it("resolves the flow steps in ru as well", async () => {
+    await renderLanding("ru");
+
+    screen.getByText("Выбери тему");
+    screen.getByText("Реши задачу");
+    screen.getByText("Спроси у ИИ-помощника");
+  });
+
   it("localises into ru — including topic chips", async () => {
     await renderLanding("ru");
 

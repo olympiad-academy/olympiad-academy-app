@@ -18,6 +18,11 @@ import styles from "./landing.module.css";
  * Module under sections/ (clean-code: split big components, files ≤400
  * lines). Structure and copy follow the design of record (snapshot App.tsx
  * LandingScreen). CTAs are Links into the S6 routing skeleton.
+ *
+ * i18n seam rule for sections: repeated card/chat collections arrive as
+ * props from buildLandingContent (one mapping place, covered by the
+ * resolved-copy tests); one-off strings (kickers, hero, CTA) are fetched by
+ * the section itself via useTranslation.
  */
 export const LandingRoute = (): ReactElement => {
   const { t } = useTranslation();

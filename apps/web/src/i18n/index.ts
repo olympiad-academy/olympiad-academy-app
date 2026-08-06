@@ -1,6 +1,7 @@
 import i18next, { type i18n } from "i18next";
 import { initReactI18next } from "react-i18next";
 import { LanguageSchema, type Language } from "@olympiad-academy-app/api-client";
+import type { PreferenceStorage } from "../preferences/preference-storage.js";
 import { uz } from "./locales/uz.js";
 import { ru } from "./locales/ru.js";
 import { en } from "./locales/en.js";
@@ -21,8 +22,6 @@ import { en } from "./locales/en.js";
 export const SUPPORTED_LOCALES = LanguageSchema.options;
 export const DEFAULT_LOCALE: Language = "uz";
 export const LOCALE_STORAGE_KEY = "oa.locale";
-
-import type { PreferenceStorage } from "../preferences/preference-storage.js";
 
 /** Storage seam for the locale preference (shared shape, see preferences/). */
 export type LocaleStorage = PreferenceStorage;

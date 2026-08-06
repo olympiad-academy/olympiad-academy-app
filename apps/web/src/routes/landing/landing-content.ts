@@ -18,12 +18,26 @@ export const LANDING_TOPICS: readonly LandingTopic[] = (
 ).map(([id, accent]) => ({ id, accent }));
 
 /**
- * The hero shows the FIRST FIVE topics, not all seven (designer decision
- * 2026-08-06): seven chips wrapped to a second row, and the approved step-1
- * copy itself says "5 олимпиадных тем" — five also makes chips and copy
- * agree. The full set renders on the /topics stub.
+ * The hero shows FIVE of the seven topics (designer decision 2026-08-06):
+ * seven chips wrapped to a second row, and the approved step-1 copy itself
+ * says "5 олимпиадных тем" — five also makes chips and copy agree. The
+ * full set renders on the /topics stub.
+ *
+ * The five are an EXPLICIT list, not a slice: slicing would silently couple
+ * the hero to the key order of topicAccentTokens in packages/ui — a reorder
+ * there would change the hero with no signal here.
  */
-export const HERO_TOPICS: readonly LandingTopic[] = LANDING_TOPICS.slice(0, 5);
+const HERO_TOPIC_IDS: readonly TopicId[] = [
+  "numbers",
+  "fractions",
+  "decimals",
+  "measurement",
+  "geometry",
+];
+
+export const HERO_TOPICS: readonly LandingTopic[] = HERO_TOPIC_IDS.flatMap((id) =>
+  LANDING_TOPICS.filter((topic) => topic.id === id),
+);
 
 /**
  * Decorative math symbols scattered over the hero (design of record). Only
@@ -62,20 +76,20 @@ export const buildLandingContent = (t: Translate): LandingContent => {
     flowSteps: [
       {
         stepNumber: "01",
-        title: t("landing.step1Title"),
-        description: t("landing.step1Desc"),
+        title: t("landing.flowStep1Title"),
+        description: t("landing.flowStep1Desc"),
         icon: "🗂",
       },
       {
         stepNumber: "02",
-        title: t("landing.step2Title"),
-        description: t("landing.step2Desc"),
+        title: t("landing.flowStep2Title"),
+        description: t("landing.flowStep2Desc"),
         icon: "✏️",
       },
       {
         stepNumber: "03",
-        title: t("landing.step3Title"),
-        description: t("landing.step3Desc"),
+        title: t("landing.flowStep3Title"),
+        description: t("landing.flowStep3Desc"),
         icon: "✦",
       },
     ],

@@ -10,6 +10,14 @@
   padding: var(--oa-space-80) var(--oa-space-20);
 }
 
+/* Narrow centred variant — the target-audience statement. */
+.sectionInnerNarrow {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: var(--oa-space-80) var(--oa-space-20);
+  text-align: center;
+}
+
 .sectionKicker {
   font-size: var(--oa-font-size-12);
   font-weight: var(--oa-font-weight-black);
@@ -37,6 +45,25 @@
   padding: var(--oa-space-24);
   background: var(--oa-surface);
   border: 1px solid var(--oa-border);
+}
+
+.cardNumber {
+  font-family: var(--oa-font-family-display);
+  font-size: var(--oa-font-size-48);
+  font-weight: var(--oa-font-weight-black);
+  line-height: var(--oa-line-height-none);
+  color: var(--oa-text-faint);
+  margin-bottom: var(--oa-space-16);
+}
+
+.cardIcon {
+  font-size: var(--oa-font-size-30);
+  margin-bottom: var(--oa-space-16);
+}
+
+.cardIconCompact {
+  font-size: var(--oa-font-size-24);
+  margin-bottom: var(--oa-space-12);
 }
 
 .cardTitle {

@@ -1,4 +1,5 @@
 import "./helpers/dom.js";
+import type { ReactElement } from "react";
 import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cleanup, render, screen } from "@testing-library/react";
@@ -29,8 +30,6 @@ const renderStub = async (element: ReactElement, locale?: string): Promise<void>
     </I18nextProvider>,
   );
 };
-
-import type { ReactElement } from "react";
 
 afterEach(() => cleanup());
 

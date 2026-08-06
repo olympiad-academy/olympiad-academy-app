@@ -1,4 +1,5 @@
 import { themeModes, type ThemeMode } from "@olympiad-academy-app/ui";
+import type { PreferenceStorage } from "../preferences/preference-storage.js";
 
 /**
  * Colour-mode switching (OLY-39, decision D12).
@@ -18,8 +19,6 @@ export const THEME_ATTRIBUTE = "data-theme";
 
 /** Dark is the design of record's default; light is the override. */
 export const DEFAULT_THEME_MODE: ThemeMode = "dark";
-
-import type { PreferenceStorage } from "../preferences/preference-storage.js";
 
 /** Storage seam for the theme preference (shared shape, see preferences/). */
 export type ThemeStorage = PreferenceStorage;

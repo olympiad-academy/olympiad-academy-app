@@ -1,7 +1,4 @@
 .grid {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: var(--oa-space-80) var(--oa-space-20);
   display: grid;
   gap: var(--oa-space-48);
 }

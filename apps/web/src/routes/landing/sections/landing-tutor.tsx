@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { clsx } from "clsx";
 import type { ChatMessage, Feature } from "../landing-content.js";
 import shared from "./landing-shared.module.css";
 import styles from "./landing-tutor.module.css";
@@ -15,7 +16,7 @@ export const LandingTutor = ({
   const { t } = useTranslation();
   return (
     <section className={shared["section"]}>
-      <div className={styles["grid"]}>
+      <div className={clsx(shared["sectionInner"], styles["grid"])}>
         <div>
           <div className={styles["badge"]}>✦ {t("landing.aiTutorKicker")}</div>
           <h2 className={styles["title"]}>{t("landing.aiTutorTitle")}</h2>
@@ -48,9 +49,9 @@ const ChatMock = ({ chat }: { chat: readonly ChatMessage[] }): ReactElement => {
         <span className={styles["chatTag"]}>{t("landing.chatTag")}</span>
       </div>
       <div className={styles["chatMessages"]}>
-        {chat.map((message, index) => (
+        {chat.map((message) => (
           <div
-            key={index}
+            key={message.text}
             className={message.from === "student" ? styles["rowStudent"] : styles["rowTutor"]}
           >
             <div

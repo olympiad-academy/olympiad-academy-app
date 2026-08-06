@@ -76,3 +76,13 @@ New design fact from the snapshot: the design of record defines two complete col
 ## Stack confirmations
 
 - Team lead, 2026-08-04: «simple SPA React 18 is better for now, we don't need anything from Next or React 19» — DL-16 starter stack stands.
+
+## Post-review hardening record (2026-08-06) — visible justifications
+
+The full decision register lives in `.vibe/work/oly-19/` (local, gitignored by design). This section keeps the justifications a PR reviewer needs **inside** the committed tree:
+
+- **Starter scaffold routes removed** (`home`, `system-status`, S5). OLY-8's DoD evidence was «web consumes `createApiClient`» — that consumption is now load-bearing through `i18n/index.ts`, which derives the locale list from the contract's `LanguageSchema` (same api-client package). The scaffold screens were starter placeholders, not product screens; their deletion is recorded here and in the register (D2/D8/D11).
+- **Path-ownership expansion beyond the plan's `owned` list**, all review-driven and listed with reasons: `eslint.config.mjs` (operator rule: machine-checkable standards live in the linter — strict block scoped to `apps/web`), `AGENTS.md` (one pointer line to `docs/code-standards.md`), `.github/workflows/quality.yml` (e2e-web job proving AC1/AC2 in CI, PR-only), `apps/web/index.html` (`lang="uz"` + favicon link), `apps/web/public/favicon.svg` (below).
+- **favicon.svg hardcoded colours — recorded exception to the tokens-only rule (D3).** A favicon renders outside the document and cannot consume CSS custom properties, so the brand stops are literals; `apps/web/test/favicon.test.ts` pins them to `brandGradFrom`/`brandGradTo`/`brandMark` so any drift breaks the build.
+- **Dead `nav` i18n namespace removed** (2026-08-06): no consumers after the shell became nav-less per the design of record. OLY-40 re-adds exactly the keys it needs.
+- **Design deviations from the snapshot are deliberate** (D11-A2, D12-A1): 5 of 7 hero topic chips (explicit `HERO_TOPIC_IDS` list), ToggleGroup instead of Select for the switcher, 10 tokens raised to WCAG AA with a contrast test, no theme-switch animation. Full old→new token list in `.vibe/evidence/oly-19/design/README.md` («Deviations», committed) for the Figma sync.

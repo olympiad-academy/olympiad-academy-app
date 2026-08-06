@@ -9,7 +9,7 @@ export const LandingTarget = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <section className={shared["section"]}>
-      <div className={styles["inner"]}>
+      <div className={shared["sectionInnerNarrow"]}>
         <div className={clsx(shared["sectionKicker"], styles["kicker"])}>
           {t("landing.targetTitle")}
         </div>
