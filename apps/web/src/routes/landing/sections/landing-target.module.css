@@ -1,0 +1,16 @@
+.inner {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: var(--oa-space-80) var(--oa-space-20);
+  text-align: center;
+}
+
+.kicker {
+  margin-bottom: var(--oa-space-24);
+}
+
+.text {
+  font-size: var(--oa-font-size-20);
+  line-height: var(--oa-line-height-relaxed);
+  color: var(--oa-text-muted);
+}

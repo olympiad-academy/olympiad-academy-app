@@ -1,0 +1,12 @@
+.footer {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: var(--oa-space-24) var(--oa-space-20);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--oa-space-12);
+  border-top: 1px solid var(--oa-border2);
+  font-size: var(--oa-font-size-12);
+  color: var(--oa-text-faint);
+}

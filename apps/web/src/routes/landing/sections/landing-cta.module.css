@@ -1,0 +1,47 @@
+.inner {
+  text-align: center;
+}
+
+.card {
+  display: inline-block;
+  border-radius: var(--oa-radius-24);
+  padding: var(--oa-space-48);
+  background: color-mix(in srgb, var(--oa-primary-strong) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--oa-primary-strong) 20%, transparent);
+}
+
+[data-theme="light"] .card {
+  background: color-mix(in srgb, var(--oa-primary-strong) 6%, transparent);
+}
+
+.title {
+  font-family: var(--oa-font-family-display);
+  font-size: var(--oa-font-size-30);
+  font-weight: var(--oa-font-weight-black);
+  margin-bottom: var(--oa-space-16);
+}
+
+.note {
+  font-size: var(--oa-font-size-14);
+  color: var(--oa-text-subtle);
+  margin-bottom: var(--oa-space-32);
+}
+
+.button {
+  font-family: var(--oa-font-family-display);
+  font-weight: var(--oa-font-weight-black);
+  font-size: var(--oa-font-size-16);
+  color: var(--oa-text-on-accent);
+  text-decoration: none;
+  padding: var(--oa-space-16) var(--oa-space-32);
+  border-radius: var(--oa-radius-16);
+  background: var(--oa-primary-gradient);
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.button:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}

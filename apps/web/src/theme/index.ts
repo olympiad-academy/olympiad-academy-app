@@ -19,10 +19,10 @@ export const THEME_ATTRIBUTE = "data-theme";
 /** Dark is the design of record's default; light is the override. */
 export const DEFAULT_THEME_MODE: ThemeMode = "dark";
 
-export interface ThemeStorage {
-  getItem(key: string): string | null;
-  setItem(key: string, value: string): void;
-}
+import type { PreferenceStorage } from "../preferences/preference-storage.js";
+
+/** Storage seam for the theme preference (shared shape, see preferences/). */
+export type ThemeStorage = PreferenceStorage;
 
 const isThemeMode = (value: string | null): value is ThemeMode =>
   value !== null && themeModes.some((mode) => mode === value);

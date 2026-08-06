@@ -43,18 +43,8 @@
 }
 
 .topicsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: var(--oa-space-12);
-  text-align: left;
-}
-
-.topicCard {
-  border-radius: var(--oa-radius-12);
-  padding: var(--oa-space-14) var(--oa-space-16);
-  font-size: var(--oa-font-size-14);
-  font-weight: var(--oa-font-weight-bold);
-  color: var(--topic-accent);
-  background: color-mix(in srgb, var(--topic-accent) 8%, transparent);
-  border: 1px solid color-mix(in srgb, var(--topic-accent) 19%, transparent);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--oa-space-8);
+  justify-content: center;
 }
