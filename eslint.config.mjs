@@ -131,4 +131,45 @@ export default tseslint.config(
       "@typescript-eslint/no-extraneous-class": "off",
     },
   },
+  {
+    // Clean-code standards from docs/code-standards.md, machine-enforced
+    // (operator, 2026-08-06). Scoped to apps/web — the code this project
+    // owns; widening to apps/api and apps/mobile is a team follow-up, not
+    // something a frontend ticket rewrites under its owners.
+    files: ["apps/web/**/*.ts", "apps/web/**/*.tsx"],
+    linterOptions: {
+      // Inline eslint-* comments are banned: fix the code or this config,
+      // never mute. This also makes the scaffold's old disable comments
+      // inert — the marker bindings are functions now precisely so they
+      // need no suppression.
+      noInlineConfig: true,
+      reportUnusedDisableDirectives: "error",
+    },
+    rules: {
+      "func-style": ["error", "expression", { allowArrowFunctions: true }],
+      curly: ["error", "all"],
+      "max-depth": ["error", 3],
+      "max-params": ["error", 3],
+      "max-lines": ["error", { max: 400, skipBlankLines: true, skipComments: true }],
+      "no-console": "error",
+      // "t" stays: it is the i18next translation function name, not a variable.
+      "id-length": ["error", { min: 2, exceptions: ["t", "i", "j", "x", "y", "_"] }],
+    },
+  },
+  {
+    // Boolean-prefix naming needs type information, which the repo config
+    // deliberately disables for test files — so this rule is src-only.
+    files: ["apps/web/src/**/*.ts", "apps/web/src/**/*.tsx"],
+    rules: {
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: "variable",
+          types: ["boolean"],
+          format: ["camelCase"],
+          prefix: ["is", "has", "should", "can"],
+        },
+      ],
+    },
+  },
 );

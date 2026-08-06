@@ -9,9 +9,9 @@ import {
   type LocaleStorage,
 } from "@/i18n/index.js";
 
-function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
-  data: Record<string, string>;
-} {
+const fakeStorage = (
+  initial: Record<string, string> = {},
+): LocaleStorage & { data: Record<string, string> } => {
   const data = { ...initial };
   return {
     data,
@@ -20,7 +20,7 @@ function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
       data[key] = value;
     },
   };
-}
+};
 
 describe("i18n module (D1)", () => {
   it("exposes exactly the locales from the contract LanguageSchema (no duplicated enum)", () => {

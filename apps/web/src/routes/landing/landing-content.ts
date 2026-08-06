@@ -57,7 +57,7 @@ export interface LandingContent {
 type Translate = (key: string) => string;
 
 /** Builds the landing's structured content from the i18n copy (D11-A1). */
-export function buildLandingContent(t: Translate): LandingContent {
+export const buildLandingContent = (t: Translate): LandingContent => {
   return {
     steps: [
       {
@@ -98,4 +98,4 @@ export function buildLandingContent(t: Translate): LandingContent {
       { from: "tutor", text: t("landing.chat6") },
     ],
   };
-}
+};

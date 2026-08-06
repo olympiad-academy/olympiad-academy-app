@@ -8,7 +8,7 @@ import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index
 import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
-function fakeStorage(initial: Record<string, string> = {}): LocaleStorage {
+const fakeStorage = (initial: Record<string, string> = {}): LocaleStorage => {
   const data = { ...initial };
   return {
     getItem: (key: string) => data[key] ?? null,
@@ -16,9 +16,9 @@ function fakeStorage(initial: Record<string, string> = {}): LocaleStorage {
       data[key] = value;
     },
   };
-}
+};
 
-async function renderStub(element: ReactElement, locale?: string): Promise<void> {
+const renderStub = async (element: ReactElement, locale?: string): Promise<void> => {
   const i18n = await createI18n({
     storage: fakeStorage(locale === undefined ? {} : { [LOCALE_STORAGE_KEY]: locale }),
   });
@@ -27,7 +27,7 @@ async function renderStub(element: ReactElement, locale?: string): Promise<void>
       <MemoryRouter>{element}</MemoryRouter>
     </I18nextProvider>,
   );
-}
+};
 
 import type { ReactElement } from "react";
 

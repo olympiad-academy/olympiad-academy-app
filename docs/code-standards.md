@@ -36,9 +36,23 @@
 - Dynamic styling via classes, not JS; nesting ≤2; consistent units
 - Component CSS Module lives next to its component
 
-## Repo conventions we formalize (deviations from the guide's defaults)
+## Hard rules — machine-enforced in `eslint.config.mjs` (apps/web scope)
 
-Locked as decision D13 (2026-08-06): component files are **`folder/folder-name.tsx`** (not `index.tsx`), and components are **`export function` declarations** (not arrow consts) — matching the repo's starter layout. The guide's `index.tsx` + arrow-const style is the one we deliberately do not follow; everything else in the guide applies.
+What the linter checks needs no vigilance. Enforced 2026-08-06 (operator):
+
+- **No inline linter suppression** — `noInlineConfig: true` makes `eslint-disable*` comments inert and errors them. Fix the code or the config, never mute. (Scaffold markers are functions precisely so they need no suppression.)
+- **Arrow function expressions everywhere** — `func-style: ["error", "expression"]`
+- **Braces on every block** (`curly: all`), **nesting ≤3** (`max-depth`), **≤3 params** (`max-params`)
+- **Files ≤400 lines** — `max-lines` (blank/comment lines skipped)
+- **No `console.*`** — `no-console`
+- **No single-letter names** — `id-length` (exceptions: `t` the i18next function, `i`/`j` loop counters, `x`/`y`, `_`)
+- **Booleans prefixed is/has/should/can** — `naming-convention` (src only: test files are type-info-free by repo config)
+
+Scope: these apply to `apps/web/**` — the code this project owns. Widening to `apps/api` / `apps/mobile` is a team follow-up (their code, their call), not something a frontend ticket rewrites under its owners.
+
+## Repo conventions we formalize
+
+Locked as decision D13 (2026-08-06, amended same day): component files are **`folder/folder-name.tsx`** (not the guide's `index.tsx`), and components are **arrow consts** (`export const X = (): ReactElement => …`) per the team guide (React.md §2.1) — the starter scaffold's function declarations are not the project style; all components were converted in one sweep.
 
 ## WCAG floor
 

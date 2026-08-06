@@ -7,7 +7,7 @@ import { MemoryRouter } from "react-router-dom";
 import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index.js";
 import { LandingRoute } from "@/routes/landing/landing.js";
 
-function fakeStorage(initial: Record<string, string> = {}): LocaleStorage {
+const fakeStorage = (initial: Record<string, string> = {}): LocaleStorage => {
   const data = { ...initial };
   return {
     getItem: (key: string) => data[key] ?? null,
@@ -15,9 +15,9 @@ function fakeStorage(initial: Record<string, string> = {}): LocaleStorage {
       data[key] = value;
     },
   };
-}
+};
 
-async function renderLanding(locale?: string): Promise<void> {
+const renderLanding = async (locale?: string): Promise<void> => {
   const i18n = await createI18n({
     storage: fakeStorage(locale === undefined ? {} : { [LOCALE_STORAGE_KEY]: locale }),
   });
@@ -28,7 +28,7 @@ async function renderLanding(locale?: string): Promise<void> {
       </MemoryRouter>
     </I18nextProvider>,
   );
-}
+};
 
 afterEach(() => cleanup());
 

@@ -33,16 +33,16 @@ const resources = {
   en: { translation: en },
 } as const;
 
-function readStoredLocale(storage: LocaleStorage): Language {
+const readStoredLocale = (storage: LocaleStorage): Language => {
   const parsed = LanguageSchema.safeParse(storage.getItem(LOCALE_STORAGE_KEY));
   return parsed.success ? parsed.data : DEFAULT_LOCALE;
-}
+};
 
 export interface CreateI18nOptions {
   storage: LocaleStorage;
 }
 
-export async function createI18n({ storage }: CreateI18nOptions): Promise<i18n> {
+export const createI18n = async ({ storage }: CreateI18nOptions): Promise<i18n> => {
   const instance = i18next.createInstance();
   await instance.use(initReactI18next).init({
     lng: readStoredLocale(storage),
@@ -57,10 +57,10 @@ export async function createI18n({ storage }: CreateI18nOptions): Promise<i18n> 
     }
   });
   return instance;
-}
+};
 
 /** Keeps <html lang> in sync; no-op outside the browser. */
-export function syncDocumentLanguage(i18n: i18n): void {
+export const syncDocumentLanguage = (i18n: i18n): void => {
   if (typeof document === "undefined") {
     return;
   }
@@ -69,11 +69,11 @@ export function syncDocumentLanguage(i18n: i18n): void {
   };
   apply(i18n.language);
   i18n.on("languageChanged", apply);
-}
+};
 
 /** Browser entrypoint: the app singleton backed by localStorage. */
-export async function createBrowserI18n(): Promise<i18n> {
+export const createBrowserI18n = async (): Promise<i18n> => {
   const instance = await createI18n({ storage: window.localStorage });
   syncDocumentLanguage(instance);
   return instance;
-}
+};

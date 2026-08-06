@@ -114,6 +114,9 @@ jobs:
   # server behind E2E_API=1); specs that do must use test:e2e:api instead.
   e2e-web:
     name: web e2e (playwright)
+    # Pull requests only (operator, 2026-08-06): pushes to main are already
+    # gated by the merged PR's run — no need to spend the minutes twice.
+    if: github.event_name == 'pull_request'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

@@ -32,40 +32,40 @@ const isThemeMode = (value: string | null): value is ThemeMode =>
  * and outlives deploys, so a stale or hand-edited value must not reach the DOM
  * as a `data-theme` no stylesheet answers to — that renders a half-themed page.
  */
-export function readStoredThemeMode(storage: ThemeStorage): ThemeMode {
+export const readStoredThemeMode = (storage: ThemeStorage): ThemeMode => {
   const stored = storage.getItem(THEME_STORAGE_KEY);
   return isThemeMode(stored) ? stored : DEFAULT_THEME_MODE;
-}
+};
 
-export function persistThemeMode(storage: ThemeStorage, mode: ThemeMode): void {
+export const persistThemeMode = (storage: ThemeStorage, mode: ThemeMode): void => {
   storage.setItem(THEME_STORAGE_KEY, mode);
-}
+};
 
-export function nextThemeMode(mode: ThemeMode): ThemeMode {
+export const nextThemeMode = (mode: ThemeMode): ThemeMode => {
   return mode === "dark" ? "light" : "dark";
-}
+};
 
 /** Reflects the mode onto <html>; no-op outside the browser. */
-export function applyThemeMode(mode: ThemeMode): void {
+export const applyThemeMode = (mode: ThemeMode): void => {
   if (typeof document === "undefined") {
     return;
   }
   document.documentElement.setAttribute(THEME_ATTRIBUTE, mode);
-}
+};
 
 /**
  * Browser entrypoint. The inline snippet in index.html has already applied the
  * stored mode before first paint; this re-applies it so the attribute is correct
  * even if that snippet was stripped, and returns the mode for React to own.
  */
-export function initBrowserTheme(): ThemeMode {
+export const initBrowserTheme = (): ThemeMode => {
   const mode = readStoredThemeMode(window.localStorage);
   applyThemeMode(mode);
   return mode;
-}
+};
 
 /** Persists and applies in one step — what the toggle control calls. */
-export function setThemeMode(storage: ThemeStorage, mode: ThemeMode): void {
+export const setThemeMode = (storage: ThemeStorage, mode: ThemeMode): void => {
   persistThemeMode(storage, mode);
   applyThemeMode(mode);
-}
+};

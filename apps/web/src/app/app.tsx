@@ -60,9 +60,9 @@ const appRoutes: RouteObject[] = [
   },
 ];
 
-function AppRoutes(): ReactElement | null {
+const AppRoutes = (): ReactElement | null => {
   return useRoutes(appRoutes);
-}
+};
 
 export const App = (): ReactElement => {
   return (

@@ -25,13 +25,13 @@ if (rootElement === null) {
 
 // i18n init is async (stored-locale resolution), so the first render waits for
 // it — every screen below the provider can rely on t()/useTranslation (D1).
-async function bootstrap(container: HTMLElement): Promise<void> {
+const bootstrap = async (container: HTMLElement): Promise<void> => {
   const i18n = await createBrowserI18n();
   createRoot(container).render(
     <I18nextProvider i18n={i18n}>
       <App />
     </I18nextProvider>,
   );
-}
+};
 
 void bootstrap(rootElement);

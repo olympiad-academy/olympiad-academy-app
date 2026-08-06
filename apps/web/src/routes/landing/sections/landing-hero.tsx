@@ -10,14 +10,14 @@ import styles from "./landing-hero.module.css";
  * positions are a function of the index). Inline because they are runtime
  * layout values, not colours — the colour comes from the CSS module.
  */
-function heroSymbolStyle(index: number): CSSProperties {
+const heroSymbolStyle = (index: number): CSSProperties => {
   return {
     left: `${String(5 + index * 10)}%`,
     top: `${String(10 + Math.sin(index * 1.3) * 55)}%`,
     fontSize: `${(1.2 + index * 0.25).toFixed(2)}rem`,
     transform: `rotate(${String(index * 19 - 40)}deg)`,
   };
-}
+};
 
 /** Hero: badge, pre-line title, sub, CTA pair, topic chips over a decorated glow. */
 export const LandingHero = (): ReactElement => {

@@ -13,9 +13,9 @@ import { THEME_STORAGE_KEY } from "@/theme/index.js";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
 import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
 
-function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
-  data: Record<string, string>;
-} {
+const fakeStorage = (
+  initial: Record<string, string> = {},
+): LocaleStorage & { data: Record<string, string> } => {
   const data = { ...initial };
   return {
     data,
@@ -24,7 +24,7 @@ function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
       data[key] = value;
     },
   };
-}
+};
 
 afterEach(() => {
   cleanup();
