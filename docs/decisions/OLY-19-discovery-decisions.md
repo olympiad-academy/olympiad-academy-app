@@ -63,7 +63,7 @@ Landing `/` = static multi-block page per the Figma Make draft (several simple c
 
 ### D12 — Two colour modes with a switcher
 
-New design fact from the snapshot: the design of record defines two complete colour modes (dark + light, 45 semantic tokens each) and a theme toggle in the navigation of every screen. Decision (2026-08-05): **ship both modes** with an explicit toggle next to the language switcher; choice persists in localStorage and applies before first paint. Dark is the default. Every OLY-39/40/42 screen is visually verified in both modes. Full record in the register (D12, incl. the `color-mix()` rule for topic-accent-derived tokens).
+New design fact from the snapshot: the design of record defines two complete colour modes (dark + light, 39 semantic tokens each — the snapshot's theme object has 41 fields; the other two are `hintBg`/`hintBorder`, which are runtime functions, not tokens) and a theme toggle in the navigation of every screen. Decision (2026-08-05): **ship both modes** with an explicit toggle next to the language switcher; choice persists in localStorage and applies before first paint. Dark is the default. Every OLY-39/40/42 screen is visually verified in both modes. Full record in the register (D12, incl. the `color-mix()` rule for topic-accent-derived tokens).
 
 ## Team-lead follow-ups (blocking nothing in OLY-39/40/42)
 

@@ -92,13 +92,7 @@ a {
 }
 
 /*
- * Colour-mode switching should feel like a transition, not a repaint — but only
- * for users who have not asked for less motion.
+ * No theme-switch transition: the one originally written here was declared on
+ * <html> while background/color live on <body>, so it never fired. Operator
+ * decision 2026-08-06 — remove rather than repair; theme switches are instant.
  */
-@media (prefers-reduced-motion: no-preference) {
-  html {
-    transition:
-      background-color 0.25s ease,
-      color 0.25s ease;
-  }
-}

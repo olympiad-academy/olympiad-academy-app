@@ -23,7 +23,7 @@ This is a Make file, not a Figma design file. Consequences, all verified on
 
 | File       | What it is                                                        | Consumed by                          |
 | ---------- | ----------------------------------------------------------------- | ------------------------------------ |
-| `theme.ts` | 45 semantic colour tokens × dark/light                            | OLY-39 S3 (tokens), D12              |
+| `theme.ts` | 41 fields/mode = 39 semantic colour tokens + 2 runtime functions (`hintBg`/`hintBorder`) × dark/light (count corrected 2026-08-06; earlier said "45") | OLY-39 S3 (tokens), D12 |
 | `i18n.ts`  | 150 keys × uz/ru/en — final approved copy, verified equal key sets | OLY-39 S5 (landing), OLY-40 (labels) |
 | `App.tsx`  | reference implementation, 1275 lines, six screens                 | OLY-39 S3–S6, OLY-40, OLY-42         |
 
@@ -91,5 +91,47 @@ This snapshot is frozen at 2026-08-05. The Make file may keep changing; this
 directory does not. If it needs to be refreshed, that is a new amendment, not an
 in-place edit.
 
-Note that `.vibe/evidence/**` is gitignored (`.gitignore:78`) — this directory
-is local to the machine and is not versioned with the repo.
+Since 2026-08-06 this directory IS committed to git (operator decision):
+design snapshots are team-shared evidence, exempted from the `.vibe/evidence/**`
+gitignore rule for `*/design/` paths only.
+
+## Deviations from this snapshot in the shipped tokens (D12 Amendment 1, 2026-08-06)
+
+The snapshot stays frozen; the shipped tokens in `packages/ui/src/tokens/tokens.ts`
+deviate from it in exactly these places, all operator-approved, all enforced by
+`packages/ui/test/tokens-contrast.test.ts`. **This list is the handoff for
+bringing the Figma design file in sync.** Contrast ratios are WCAG relative to
+the page background (semi-transparent tokens composited).
+
+### Dark mode
+
+| Token              | Snapshot value                       | Shipped value                        | Why (before → after)                     |
+| ------------------ | ------------------------------------ | ------------------------------------ | ---------------------------------------- |
+| `textFaint`        | `rgba(247,247,251,0.38)`             | `rgba(247,247,251,0.48)`             | 3.4:1 → 4.7:1 (AA)                       |
+| `textSubtle`       | `rgba(247,247,251,0.50)`             | `rgba(247,247,251,0.55)`             | 5.1:1 → 5.9:1 (kept above textFaint)     |
+| `langInactiveColor`| `rgba(247,247,251,0.50)`             | `rgba(247,247,251,0.55)`             | tracks textSubtle, as in the snapshot    |
+| `primaryGradient`  | `#6366f1 → #a855f7`                  | `#5856e8 → #9333ea`                  | CTA label 4.2→3.7:1 → 5.1:1 both stops   |
+
+### Light mode
+
+| Token              | Snapshot value                       | Shipped value                        | Why (before → after)                     |
+| ------------------ | ------------------------------------ | ------------------------------------ | ---------------------------------------- |
+| `textFaint`        | `rgba(23,23,34,0.42)`                | `rgba(23,23,34,0.62)`                | 2.6:1 → 4.8:1 (AA)                       |
+| `textSubtle`       | `rgba(23,23,34,0.52)`                | `rgba(23,23,34,0.72)`                | 3.5:1 → 6.7:1 (AA)                       |
+| `textMuted`        | `rgba(23,23,34,0.68)`                | `rgba(23,23,34,0.80)`                | 5.8:1 → 8.8:1 (kept above textSubtle)    |
+| `langInactiveColor`| `rgba(23,23,34,0.50)`                | `rgba(23,23,34,0.72)`                | tracks textSubtle, as in the snapshot    |
+| `wrongText`        | `#b45309`                            | `#92400e`                            | 4.2:1 → 5.9:1 on `wrongBg` (AA)          |
+| `correctSubText`   | `rgba(4,120,87,0.72)`                | `#065f46`                            | 2.8:1 → 6.3:1 on `correctBg` (AA)        |
+
+### Typography
+
+| Token                | Snapshot                          | Shipped                                                              | Why |
+| -------------------- | --------------------------------- | -------------------------------------------------------------------- | --- |
+| display font stack   | `'Plus Jakarta Sans', …`          | `'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', 'Nunito Variable', 'Nunito', system-ui, sans-serif` | Plus Jakarta Sans has no basic-cyrillic subset (U+0400–045F) at all; without the Nunito fallback every Russian heading/CTA renders in system-ui. Russian display text sets in Nunito (the brand body face); latin text is unchanged. |
+
+### Behaviour notes (not design-file changes)
+
+- The prototype's hidden scrollbars (`* { scrollbar-width: none }`) were NOT carried over.
+- No theme-switch animation ships (the snapshot's equivalent CSS targeted `html` and never fired; the operator chose removal).
+- `color-scheme: dark/light` is emitted per mode so native widgets match the theme.
+- `hintBg`/`hintBorder` remain functions — resolved via `color-mix()` at the call site (D12), needed by the Practice screen.

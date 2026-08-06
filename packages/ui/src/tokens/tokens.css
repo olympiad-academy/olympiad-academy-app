@@ -6,6 +6,8 @@
  * override on [data-theme="light"], set on <html> before first paint (D12).
  */
 :root {
+  color-scheme: dark;
+
   --oa-bg: #0a0b14;
   --oa-surface: rgba(247, 247, 251, 0.045);
   --oa-surface2: rgba(247, 247, 251, 0.03);
@@ -13,8 +15,8 @@
   --oa-nav-bg: rgba(10, 11, 20, 0.92);
   --oa-text: #f7f7fb;
   --oa-text-muted: rgba(247, 247, 251, 0.68);
-  --oa-text-subtle: rgba(247, 247, 251, 0.5);
-  --oa-text-faint: rgba(247, 247, 251, 0.38);
+  --oa-text-subtle: rgba(247, 247, 251, 0.55);
+  --oa-text-faint: rgba(247, 247, 251, 0.48);
   --oa-text-on-accent: #f8f7ff;
   --oa-border: rgba(247, 247, 251, 0.09);
   --oa-border2: rgba(247, 247, 251, 0.06);
@@ -23,7 +25,7 @@
   --oa-primary-strong: #6366f1;
   --oa-primary-soft: rgba(129, 140, 248, 0.14);
   --oa-primary-border: rgba(129, 140, 248, 0.38);
-  --oa-primary-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+  --oa-primary-gradient: linear-gradient(135deg, #5856e8, #9333ea);
   --oa-focus-ring: rgba(129, 140, 248, 0.74);
   --oa-glow-bg: radial-gradient(
     ellipse 80% 50% at 50% -10%,
@@ -34,7 +36,7 @@
   --oa-input-border: rgba(247, 247, 251, 0.12);
   --oa-input-border-focus: rgba(129, 140, 248, 0.74);
   --oa-lang-active-bg: rgba(247, 247, 251, 0.15);
-  --oa-lang-inactive-color: rgba(247, 247, 251, 0.5);
+  --oa-lang-inactive-color: rgba(247, 247, 251, 0.55);
   --oa-lang-border: rgba(247, 247, 251, 0.14);
   --oa-correct-bg: rgba(16, 185, 129, 0.09);
   --oa-correct-border: rgba(52, 211, 153, 0.24);
@@ -97,20 +99,23 @@
   --oa-letter-spacing-widest: 0.1em;
 
   --oa-font-family-display:
-    "Plus Jakarta Sans Variable", "Plus Jakarta Sans", system-ui, sans-serif;
+    "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Nunito Variable", "Nunito", system-ui,
+    sans-serif;
   --oa-font-family-body: "Nunito Variable", "Nunito", system-ui, sans-serif;
 }
 
 [data-theme="light"] {
+  color-scheme: light;
+
   --oa-bg: #f2f2f8;
   --oa-surface: #ffffff;
   --oa-surface2: rgba(15, 15, 26, 0.025);
   --oa-surface-hover: rgba(15, 15, 26, 0.05);
   --oa-nav-bg: rgba(242, 242, 248, 0.92);
   --oa-text: #171722;
-  --oa-text-muted: rgba(23, 23, 34, 0.68);
-  --oa-text-subtle: rgba(23, 23, 34, 0.52);
-  --oa-text-faint: rgba(23, 23, 34, 0.42);
+  --oa-text-muted: rgba(23, 23, 34, 0.8);
+  --oa-text-subtle: rgba(23, 23, 34, 0.72);
+  --oa-text-faint: rgba(23, 23, 34, 0.62);
   --oa-text-on-accent: #fafaff;
   --oa-border: rgba(23, 23, 34, 0.1);
   --oa-border2: rgba(23, 23, 34, 0.065);
@@ -130,15 +135,15 @@
   --oa-input-border: rgba(23, 23, 34, 0.15);
   --oa-input-border-focus: rgba(79, 70, 229, 0.58);
   --oa-lang-active-bg: rgba(23, 23, 34, 0.1);
-  --oa-lang-inactive-color: rgba(23, 23, 34, 0.5);
+  --oa-lang-inactive-color: rgba(23, 23, 34, 0.72);
   --oa-lang-border: rgba(23, 23, 34, 0.14);
   --oa-correct-bg: rgba(5, 150, 105, 0.08);
   --oa-correct-border: rgba(5, 150, 105, 0.24);
   --oa-correct-text: #047857;
-  --oa-correct-sub-text: rgba(4, 120, 87, 0.72);
+  --oa-correct-sub-text: #065f46;
   --oa-wrong-bg: rgba(217, 119, 6, 0.08);
   --oa-wrong-border: rgba(217, 119, 6, 0.25);
-  --oa-wrong-text: #b45309;
+  --oa-wrong-text: #92400e;
   --oa-ask-why-bg: rgba(79, 70, 229, 0.075);
   --oa-ask-why-border: rgba(79, 70, 229, 0.24);
   --oa-ask-why-text: #4338ca;

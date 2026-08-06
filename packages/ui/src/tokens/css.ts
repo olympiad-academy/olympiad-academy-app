@@ -60,6 +60,10 @@ export const renderTokensCss = (): string => {
 
   const blocks = [
     block(":root", [
+      // Native widgets (scrollbars, form controls, Chrome autofill) follow
+      // the active mode instead of staying light on a dark page.
+      declaration("color-scheme", defaultMode),
+      "",
       ...Object.entries(colorTokens[defaultMode]).map(([name, value]) =>
         declaration(cssVarName(name), value),
       ),
@@ -76,12 +80,13 @@ export const renderTokensCss = (): string => {
       ...scale("font-family", fontFamilyTokens),
     ]),
     ...overrideModes.map((mode) =>
-      block(
-        `[data-theme="${mode}"]`,
-        Object.entries(colorTokens[mode]).map(([name, value]) =>
+      block(`[data-theme="${mode}"]`, [
+        declaration("color-scheme", mode),
+        "",
+        ...Object.entries(colorTokens[mode]).map(([name, value]) =>
           declaration(cssVarName(name), value),
         ),
-      ),
+      ]),
     ),
   ];
 
