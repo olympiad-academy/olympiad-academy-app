@@ -6,6 +6,7 @@ import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
 import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index.js";
 import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
+import { ProfileStubRoute } from "@/routes/stubs/profile-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
 const fakeStorage = (initial: Record<string, string> = {}): LocaleStorage => {
@@ -73,5 +74,17 @@ describe("Routing skeleton stubs (D2/D8, AC2)", () => {
 
     screen.getByRole("heading", { level: 1, name: "Темы" });
     screen.getByText("Дроби");
+  });
+
+  it("profile stub reserves the /profile route (D2 skeleton)", async () => {
+    await renderStub(<ProfileStubRoute />);
+
+    screen.getByRole("heading", { level: 1, name: "Profil" });
+  });
+
+  it("profile stub localises (ru)", async () => {
+    await renderStub(<ProfileStubRoute />, "ru");
+
+    screen.getByRole("heading", { level: 1, name: "Профиль" });
   });
 });

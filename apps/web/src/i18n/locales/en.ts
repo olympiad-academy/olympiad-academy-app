@@ -27,6 +27,8 @@ export const en = {
     authNote: "The full form arrives with OLY-40 — the route is already reserved.",
     topicsNote:
       "The full Topic List screen is a separate task. Below — a preview in the spirit of the design.",
+    profileTitle: "Profile",
+    profileNote: "The profile page is a separate task — the route is already reserved.",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

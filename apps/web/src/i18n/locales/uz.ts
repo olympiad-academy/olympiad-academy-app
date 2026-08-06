@@ -26,6 +26,8 @@ export const uz = {
     topicsTitle: "Mavzular",
     authNote: "To'liq shakl OLY-40 qadamida — marshrut allaqachon zaxiralangan.",
     topicsNote: "To'liq mavzular ekrani — alohida vazifa. Quyida dizayn ruhidagi ko'rik.",
+    profileTitle: "Profil",
+    profileNote: "Profil sahifasi — alohida vazifa, marshrut allaqachon band qilingan.",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

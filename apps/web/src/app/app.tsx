@@ -10,6 +10,7 @@ import {
 import { ROUTES } from "@/constants/routes.js";
 import { LandingRoute } from "@/routes/landing/landing.js";
 import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
+import { ProfileStubRoute } from "@/routes/stubs/profile-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
 // These bindings are replaced by managed schematic integration blocks.
@@ -55,6 +56,7 @@ const appRoutes: RouteObject[] = [
       { path: ROUTES.SIGNUP, element: <AuthStubRoute kind="signup" /> },
       { path: ROUTES.LOGIN, element: <AuthStubRoute kind="login" /> },
       { path: ROUTES.TOPICS, element: <TopicsStubRoute /> },
+      { path: ROUTES.PROFILE, element: <ProfileStubRoute /> },
       ...generatedPublicRoutes(),
       { element: <ProtectedRoutes />, children: generatedProtectedRoutes() },
     ],

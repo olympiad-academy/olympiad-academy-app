@@ -26,6 +26,8 @@ export const ru = {
     topicsTitle: "Темы",
     authNote: "Полная форма — на шаге OLY-40, маршрут уже зарезервирован.",
     topicsNote: "Полный экран тем — отдельная задача. Ниже — обзор в духе дизайна.",
+    profileTitle: "Профиль",
+    profileNote: "Страница профиля — отдельная задача, маршрут уже зарезервирован.",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.
