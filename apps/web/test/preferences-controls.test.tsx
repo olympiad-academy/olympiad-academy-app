@@ -8,10 +8,10 @@ import {
   LOCALE_STORAGE_KEY,
   SUPPORTED_LOCALES,
   type LocaleStorage,
-} from "../src/i18n/index.js";
-import { THEME_STORAGE_KEY } from "../src/theme/index.js";
-import { LanguageSwitcher } from "../src/components/language-switcher/language-switcher.js";
-import { ThemeToggle } from "../src/components/theme-toggle/theme-toggle.js";
+} from "@/i18n/index.js";
+import { THEME_STORAGE_KEY } from "@/theme/index.js";
+import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
+import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
 
 function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
   data: Record<string, string>;

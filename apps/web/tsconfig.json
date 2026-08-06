@@ -8,6 +8,12 @@
     "noEmit": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
+    // "@/x" = "src/x" — no ../../../ climbing. Honoured by tsc, Vite
+    // (resolve.alias) and tsx (test runner) alike.
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "types": ["react", "react-dom", "node"],
     // happy-dom's .d.ts references node:stream/web types newer than the
     // installed @types/node; lib checking adds nothing to our own code.

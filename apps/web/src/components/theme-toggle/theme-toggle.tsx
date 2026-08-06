@@ -1,7 +1,7 @@
 import { useState, type ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import type { ThemeMode } from "@olympiad-academy-app/ui";
-import { nextThemeMode, readStoredThemeMode, setThemeMode } from "../../theme/index.js";
+import { nextThemeMode, readStoredThemeMode, setThemeMode } from "@/theme/index.js";
 import styles from "./theme-toggle.module.css";
 
 /**

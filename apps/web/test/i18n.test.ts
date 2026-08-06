@@ -7,7 +7,7 @@ import {
   LOCALE_STORAGE_KEY,
   createI18n,
   type LocaleStorage,
-} from "../src/i18n/index.js";
+} from "@/i18n/index.js";
 
 function fakeStorage(initial: Record<string, string> = {}): LocaleStorage & {
   data: Record<string, string>;

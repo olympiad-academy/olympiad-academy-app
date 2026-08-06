@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
@@ -10,6 +11,17 @@ export default defineConfig({
   // page and drops component state. That is the difference between usable and
   // painful when building out screens.
   plugins: [react()],
+  resolve: {
+    alias: [
+      // "@/x" -> "src/x", mirroring tsconfig paths. Regex find so scoped
+      // packages (@olympiad-academy-app/*, @fontsource-variable/*) are
+      // untouched — a plain "@" prefix alias would swallow them.
+      {
+        find: /^@\//,
+        replacement: fileURLToPath(new URL("./src/", import.meta.url)),
+      },
+    ],
+  },
   server: {
     proxy: {
       "/api": apiTarget,

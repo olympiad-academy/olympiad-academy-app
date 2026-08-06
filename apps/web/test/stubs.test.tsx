@@ -4,9 +4,9 @@ import { afterEach, describe, it } from "node:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
-import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "../src/i18n/index.js";
-import { AuthStubRoute } from "../src/routes/stubs/auth-stub.js";
-import { TopicsStubRoute } from "../src/routes/stubs/topics-stub.js";
+import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index.js";
+import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
+import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
 function fakeStorage(initial: Record<string, string> = {}): LocaleStorage {
   const data = { ...initial };

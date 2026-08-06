@@ -2,7 +2,7 @@ import type { ReactElement } from "react";
 import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { useTranslation } from "react-i18next";
 import { LanguageSchema } from "@olympiad-academy-app/api-client";
-import { SUPPORTED_LOCALES } from "../../i18n/index.js";
+import { SUPPORTED_LOCALES } from "@/i18n/index.js";
 import styles from "./language-switcher.module.css";
 
 /**

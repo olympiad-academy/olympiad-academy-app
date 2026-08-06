@@ -10,7 +10,7 @@ import {
   THEME_ATTRIBUTE,
   THEME_STORAGE_KEY,
   type ThemeStorage,
-} from "../src/theme/index.js";
+} from "@/theme/index.js";
 
 const storageOf = (
   initial: Record<string, string> = {},

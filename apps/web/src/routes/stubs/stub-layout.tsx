@@ -1,8 +1,8 @@
 import type { ReactElement, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { LanguageSwitcher } from "../../components/language-switcher/language-switcher.js";
-import { Logo } from "../../components/logo/logo.js";
-import { ThemeToggle } from "../../components/theme-toggle/theme-toggle.js";
+import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
+import { Logo } from "@/components/logo/logo.js";
+import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
 import styles from "./stubs.module.css";
 
 /**

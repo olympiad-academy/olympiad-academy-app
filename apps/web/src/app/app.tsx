@@ -7,9 +7,9 @@ import {
   useRoutes,
   type RouteObject,
 } from "react-router-dom";
-import { LandingRoute } from "../routes/landing/landing.js";
-import { AuthStubRoute } from "../routes/stubs/auth-stub.js";
-import { TopicsStubRoute } from "../routes/stubs/topics-stub.js";
+import { LandingRoute } from "@/routes/landing/landing.js";
+import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
+import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
 // These bindings are reassigned by managed schematic integration blocks.
 // eslint-disable-next-line prefer-const

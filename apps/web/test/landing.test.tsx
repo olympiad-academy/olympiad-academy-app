@@ -4,8 +4,8 @@ import { afterEach, describe, it } from "node:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
-import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "../src/i18n/index.js";
-import { LandingRoute } from "../src/routes/landing/landing.js";
+import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index.js";
+import { LandingRoute } from "@/routes/landing/landing.js";
 
 function fakeStorage(initial: Record<string, string> = {}): LocaleStorage {
   const data = { ...initial };

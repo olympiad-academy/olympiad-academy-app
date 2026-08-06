@@ -1,6 +1,6 @@
 import type { CSSProperties, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { LANDING_TOPICS } from "../landing/landing-content.js";
+import { LANDING_TOPICS } from "@/routes/landing/landing-content.js";
 import { StubLayout } from "./stub-layout.js";
 import styles from "./stubs.module.css";
 

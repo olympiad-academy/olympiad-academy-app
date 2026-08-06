@@ -1,9 +1,9 @@
 import type { CSSProperties, ReactElement } from "react";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "../../components/language-switcher/language-switcher.js";
-import { Logo } from "../../components/logo/logo.js";
-import { ThemeToggle } from "../../components/theme-toggle/theme-toggle.js";
+import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
+import { Logo } from "@/components/logo/logo.js";
+import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
 import { HERO_SYMBOLS, LANDING_TOPICS } from "./landing-content.js";
 import styles from "./landing.module.css";
 
