@@ -90,3 +90,4 @@ apps/api/dist/
 .vibe/cache/
 .vibe/tmp/
 # vibe-engineer:local-qa-ignore:end
+test-results/
