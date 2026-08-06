@@ -1,6 +1,6 @@
 # OLY-19: Discovery decisions — Sign Up / Login screen
 
-**Status:** proposed for team review (operator: helgazhizhka, locked 2026-08-04)
+**Status:** locked by operator (2026-08-04); **updated 2026-08-06** — D11 Amendment 1 (final copy from the design snapshot), D12 (two colour modes), follow-up statuses after backend auth landed in `main`
 **Scope:** OLY-19 ([3.1] Sign Up / Login screen) and its sub-issues OLY-39, OLY-40, OLY-42, OLY-41.
 **Source:** full decision register with alternatives and reopening conditions lives in the local workflow memory (`.vibe/work/oly-19/`, gitignored by starter convention). This document is the team-visible summary for review and challenge.
 
@@ -55,16 +55,23 @@ The contract Zod schema is the **only** source of validation rules (`zodResolver
 
 `UserSchema` requires `grade` (5–11), but the signup contract and §14 Screen 1 do not collect it. Decision: build the form strictly per §14 + contract — no grade field. **Team-lead follow-up:** decide where grade enters (signup extension vs onboarding step) before backend auth is implemented.
 
-### D11 — Landing scope: static blocks + CTA, placeholder copy
+### D11 — Landing scope: static blocks + CTA
 
-Landing `/` = static multi-block page per the Figma Make draft (several simple content blocks, no forms, CTA buttons → `/signup`, `/login`) + language switcher. Copy is placeholder in 3 locales until the design approval call; approved-design PNG exports are mandatory build-time evidence before OLY-39 visual steps. **Reopening condition:** if the approval call changes the landing concept materially, a forward-only amendment lands before OLY-39 build.
+Landing `/` = static multi-block page per the Figma Make draft (several simple content blocks, no forms, CTA buttons → `/signup`, `/login`) + language switcher.
+
+**D11 Amendment 1 (2026-08-05):** design of record is the Figma **Make** snapshot (file `SqHXE7vPridy3ZHWtDLpQV`), committed to git as team evidence at `.vibe/evidence/oly-19/design/` (theme tokens, final i18n copy ×3 locales, reference implementation, README with provenance). Copy is **final, taken from the snapshot** — the earlier "placeholder copy + mandatory PNG exports" clause is replaced: frame exports are impossible from Make, and the published live prototype (<https://cleat-boil-62436427.figma.site/>) supersedes them as the rendering reference. Full record in the register (D11-A1).
+
+### D12 — Two colour modes with a switcher
+
+New design fact from the snapshot: the design of record defines two complete colour modes (dark + light, 45 semantic tokens each) and a theme toggle in the navigation of every screen. Decision (2026-08-05): **ship both modes** with an explicit toggle next to the language switcher; choice persists in localStorage and applies before first paint. Dark is the default. Every OLY-39/40/42 screen is visually verified in both modes. Full record in the register (D12, incl. the `color-mix()` rule for topic-accent-derived tokens).
 
 ## Team-lead follow-ups (blocking nothing in OLY-39/40/42)
 
-1. Contract error schemas for signup/login (D6)
+1. Contract error schemas for signup/login (D6) — **updated 2026-08-06:** backend auth landed in `main` (PR #4) and the implementation does return 409 duplicate / 400 validation / 401 invalid credentials (also in Swagger). **But the contract still declares only `responses: { 200 }`** — no error schemas. The frontend will map HTTP codes to the `AuthResult` union against observed implementation behaviour (exactly what D6 prescribes), but response-body shapes are undefined anywhere. Please add error schemas to `contract.ts` — small PR, I can propose the shapes.
 2. Password-reset endpoint → unblocks OLY-41 (D4)
-3. `grade` collection point: signup vs onboarding (D10)
+3. `grade` collection point: signup vs onboarding (D10) — **updated 2026-08-06:** backend merged with a temporary hardcoded `DEFAULT_GRADE = 5` (flagged `FLAG (D10)` in code). Acceptable for demos; must be decided before any real user data exists.
 4. httpOnly-cookie auth when the real backend lands (D7)
+5. `parent_contact` field: the prototype's signup form collects it, but `contract.signup.body` does not accept it — frontend omits it. If product wants it, contract extension needed (design snapshot README, freezing notes)
 
 ## Stack confirmations
 
