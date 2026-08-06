@@ -1,16 +1,13 @@
 import type { ReactElement } from "react";
 import {
   BrowserRouter,
-  Link,
   Navigate,
   Outlet,
   useLocation,
   useRoutes,
   type RouteObject,
 } from "react-router-dom";
-import { HomeRoute } from "../routes/home/home.js";
-import { LanguageSwitcher } from "../components/language-switcher/language-switcher.js";
-import { ThemeToggle } from "../components/theme-toggle/theme-toggle.js";
+import { LandingRoute } from "../routes/landing/landing.js";
 
 // These bindings are reassigned by managed schematic integration blocks.
 // eslint-disable-next-line prefer-const
@@ -31,16 +28,14 @@ function ProtectedRoutes(): ReactElement {
 }
 
 function AppShell(): ReactElement {
+  // Each screen owns its nav (switchers included), as in the design of
+  // record — the shell is a bare outlet. Schematic nav links, when an
+  // integration block assigns them, still render above the screen.
   return (
     <main>
-      <nav aria-label="Application navigation">
-        <Link to="/">Home</Link>
-        {generatedNavLinks}
-        {/* D1 + D12: both preference controls live in the navigation of every
-            screen, per the design of record. S5 restyles the shell/landing. */}
-        <LanguageSwitcher />
-        <ThemeToggle />
-      </nav>
+      {generatedNavLinks.length > 0 ? (
+        <nav aria-label="Application navigation">{generatedNavLinks}</nav>
+      ) : null}
       <Outlet />
     </main>
   );
@@ -51,7 +46,7 @@ const appRoutes: RouteObject[] = [
     path: "/",
     element: <AppShell />,
     children: [
-      { index: true, element: <HomeRoute /> },
+      { index: true, element: <LandingRoute /> },
       ...generatedPublicRoutes,
       { element: <ProtectedRoutes />, children: generatedProtectedRoutes },
     ],
