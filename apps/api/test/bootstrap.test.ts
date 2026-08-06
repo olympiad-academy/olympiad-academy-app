@@ -10,23 +10,26 @@ test("api exposes bootstrap and AppModule", () => {
   assert.equal(typeof AppModule, "function");
 });
 
-test("api health and readiness routes resolve through Nest DI in the tsx dev runtime", async () => {
-  const app = await NestFactory.create(AppModule, { logger: false });
-  await app.listen(0);
+test(
+  "api health and readiness routes resolve through Nest DI in the tsx dev runtime",
+  { skip: !process.env["DATABASE_URL"] ? "DATABASE_URL not set (no DB available)" : false },
+  async () => {
+    const app = await NestFactory.create(AppModule, { logger: false });
+    await app.listen(0);
 
-  try {
-    const address = app.getHttpServer().address() as AddressInfo;
-    const health = await fetch(`http://127.0.0.1:${address.port}/health`);
-    const readiness = await fetch(`http://127.0.0.1:${address.port}/health/ready`);
+    try {
+      const address = app.getHttpServer().address() as AddressInfo;
+      const health = await fetch(`http://127.0.0.1:${address.port}/health`);
+      const readiness = await fetch(`http://127.0.0.1:${address.port}/health/ready`);
 
-    assert.equal(health.status, 200);
-    const healthBody = (await health.json()) as { status: string; contractRouteCount: number };
-    assert.equal(healthBody.status, "ok");
-    // Proves apps/api can resolve @olympiad-academy-app/contracts at runtime, not just typecheck.
-    assert.ok(healthBody.contractRouteCount > 0);
-    assert.equal(readiness.status, 200);
-    assert.deepEqual(await readiness.json(), { status: "ready" });
-  } finally {
-    await app.close();
-  }
-});
+      assert.equal(health.status, 200);
+      const healthBody = (await health.json()) as { status: string; contractRouteCount: number };
+      assert.equal(healthBody.status, "ok");
+      assert.ok(healthBody.contractRouteCount > 0);
+      assert.equal(readiness.status, 200);
+      assert.deepEqual(await readiness.json(), { status: "ready" });
+    } finally {
+      await app.close();
+    }
+  },
+);

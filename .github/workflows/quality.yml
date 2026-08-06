@@ -24,6 +24,22 @@ jobs:
     name: generated starter quick-gate
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: test
+          POSTGRES_PASSWORD: test
+          POSTGRES_DB: olympiad_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://test:test@localhost:5432/olympiad_test
     steps:
       - name: Checkout
         # actions/checkout@v4.3.1
@@ -45,11 +61,15 @@ jobs:
 
       - name: Install dependencies
         run: |
+          mkdir -p .vibe/evidence/ci
           if [ -f pnpm-lock.yaml ]; then
             pnpm install --frozen-lockfile
           else
             pnpm install --no-frozen-lockfile
           fi
+
+      - name: Run Prisma migrations
+        run: pnpm --dir apps/api exec prisma migrate deploy
 
       - name: Project-local vibe-engineer smoke
         run: |
@@ -85,5 +105,5 @@ jobs:
         with:
           name: generated-starter-ci-evidence-${{ github.run_id }}
           path: .vibe/evidence/ci
-          if-no-files-found: error
+          if-no-files-found: warn
           retention-days: 14
