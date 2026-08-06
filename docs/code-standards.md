@@ -36,6 +36,10 @@
 - Dynamic styling via classes, not JS; nesting ≤2; consistent units
 - Component CSS Module lives next to its component
 
+## Team communication
+
+- **PR titles and descriptions are written in English** (operator, 2026-08-06) — the whole team reviews them.
+
 ## Hard rules — machine-enforced in `eslint.config.mjs` (apps/web scope)
 
 What the linter checks needs no vigilance. Enforced 2026-08-06 (operator):
