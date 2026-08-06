@@ -37,13 +37,13 @@ export const uz = {
     cta: "Bepul boshlash",
     login: "Kirish",
     howItWorks: "Qanday ishlaydi",
-    step1Title: "Mavzu tanla",
-    step1Desc:
+    flowStep1Title: "Mavzu tanla",
+    flowStep1Desc:
       "Arifmetika, mantiq, kombinatorika — 5 ta olimpiada mavzusidan birini tanlang yoki aralash mashq qiling.",
-    step2Title: "Masala yech",
-    step2Desc: "Haqiqiy olimpiada masalalari. Javob kiritasiz, tizim darhol tekshiradi.",
-    step3Title: "AI tutordan so'ra",
-    step3Desc:
+    flowStep2Title: "Masala yech",
+    flowStep2Desc: "Haqiqiy olimpiada masalalari. Javob kiritasiz, tizim darhol tekshiradi.",
+    flowStep3Title: "AI tutordan so'ra",
+    flowStep3Desc:
       "Qotib qolsangiz — AI tutorga yozing. U javobni bermaydi, balki keyingi savol bilan yo'l ko'rsatadi.",
     featuresTitle: "Nima uchun Olympiad Academy?",
     feat1Title: "3 bosqichli maslahat",

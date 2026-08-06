@@ -6,7 +6,7 @@ import { LandingFeatures } from "./sections/landing-features.js";
 import { LandingFooter } from "./sections/landing-footer.js";
 import { LandingHero } from "./sections/landing-hero.js";
 import { LandingNav } from "./sections/landing-nav.js";
-import { LandingSteps } from "./sections/landing-steps.js";
+import { LandingFlow } from "./sections/landing-flow.js";
 import { LandingTarget } from "./sections/landing-target.js";
 import { LandingTutor } from "./sections/landing-tutor.js";
 import styles from "./landing.module.css";
@@ -26,7 +26,7 @@ export const LandingRoute = (): ReactElement => {
     <div className={styles["page"]}>
       <LandingNav />
       <LandingHero />
-      <LandingSteps steps={content.steps} />
+      <LandingFlow flowSteps={content.flowSteps} />
       <LandingTutor tutorFeatures={content.tutorFeatures} chat={content.chat} />
       <LandingFeatures features={content.features} />
       <LandingTarget />

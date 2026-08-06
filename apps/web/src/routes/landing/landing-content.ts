@@ -31,14 +31,14 @@ export const HERO_TOPICS: readonly LandingTopic[] = LANDING_TOPICS.slice(0, 5);
  */
 export const HERO_SYMBOLS = ["∑", "π", "∞", "√", "∫", "≈", "Δ", "ℤ", "n!", "⟳"] as const;
 
-/** A titled icon card on the landing. Steps extend it with their number. */
+/** A titled icon card on the landing. Flow steps extend it with their number. */
 export interface Feature {
   readonly title: string;
   readonly description: string;
   readonly icon: string;
 }
 
-export interface Step extends Feature {
+export interface FlowStep extends Feature {
   readonly stepNumber: string;
 }
 
@@ -48,7 +48,7 @@ export interface ChatMessage {
 }
 
 export interface LandingContent {
-  readonly steps: readonly Step[];
+  readonly flowSteps: readonly FlowStep[];
   readonly tutorFeatures: readonly Feature[];
   readonly features: readonly Feature[];
   readonly chat: readonly ChatMessage[];
@@ -59,7 +59,7 @@ type Translate = (key: string) => string;
 /** Builds the landing's structured content from the i18n copy (D11-A1). */
 export const buildLandingContent = (t: Translate): LandingContent => {
   return {
-    steps: [
+    flowSteps: [
       {
         stepNumber: "01",
         title: t("landing.step1Title"),

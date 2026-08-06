@@ -38,12 +38,13 @@ export const en = {
     cta: "Start for free",
     login: "Log in",
     howItWorks: "How it works",
-    step1Title: "Pick a topic",
-    step1Desc: "Arithmetic, logic, combinatorics — 5 olympiad topics or a mixed practice session.",
-    step2Title: "Solve a problem",
-    step2Desc: "Real olympiad problems. Enter your answer and get instant feedback.",
-    step3Title: "Ask the AI tutor",
-    step3Desc:
+    flowStep1Title: "Pick a topic",
+    flowStep1Desc:
+      "Arithmetic, logic, combinatorics — 5 olympiad topics or a mixed practice session.",
+    flowStep2Title: "Solve a problem",
+    flowStep2Desc: "Real olympiad problems. Enter your answer and get instant feedback.",
+    flowStep3Title: "Ask the AI tutor",
+    flowStep3Desc:
       "Stuck? Message the tutor. It won't hand over the answer — it leads you there with the next question.",
     featuresTitle: "Why Olympiad Academy?",
     feat1Title: "3-tier hint system",
