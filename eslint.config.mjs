@@ -46,6 +46,7 @@ export default tseslint.config(
       // code. Linting them fails on the project service before any rule runs.
       // .prettierignore already excludes the same directories.
       ".vibe/**",
+      ".claude/**",
       "apps/mobile/babel.config.cjs",
       "apps/mobile/index.js",
       "apps/mobile/metro.config.cjs",
