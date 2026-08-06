@@ -5,7 +5,7 @@ import shared from "./landing-shared.module.css";
 import styles from "./landing-features.module.css";
 
 /** «Why Olympiad Academy» — the three feature cards. */
-export function LandingFeatures({ features }: { features: readonly Feature[] }): ReactElement {
+export const LandingFeatures = ({ features }: { features: readonly Feature[] }): ReactElement => {
   const { t } = useTranslation();
   return (
     <section className={shared["section"]}>
@@ -23,4 +23,4 @@ export function LandingFeatures({ features }: { features: readonly Feature[] }):
       </div>
     </section>
   );
-}
+};

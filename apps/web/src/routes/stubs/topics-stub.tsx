@@ -11,7 +11,7 @@ import styles from "./stubs.module.css";
  * spirit of the Topic List design without building the real screen, which
  * is a separate future task.
  */
-export function TopicsStubRoute(): ReactElement {
+export const TopicsStubRoute = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <StubLayout>
@@ -30,4 +30,4 @@ export function TopicsStubRoute(): ReactElement {
       </div>
     </StubLayout>
   );
-}
+};

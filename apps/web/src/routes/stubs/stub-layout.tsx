@@ -9,11 +9,11 @@ import styles from "./stubs.module.css";
  * the stubs without touching the routes (OLY-40 auth, a future task for
  * Topic List).
  */
-export function StubLayout({ children }: { children: ReactNode }): ReactElement {
+export const StubLayout = ({ children }: { children: ReactNode }): ReactElement => {
   return (
     <div className={styles["page"]}>
       <AuthNav />
       <div className={styles["body"]}>{children}</div>
     </div>
   );
-}
+};

@@ -7,7 +7,7 @@ import styles from "./stubs.module.css";
  * `/signup` and `/login` placeholders (D2: the routes exist from OLY-39 so
  * the landing CTAs and e2e have real targets; the forms arrive in OLY-40).
  */
-export function AuthStubRoute({ kind }: { kind: "signup" | "login" }): ReactElement {
+export const AuthStubRoute = ({ kind }: { kind: "signup" | "login" }): ReactElement => {
   const { t } = useTranslation();
   return (
     <StubLayout>
@@ -19,4 +19,4 @@ export function AuthStubRoute({ kind }: { kind: "signup" | "login" }): ReactElem
       </div>
     </StubLayout>
   );
-}
+};

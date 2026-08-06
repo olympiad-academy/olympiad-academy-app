@@ -15,7 +15,7 @@ test.describe("AC1 — language switcher on the landing (D1)", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Olimpiada matematikasini");
 
     // Switch to Russian: chrome re-renders, including the hero copy.
-    await page.getByRole("radio", { name: "Русский" }).click();
+    await page.getByRole("radio", { name: "RU — Русский" }).click();
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Олимпиадная математика");
     await expect(page.getByText("Как это работает")).toBeVisible();
 
@@ -24,7 +24,7 @@ test.describe("AC1 — language switcher on the landing (D1)", () => {
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Олимпиадная математика");
 
     // And English works too.
-    await page.getByRole("radio", { name: "English" }).click();
+    await page.getByRole("radio", { name: "EN — English" }).click();
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Master olympiad math");
   });
 });

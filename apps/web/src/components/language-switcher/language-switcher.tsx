@@ -18,7 +18,7 @@ import styles from "./language-switcher.module.css";
  * name contains the visible label (WCAG 2.5.3 Label in Name — voice-control
  * users speak what they see).
  */
-export function LanguageSwitcher(): ReactElement {
+export const LanguageSwitcher = (): ReactElement => {
   const { t, i18n } = useTranslation();
 
   const handleChange = (value: string): void => {
@@ -51,4 +51,4 @@ export function LanguageSwitcher(): ReactElement {
       ))}
     </ToggleGroup.Root>
   );
-}
+};

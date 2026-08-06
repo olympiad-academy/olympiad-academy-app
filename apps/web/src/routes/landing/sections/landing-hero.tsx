@@ -20,7 +20,7 @@ function heroSymbolStyle(index: number): CSSProperties {
 }
 
 /** Hero: badge, pre-line title, sub, CTA pair, topic chips over a decorated glow. */
-export function LandingHero(): ReactElement {
+export const LandingHero = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <section className={styles["hero"]}>
@@ -56,4 +56,4 @@ export function LandingHero(): ReactElement {
       </div>
     </section>
   );
-}
+};

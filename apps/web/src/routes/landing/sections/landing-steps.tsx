@@ -5,7 +5,7 @@ import shared from "./landing-shared.module.css";
 import styles from "./landing-steps.module.css";
 
 /** «How it works» — the three numbered steps. */
-export function LandingSteps({ steps }: { steps: readonly Step[] }): ReactElement {
+export const LandingSteps = ({ steps }: { steps: readonly Step[] }): ReactElement => {
   const { t } = useTranslation();
   return (
     <section className={shared["section"]}>
@@ -24,4 +24,4 @@ export function LandingSteps({ steps }: { steps: readonly Step[] }): ReactElemen
       </div>
     </section>
   );
-}
+};

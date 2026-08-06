@@ -11,37 +11,37 @@ import { LandingRoute } from "@/routes/landing/landing.js";
 import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
-// These bindings are reassigned by managed schematic integration blocks.
-// eslint-disable-next-line prefer-const
-let generatedAuthRequired = false;
-// eslint-disable-next-line prefer-const
-let generatedHasAuthSession = (): boolean => true;
-const generatedPublicRoutes: RouteObject[] = [];
-const generatedProtectedRoutes: RouteObject[] = [];
-const generatedNavLinks: ReactElement[] = [];
+// These bindings are replaced by managed schematic integration blocks.
+// Function form (not mutable lets): reads stay unnarrowed for the linter and
+// no eslint-disable is needed anywhere — inline disables are banned here.
+const generatedAuthRequired = (): boolean => false;
+const generatedHasAuthSession = (): boolean => true;
+const generatedPublicRoutes = (): RouteObject[] => [];
+const generatedProtectedRoutes = (): RouteObject[] => [];
+const generatedNavLinks = (): ReactElement[] => [];
 // vibe-engineer:web-app-integrations:end
 
-function ProtectedRoutes(): ReactElement {
+const ProtectedRoutes = (): ReactElement => {
   const location = useLocation();
-  if (generatedAuthRequired && !generatedHasAuthSession()) {
+  if (generatedAuthRequired() && !generatedHasAuthSession()) {
     return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
   return <Outlet />;
-}
+};
 
-function AppShell(): ReactElement {
+const AppShell = (): ReactElement => {
   // Each screen owns its nav (switchers included), as in the design of
   // record — the shell is a bare outlet. Schematic nav links, when an
   // integration block assigns them, still render above the screen.
   return (
     <main>
-      {generatedNavLinks.length > 0 ? (
-        <nav aria-label="Application navigation">{generatedNavLinks}</nav>
+      {generatedNavLinks().length > 0 ? (
+        <nav aria-label="Application navigation">{generatedNavLinks()}</nav>
       ) : null}
       <Outlet />
     </main>
   );
-}
+};
 
 const appRoutes: RouteObject[] = [
   {
@@ -54,8 +54,8 @@ const appRoutes: RouteObject[] = [
       { path: "signup", element: <AuthStubRoute kind="signup" /> },
       { path: "login", element: <AuthStubRoute kind="login" /> },
       { path: "topics", element: <TopicsStubRoute /> },
-      ...generatedPublicRoutes,
-      { element: <ProtectedRoutes />, children: generatedProtectedRoutes },
+      ...generatedPublicRoutes(),
+      { element: <ProtectedRoutes />, children: generatedProtectedRoutes() },
     ],
   },
 ];
@@ -64,10 +64,10 @@ function AppRoutes(): ReactElement | null {
   return useRoutes(appRoutes);
 }
 
-export function App(): ReactElement {
+export const App = (): ReactElement => {
   return (
     <BrowserRouter>
       <AppRoutes />
     </BrowserRouter>
   );
-}
+};

@@ -5,13 +5,13 @@ import shared from "./landing-shared.module.css";
 import styles from "./landing-tutor.module.css";
 
 /** AI-tutor section: pitch + feature list on the left, chat mock on the right. */
-export function LandingTutor({
+export const LandingTutor = ({
   tutorFeatures,
   chat,
 }: {
   tutorFeatures: readonly Feature[];
   chat: readonly ChatMessage[];
-}): ReactElement {
+}): ReactElement => {
   const { t } = useTranslation();
   return (
     <section className={shared["section"]}>
@@ -36,9 +36,9 @@ export function LandingTutor({
       </div>
     </section>
   );
-}
+};
 
-function ChatMock({ chat }: { chat: readonly ChatMessage[] }): ReactElement {
+const ChatMock = ({ chat }: { chat: readonly ChatMessage[] }): ReactElement => {
   const { t } = useTranslation();
   return (
     <div className={styles["chat"]}>
@@ -76,4 +76,4 @@ function ChatMock({ chat }: { chat: readonly ChatMessage[] }): ReactElement {
       </div>
     </div>
   );
-}
+};

@@ -7,7 +7,7 @@ import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
 import styles from "./landing-nav.module.css";
 
 /** Sticky landing nav: brand, preference controls, login + primary CTA. */
-export function LandingNav(): ReactElement {
+export const LandingNav = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <nav className={styles["nav"]}>
@@ -29,4 +29,4 @@ export function LandingNav(): ReactElement {
       </div>
     </nav>
   );
-}
+};

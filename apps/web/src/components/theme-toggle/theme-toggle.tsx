@@ -15,7 +15,7 @@ import styles from "./theme-toggle.module.css";
  * <html data-theme> before first paint, so the toggle never shows a mode
  * different from what is on screen.
  */
-export function ThemeToggle(): ReactElement {
+export const ThemeToggle = (): ReactElement => {
   const { t } = useTranslation();
   const [mode, setMode] = useState<ThemeMode>(() => readStoredThemeMode(window.localStorage));
 
@@ -35,10 +35,10 @@ export function ThemeToggle(): ReactElement {
       {mode === "dark" ? <SunIcon /> : <MoonIcon />}
     </button>
   );
-}
+};
 
 /** Sun — shown in dark mode (the action offered is "go light"). From the design of record. */
-function SunIcon(): ReactElement {
+const SunIcon = (): ReactElement => {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <path
@@ -49,10 +49,10 @@ function SunIcon(): ReactElement {
       />
     </svg>
   );
-}
+};
 
 /** Moon — shown in light mode (the action offered is "go dark"). From the design of record. */
-function MoonIcon(): ReactElement {
+const MoonIcon = (): ReactElement => {
   return (
     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
       <path
@@ -64,4 +64,4 @@ function MoonIcon(): ReactElement {
       />
     </svg>
   );
-}
+};

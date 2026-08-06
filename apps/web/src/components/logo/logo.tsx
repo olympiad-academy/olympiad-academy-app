@@ -7,7 +7,7 @@ import styles from "./logo.module.css";
  * (brandGradFrom/brandGradTo/brandMark — mode-independent by design), never
  * literals (ADR single-source rule). Same SVG ships as the favicon.
  */
-export function Logo({ size = 32 }: { size?: number }): ReactElement {
+export const Logo = ({ size = 32 }: { size?: number }): ReactElement => {
   return (
     <svg
       width={size}
@@ -37,4 +37,4 @@ export function Logo({ size = 32 }: { size?: number }): ReactElement {
       <circle cx="16" cy="18" r="1.6" className={styles["markFill"]} />
     </svg>
   );
-}
+};

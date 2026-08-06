@@ -19,7 +19,7 @@ import styles from "./landing.module.css";
  * lines). Structure and copy follow the design of record (snapshot App.tsx
  * LandingScreen). CTAs are Links into the S6 routing skeleton.
  */
-export function LandingRoute(): ReactElement {
+export const LandingRoute = (): ReactElement => {
   const { t } = useTranslation();
   const content = buildLandingContent(t);
   return (
@@ -34,4 +34,4 @@ export function LandingRoute(): ReactElement {
       <LandingFooter />
     </div>
   );
-}
+};

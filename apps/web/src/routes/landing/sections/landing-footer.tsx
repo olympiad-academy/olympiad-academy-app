@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./landing-footer.module.css";
 
 /** Landing footer: copyright + grade label. */
-export function LandingFooter(): ReactElement {
+export const LandingFooter = (): ReactElement => {
   const { t } = useTranslation();
   return (
     <footer className={styles["footer"]}>
@@ -11,4 +11,4 @@ export function LandingFooter(): ReactElement {
       <span>{t("landing.gradeLabel")}</span>
     </footer>
   );
-}
+};

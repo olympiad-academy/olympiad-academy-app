@@ -7,10 +7,10 @@ import styles from "./topic-chip.module.css";
  * applied inline as --topic-accent and the tint derives via color-mix() in
  * the CSS module. The single cast lives here so call sites stay clean.
  */
-export function TopicChip({ accent, label }: { accent: string; label: string }): ReactElement {
+export const TopicChip = ({ accent, label }: { accent: string; label: string }): ReactElement => {
   return (
     <span className={styles["chip"]} style={{ "--topic-accent": accent } as CSSProperties}>
       {label}
     </span>
   );
-}
+};

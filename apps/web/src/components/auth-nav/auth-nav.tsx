@@ -11,7 +11,7 @@ import styles from "./auth-nav.module.css";
  * unlike the landing's sticky nav. Shared by the OLY-39 stubs now and the
  * real signup/login screens in OLY-40.
  */
-export function AuthNav(): ReactElement {
+export const AuthNav = (): ReactElement => {
   return (
     <div className={styles["nav"]}>
       <Link to="/" className={styles["back"]}>
@@ -32,4 +32,4 @@ export function AuthNav(): ReactElement {
       </div>
     </div>
   );
-}
+};
