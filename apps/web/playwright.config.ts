@@ -12,12 +12,20 @@ export default defineConfig({
     baseURL: webBaseUrl,
   },
   webServer: [
-    {
-      command: "pnpm --dir ../.. run dev:api",
-      url: `${apiBaseUrl}/health/ready`,
-      reuseExistingServer,
-      timeout: 120_000,
-    },
+    // The API server is only started when a spec actually needs it
+    // (E2E_API=1). OLY-39's specs are frontend-only, and requiring a live
+    // Postgres for a language-switcher proof would make the suite fragile
+    // for no gain. Specs that hit the API must say so in their file header.
+    ...(globalThis.process?.env["E2E_API"] === "1"
+      ? [
+          {
+            command: "pnpm --dir ../.. run dev:api",
+            url: `${apiBaseUrl}/health/ready`,
+            reuseExistingServer,
+            timeout: 120_000,
+          },
+        ]
+      : []),
     {
       command: "pnpm --dir ../.. run dev:web",
       url: webBaseUrl,
