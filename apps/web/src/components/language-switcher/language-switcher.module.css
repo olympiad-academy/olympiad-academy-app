@@ -10,6 +10,11 @@
 }
 
 .item {
+  /* Buttons carry UA border/padding — without the reset each segment renders
+     as its own little box instead of one pill (design review 2026-08-06). */
+  appearance: none;
+  border: 0;
+  margin: 0;
   padding: var(--oa-space-4) var(--oa-space-10);
   font-family: var(--oa-font-family-display);
   font-size: var(--oa-font-size-12);

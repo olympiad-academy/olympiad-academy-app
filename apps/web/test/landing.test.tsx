@@ -75,19 +75,22 @@ describe("Landing `/` (D11 + D11-A1, copy from the design snapshot)", () => {
     screen.getByText("Как это работает");
     // Topic chips carry the localized topic names.
     screen.getByText("Дроби");
-    screen.getByText("Проценты");
+    screen.getByText("Измерения и геометрия");
   });
 
-  it("renders the seven topic chips from the design of record", async () => {
+  it('renders five topic chips — matching the step-1 copy ("5 тем") and fitting one row', async () => {
     await renderLanding();
 
+    // Designer decision 2026-08-06: the hero shows the first five topics, not
+    // all seven — seven wrapped to two rows, and the approved step-1 copy
+    // itself says "5 олимпиадных тем". The full set lives on /topics.
     screen.getByText("Sonlar va amallar");
     screen.getByText("Kasrlar");
     screen.getByText("O'nli kasrlar");
     screen.getByText("O'lchash va ma'lumotlar");
     screen.getByText("O'lchash va geometriya");
-    screen.getByText("Amallar va algebraik fikrlash");
-    screen.getByText("Foizlar");
+    assert.equal(screen.queryByText("Foizlar"), null);
+    assert.equal(screen.queryByText("Amallar va algebraik fikrlash"), null);
   });
 
   it("renders the AI tutor chat mock in the active locale", async () => {

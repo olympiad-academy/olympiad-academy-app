@@ -40,3 +40,7 @@ data
 
 # Agent worktrees are not project source
 .claude/
+
+# Playwright runner output
+test-results/
+playwright-report/

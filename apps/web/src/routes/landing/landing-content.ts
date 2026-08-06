@@ -31,18 +31,15 @@ export const LANDING_TOPICS: readonly LandingTopic[] = [
 ] as const;
 
 /**
+ * The hero shows the FIRST FIVE topics, not all seven (designer decision
+ * 2026-08-06): seven chips wrapped to a second row, and the approved step-1
+ * copy itself says "5 олимпиадных тем" — five also makes chips and copy
+ * agree. The full set renders on the /topics stub.
+ */
+export const HERO_TOPICS: readonly LandingTopic[] = LANDING_TOPICS.slice(0, 5);
+
+/**
  * Decorative math symbols scattered over the hero (design of record). Only
  * the glyph list lives here; positions are computed at render.
  */
-export const HERO_SYMBOLS: readonly string[] = [
-  "∑",
-  "π",
-  "∞",
-  "√",
-  "∫",
-  "≈",
-  "Δ",
-  "ℤ",
-  "n!",
-  "⟳",
-] as const;
+export const HERO_SYMBOLS = ["∑", "π", "∞", "√", "∫", "≈", "Δ", "ℤ", "n!", "⟳"] as const;

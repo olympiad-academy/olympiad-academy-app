@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
 import { Logo } from "@/components/logo/logo.js";
 import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
-import { HERO_SYMBOLS, LANDING_TOPICS } from "./landing-content.js";
+import { HERO_SYMBOLS, HERO_TOPICS } from "./landing-content.js";
 import styles from "./landing.module.css";
 
 /**
@@ -122,7 +122,7 @@ export function LandingRoute(): ReactElement {
             </Link>
           </div>
           <div className={styles["chips"]}>
-            {LANDING_TOPICS.map((topic) => (
+            {HERO_TOPICS.map((topic) => (
               <span
                 key={topic.id}
                 className={styles["chip"]}
