@@ -9,32 +9,6 @@
   flex-direction: column;
 }
 
-.nav {
-  border-bottom: 1px solid var(--oa-border2);
-  background: var(--oa-nav-bg);
-  backdrop-filter: blur(16px);
-}
-
-.navInner {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: var(--oa-space-12) var(--oa-space-20);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-}
-
-.navActions {
-  display: flex;
-  align-items: center;
-  gap: var(--oa-space-8);
-}
-
 .body {
   flex: 1;
   display: flex;
@@ -66,17 +40,6 @@
   line-height: var(--oa-line-height-relaxed);
   color: var(--oa-text-muted);
   margin-bottom: var(--oa-space-24);
-}
-
-.homeLink {
-  font-size: var(--oa-font-size-14);
-  font-weight: var(--oa-font-weight-bold);
-  color: var(--oa-primary);
-  text-decoration: none;
-}
-
-.homeLink:hover {
-  opacity: 0.8;
 }
 
 .topicsGrid {

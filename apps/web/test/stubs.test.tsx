@@ -34,13 +34,15 @@ import type { ReactElement } from "react";
 afterEach(() => cleanup());
 
 describe("Routing skeleton stubs (D2/D8, AC2)", () => {
-  it("signup stub renders an i18n'ed placeholder and links back home", async () => {
+  it("signup stub renders an i18n'ed placeholder; nav links back to the landing per the design", async () => {
     await renderStub(<AuthStubRoute kind="signup" />);
 
     screen.getByRole("heading", { level: 1, name: "Ro'yxatdan o'tish" });
     screen.getByText(/OLY-40/);
-    const home = screen.getByRole("link", { name: "Bosh sahifa" });
-    assert.equal(home.getAttribute("href"), "/");
+    // The design of record's auth nav: chevron + brand text leading back to
+    // the landing (not a bare logo).
+    const back = screen.getByRole("link", { name: "Olympiad Academy" });
+    assert.equal(back.getAttribute("href"), "/");
   });
 
   it("login stub renders an i18n'ed placeholder", async () => {

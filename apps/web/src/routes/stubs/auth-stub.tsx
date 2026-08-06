@@ -1,5 +1,4 @@
 import type { ReactElement } from "react";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { StubLayout } from "./stub-layout.js";
 import styles from "./stubs.module.css";
@@ -17,9 +16,6 @@ export function AuthStubRoute({ kind }: { kind: "signup" | "login" }): ReactElem
           {kind === "signup" ? t("stubs.signupTitle") : t("stubs.loginTitle")}
         </h1>
         <p className={styles["note"]}>{t("stubs.authNote")}</p>
-        <Link to="/" className={styles["homeLink"]}>
-          {t("nav.home")}
-        </Link>
       </div>
     </StubLayout>
   );
