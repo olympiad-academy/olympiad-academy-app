@@ -7,6 +7,7 @@ import {
   useRoutes,
   type RouteObject,
 } from "react-router-dom";
+import { ROUTES } from "@/constants/routes.js";
 import { LandingRoute } from "@/routes/landing/landing.js";
 import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
@@ -24,7 +25,7 @@ const generatedNavLinks = (): ReactElement[] => [];
 const ProtectedRoutes = (): ReactElement => {
   const location = useLocation();
   if (generatedAuthRequired() && !generatedHasAuthSession()) {
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+    return <Navigate to={ROUTES.LOGIN} state={{ from: location.pathname }} replace />;
   }
   return <Outlet />;
 };
@@ -45,15 +46,15 @@ const AppShell = (): ReactElement => {
 
 const appRoutes: RouteObject[] = [
   {
-    path: "/",
+    path: ROUTES.HOME,
     element: <AppShell />,
     children: [
       { index: true, element: <LandingRoute /> },
       // Routing skeleton (D2/D8): real targets for the landing CTAs and the
       // post-auth redirect from day one; the screens themselves land later.
-      { path: "signup", element: <AuthStubRoute kind="signup" /> },
-      { path: "login", element: <AuthStubRoute kind="login" /> },
-      { path: "topics", element: <TopicsStubRoute /> },
+      { path: ROUTES.SIGNUP, element: <AuthStubRoute kind="signup" /> },
+      { path: ROUTES.LOGIN, element: <AuthStubRoute kind="login" /> },
+      { path: ROUTES.TOPICS, element: <TopicsStubRoute /> },
       ...generatedPublicRoutes(),
       { element: <ProtectedRoutes />, children: generatedProtectedRoutes() },
     ],

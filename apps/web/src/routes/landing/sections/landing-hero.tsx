@@ -1,5 +1,6 @@
 import type { CSSProperties, ReactElement } from "react";
 import { Link } from "react-router-dom";
+import { ROUTES } from "@/constants/routes.js";
 import { useTranslation } from "react-i18next";
 import { TopicChip } from "@/components/topic-chip/topic-chip.js";
 import { HERO_SYMBOLS, HERO_TOPICS } from "../landing-content.js";
@@ -37,10 +38,10 @@ export const LandingHero = (): ReactElement => {
         <h1 className={styles["title"]}>{t("landing.hero")}</h1>
         <p className={styles["sub"]}>{t("landing.heroSub")}</p>
         <div className={styles["ctas"]}>
-          <Link to="/signup" className={styles["ctaPrimary"]}>
+          <Link to={ROUTES.SIGNUP} className={styles["ctaPrimary"]}>
             {t("landing.cta")} →
           </Link>
-          <Link to="/login" className={styles["ctaSecondary"]}>
+          <Link to={ROUTES.LOGIN} className={styles["ctaSecondary"]}>
             {t("landing.login")}
           </Link>
         </div>
