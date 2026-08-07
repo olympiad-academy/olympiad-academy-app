@@ -11,8 +11,8 @@
      across all three locales renders at 31.5px tall (incl. its own
      padding) at the narrowest tested viewport (Playwright's mobile-chrome
      project, Pixel 5, 393px) without wrapping to a second line; combined
-     with .form's own space-12 gap and .error's space-4 margin-top, this
-     clears it with headroom instead of relying on an exact fit. */
+     with .form's own space-12 gap and .error's own space-6 margin-top,
+     this clears it with headroom instead of relying on an exact fit. */
   margin-bottom: var(--oa-space-24);
 }
 
