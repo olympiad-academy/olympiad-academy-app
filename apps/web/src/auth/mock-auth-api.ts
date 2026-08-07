@@ -1,6 +1,7 @@
 import { contract } from "@olympiad-academy-app/api-client";
 import { ZodError } from "zod";
 import type { AuthApi, AuthFieldIssue, AuthResult, LoginBody, SignupBody } from "./auth-api.js";
+import { nextMockId } from "./mock-id.js";
 
 /**
  * In-memory AuthApi for dev/demo/E2E (D5). No persistence on purpose: a
@@ -57,12 +58,12 @@ const normalizePhone = (phone: string | null | undefined): string | null => {
   return phone == null ? null : phone.trim();
 };
 
-const createToken = (): string => `mock-token-${crypto.randomUUID()}`;
+const createToken = (): string => `mock-token-${nextMockId()}`;
 
 export const createMockAuthApi = (): AuthApi => {
   const accounts: MockAccount[] = [
     {
-      userId: crypto.randomUUID(),
+      userId: nextMockId(),
       name: MOCK_SEEDED_ACCOUNT.name,
       phone: null,
       email: MOCK_SEEDED_ACCOUNT.email,
@@ -102,7 +103,7 @@ export const createMockAuthApi = (): AuthApi => {
     }
 
     const account: MockAccount = {
-      userId: crypto.randomUUID(),
+      userId: nextMockId(),
       name: parsed.name,
       phone,
       email,
