@@ -63,16 +63,23 @@ describe("password strength meter (advisory)", () => {
     screen.getByText("слабый");
   });
 
-  it("upgrades the verdict as the password gets longer, without any symbol being required", async () => {
+  it("upgrades the verdict as the password gains character variety, at contract length", async () => {
     await renderSignup("ru");
     const password = screen.getByLabelText("Пароль");
+    // All three values are 8-10 characters: the verdict moves on variety,
+    // not on asking the student for a longer password than min(8).
     await act(async () => {
-      fireEvent.change(password, { target: { value: "correcthorse" } });
+      fireEvent.change(password, { target: { value: "olympiadd" } });
+    });
+    screen.getByText("слабый");
+
+    await act(async () => {
+      fireEvent.change(password, { target: { value: "olympiad8" } });
     });
     screen.getByText("средний");
 
     await act(async () => {
-      fireEvent.change(password, { target: { value: "correcthorsebatterystaple" } });
+      fireEvent.change(password, { target: { value: "Olympiad8" } });
     });
     screen.getByText("надёжный");
   });

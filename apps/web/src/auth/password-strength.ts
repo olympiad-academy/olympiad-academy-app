@@ -7,18 +7,24 @@
  * min(8) may still be a poor one — the submit button does not care what it
  * returns.
  *
- * The model follows NIST SP 800-63B rather than classic composition rules:
- * length is the dominant term, character variety only breaks ties between
- * bands, and no class of character is ever required. Demanding
- * digit + symbol + uppercase pushes people toward predictable "Password1!"
- * shapes, which is precisely what that guidance moved away from — and it
- * would also contradict the note this project sent its backend owner asking
- * for a length-based rule rather than composition rules.
+ * The bands sit on the contract's own min(8) and separate by character
+ * variety above it. The meter deliberately does not ask for a longer
+ * password than the product requires: grading a contract-valid password as
+ * "too short" would have the advice arguing with the rule the same form
+ * enforces, and the length stays 8 (operator, 2026-08-07).
+ *
+ * PROVISIONAL. The real password rule is an open question with the team
+ * lead; the stated direction is to keep min(8) and add composition
+ * requirements, which is what the variety weighting anticipates. If it
+ * lands as something else — a longer minimum, a breached-password check —
+ * these bands follow the contract, they do not compete with it. No class of
+ * character is required here either way: this file only describes, it never
+ * rejects.
  *
  * Deliberately dependency-free: a real estimator (zxcvbn and friends) ships
  * a dictionary measured in hundreds of kilobytes, which is not a trade this
- * screen justifies. The trivial-shape check below covers the failure modes
- * a length-only score would otherwise rate highly.
+ * screen justifies. The trivial-shape check below still runs first, so a
+ * long walk along the alphabet cannot pass on variety alone.
  */
 
 export type PasswordStrength = "weak" | "fair" | "strong";
@@ -26,8 +32,12 @@ export type PasswordStrength = "weak" | "fair" | "strong";
 /** Mirrors `contract.signup.body`'s min(8); a copy would drift, so this is
  * only used to describe bands below/above it, never to accept or reject. */
 const CONTRACT_MINIMUM = 8;
-const FAIR_LENGTH = 12;
-const STRONG_LENGTH = 16;
+
+/** Character classes present, counted above the contract length to separate
+ * the bands. Not a requirement: nothing here rejects a password, and no
+ * single class is ever demanded on its own. */
+const FAIR_CLASSES = 2;
+const STRONG_CLASSES = 3;
 
 const CHARACTER_CLASSES = [/[a-z]/, /[A-Z]/, /\d/, /[^\w\s]/] as const;
 
@@ -82,17 +92,12 @@ export const estimatePasswordStrength = (password: string | undefined): Password
   if (password === undefined || password.length === 0) {
     return null;
   }
-  if (hasTrivialShape(password)) {
+  if (password.length < CONTRACT_MINIMUM || hasTrivialShape(password)) {
     return "weak";
   }
-  if (password.length >= STRONG_LENGTH) {
+  const classes = countCharacterClasses(password);
+  if (classes >= STRONG_CLASSES) {
     return "strong";
   }
-  if (password.length >= FAIR_LENGTH) {
-    return countCharacterClasses(password) >= 2 ? "strong" : "fair";
-  }
-  if (password.length >= CONTRACT_MINIMUM) {
-    return countCharacterClasses(password) >= 3 ? "fair" : "weak";
-  }
-  return "weak";
+  return classes >= FAIR_CLASSES ? "fair" : "weak";
 };
