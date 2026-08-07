@@ -17,6 +17,21 @@ OLY-19 ships as four Linear sub-issues, each its own branch + PR, strictly seque
 | 3     | **OLY-42** | Error states: duplicate account / invalid format / network failure                                              | 8 Aug                             |
 | 4     | **OLY-41** | Forgot password                                                                                                 | **deferred**, blocked by contract |
 
+## Acceptance criteria (OLY-19)
+
+Source: the locked work brief (`.vibe/work/oly-19/work-brief.json`, local).
+Copied here so reviewers can check the work against them.
+
+| ID  | Slice  | Criterion                                                                                                                                              | Proof            |
+| --- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
+| AC1 | OLY-39 | User switches UI language uz/ru/en on the landing; all chrome strings re-render; choice persists across reload                                         | unit + e2e       |
+| AC2 | OLY-39 | `/`, `/signup`, `/login`, `/topics` render; stubs carry i18n'ed placeholders                                                                           | e2e              |
+| AC3 | OLY-40 | Valid signup (name, phone or email single field, password ≥8) via mock → token stored → lands on `/topics`; browser Back never returns to auth screens | unit + e2e       |
+| AC4 | OLY-40 | Validation messages appear in realtime (after first blur, on change), sourced from contract Zod schemas, rendered in the active locale                 | unit             |
+| AC5 | OLY-40 | Mock fixtures validate against contract Zod schemas in tests (no silent mock/contract drift)                                                           | unit             |
+| AC6 | OLY-42 | Duplicate account → UI offers login instead; invalid format → field-level errors; network failure → retry control with entered data preserved          | unit + e2e       |
+| AC7 | all    | All UI types imported from `packages/contracts` via api-client; no frontend-owned copies of contract rules                                             | typecheck + lint |
+
 ## Decisions
 
 ### D1 — Full UI i18n from the first screen
