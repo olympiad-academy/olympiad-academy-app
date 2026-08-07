@@ -153,4 +153,14 @@ describe("LoginRoute realtime validation (AC4, D9)", () => {
 
     assert.equal(window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY) !== null, true);
   });
+
+  // Review defect 4: the switch-to-signup link must reuse the design of
+  // record's "signup" copy ("Ro'yxatdan o'tish" / "Регистрация" / "Sign Up"),
+  // not an invented key — D11 Amendment 1 requires approved copy be used
+  // verbatim, not authored fresh. There is no "noAccountYet" key anywhere in
+  // the design snapshot.
+  it("the link to the signup screen reuses the design-of-record signup copy", async () => {
+    await renderWithProviders(<LoginRoute />);
+    screen.getByText(/Ro'yxatdan o'tish/);
+  });
 });

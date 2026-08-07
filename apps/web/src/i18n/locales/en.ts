@@ -35,7 +35,6 @@ export const en = {
     passwordPlaceholder: "••••••",
     startPractising: "Start practising",
     alreadyHaveAccount: "I already have an account",
-    noAccountYet: "I don't have an account yet",
     errorName: "Please enter your name.",
     errorContact: "Please enter a phone number or email.",
     errorContactInvalid: "Please enter a valid email address.",

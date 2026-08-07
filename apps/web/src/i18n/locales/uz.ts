@@ -35,7 +35,6 @@ export const uz = {
     passwordPlaceholder: "••••••",
     startPractising: "Mashqni boshlash",
     alreadyHaveAccount: "Hisobim bor",
-    noAccountYet: "Hisobim yo'q",
     errorName: "Ismingizni kiriting.",
     errorContact: "Telefon raqam yoki elektron pochta manzilini kiriting.",
     errorContactInvalid: "Email manzilini to'g'ri kiriting.",

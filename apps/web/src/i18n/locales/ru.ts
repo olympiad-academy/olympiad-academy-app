@@ -34,7 +34,6 @@ export const ru = {
     passwordPlaceholder: "••••••",
     startPractising: "Начать практику",
     alreadyHaveAccount: "Уже есть аккаунт",
-    noAccountYet: "Где аккаунта нет",
     errorName: "Введите ваше имя.",
     errorContact: "Введите телефон или email.",
     errorContactInvalid: "Введите корректный email.",

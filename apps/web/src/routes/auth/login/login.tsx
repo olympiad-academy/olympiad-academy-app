@@ -93,7 +93,7 @@ export const LoginRoute = (): ReactElement => {
         <AuthSubmitButton label={t("auth.login")} isSubmitting={formState.isSubmitting} />
       </form>
       <div className={styles["switchLink"]}>
-        <Link to={ROUTES.SIGNUP}>{t("auth.noAccountYet")} →</Link>
+        <Link to={ROUTES.SIGNUP}>{t("auth.signup")} →</Link>
       </div>
     </AuthLayout>
   );
