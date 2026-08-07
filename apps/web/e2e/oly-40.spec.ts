@@ -11,7 +11,7 @@ import { expect, test } from "@playwright/test";
  */
 
 test.describe("AC3 — signup happy path (D5/D7/D9)", () => {
-  test("a valid signup stores a token and lands on /topics; Back returns to the landing, not /signup", async ({
+  test("a valid signup stores a token and lands on /topics; Back never reaches an auth screen", async ({
     page,
   }) => {
     // Start from the landing (not a direct page.goto("/signup")) so history
@@ -35,13 +35,22 @@ test.describe("AC3 — signup happy path (D5/D7/D9)", () => {
     const token = await page.evaluate(() => window.localStorage.getItem("oa.authToken"));
     expect(token).not.toBeNull();
 
-    // The signup entry was replaced, not pushed — Back skips straight to the
-    // landing, never re-showing the auth screen.
+    // AC3's actual guarantee: Back never re-shows an auth screen. Two
+    // mechanisms deliver it together — the signup entry was replaced rather
+    // than pushed (so Back targets the landing, not /signup), and the landing
+    // itself is behind the forward guard for an authenticated user (so the
+    // landing bounces on to /topics too).
+    //
+    // Consequence, deliberate: for an authenticated user Back out of /topics
+    // is a no-op — they stay put instead of reaching a page offering "log in"
+    // and "sign up for free". This is how apps that redirect authenticated
+    // users off their marketing page behave.
     await page.goBack();
-    await expect(page).toHaveURL(/\/$/);
+    await expect(page).toHaveURL(/\/topics$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Mavzular");
   });
 
-  test("an authenticated user who navigates to /signup or /login is redirected forward to /topics", async ({
+  test("an authenticated user who navigates to a pre-auth screen is redirected forward to /topics", async ({
     page,
   }) => {
     await page.goto("/signup");
@@ -55,6 +64,12 @@ test.describe("AC3 — signup happy path (D5/D7/D9)", () => {
     await expect(page).toHaveURL(/\/topics$/);
 
     await page.goto("/login");
+    await expect(page).toHaveURL(/\/topics$/);
+
+    // The landing too: its nav and hero offer "log in" and "sign up for
+    // free", and the brand link in the post-auth header points straight at
+    // it — one click from /topics before this guard covered "/".
+    await page.goto("/");
     await expect(page).toHaveURL(/\/topics$/);
   });
 });

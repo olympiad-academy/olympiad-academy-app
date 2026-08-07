@@ -74,4 +74,15 @@ describe("authenticated users never see auth screens (D7/AC3)", () => {
     await renderAppAt("/login");
     assert.equal(window.location.pathname, "/topics");
   });
+
+  // The landing is a conversion page: its nav and CTAs offer "log in" and
+  // "sign up for free", which are nonsense once a session exists — and the
+  // brand link in the post-auth header points at "/", so this was reachable
+  // by a single click from /topics. Same rule D7 already applies to /signup
+  // and /login; it simply was not carried to "/" because no working auth
+  // existed when D7 was decided.
+  it("redirects the landing forward to /topics (the brand link is the common path here)", async () => {
+    await renderAppAt("/");
+    assert.equal(window.location.pathname, "/topics");
+  });
 });

@@ -40,9 +40,14 @@ const ProtectedRoutes = (): ReactElement => {
 
 /**
  * The mirror image of ProtectedRoutes (D7): an already-authenticated user who
- * navigates to /signup or /login (typed URL, browser history, stale tab) is
- * sent forward to /topics instead of seeing the auth form again — part of
- * AC3's "back never returns to auth screens".
+ * reaches a pre-auth screen — the landing, /signup or /login, whether by
+ * typed URL, browser history, a stale tab, or the brand link in the post-auth
+ * header — is sent forward to /topics instead of being shown "log in" and
+ * "sign up" again. Part of AC3's "back never returns to auth screens".
+ *
+ * No loading branch on purpose: the session is read synchronously from
+ * localStorage (D7), so unlike an async-session app there is no interim state
+ * where "authenticated" is not yet known and a spinner would be required.
  */
 const RedirectIfAuthenticated = (): ReactElement => {
   if (browserAuthSession.hasSession()) {
@@ -70,12 +75,15 @@ const appRoutes: RouteObject[] = [
     path: ROUTES.HOME,
     element: <AppShell />,
     children: [
-      { index: true, element: <LandingRoute /> },
-      // Auth screens sit behind the forward guard (D7). /topics and
-      // /profile moved to generatedProtectedRoutes below.
+      // The landing and the auth screens all sit behind the forward guard
+      // (D7): every one of them is a pre-auth screen, so a user who already
+      // has a session is sent on to /topics rather than being offered "log
+      // in" and "sign up" again. /topics and /profile moved to
+      // generatedProtectedRoutes below.
       {
         element: <RedirectIfAuthenticated />,
         children: [
+          { index: true, element: <LandingRoute /> },
           { path: ROUTES.SIGNUP, element: <SignupRoute /> },
           { path: ROUTES.LOGIN, element: <LoginRoute /> },
         ],
