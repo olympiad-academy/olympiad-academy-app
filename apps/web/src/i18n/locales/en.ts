@@ -20,6 +20,31 @@ export const en = {
       "The full Topic List screen is a separate task. Below — a preview in the spirit of the design.",
     profileTitle: "Profile",
     profileNote: "The profile page is a separate task — the route is already reserved.",
+    profileLogout: "Log out",
+  },
+  // Signup/login forms (OLY-40, D9). Copy transcribed from the design of
+  // record (D11-A1 snapshot i18n.ts) except errorPassword: the snapshot says
+  // "at least 4 characters" but the contract requires 8 (contract.signup.body).
+  auth: {
+    appSubtitle: "Grade 5 Math Olympiad",
+    signup: "Sign Up",
+    login: "Log In",
+    name: "Name",
+    namePlaceholder: "Your name",
+    contact: "Phone or Email",
+    contactPlaceholder: "+998 90 123 45 67 or name@email.com",
+    contactHint: "Enter a phone number or email to access your account.",
+    password: "Password",
+    passwordPlaceholder: "••••••",
+    startPractising: "Start practising",
+    alreadyHaveAccount: "I already have an account",
+    noAccountYet: "I don't have an account yet",
+    errorName: "Please enter your name.",
+    errorContact: "Please enter a phone number or email.",
+    errorContactInvalid: "Please enter a valid email address.",
+    errorPassword: "Password must be at least 8 characters.",
+    errorPasswordRequired: "Please enter your password.",
+    errorGeneric: "Something went wrong. Please try again.",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

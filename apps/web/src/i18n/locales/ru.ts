@@ -18,7 +18,32 @@ export const ru = {
     authNote: "Полная форма — на шаге OLY-40, маршрут уже зарезервирован.",
     topicsNote: "Полный экран тем — отдельная задача. Ниже — обзор в духе дизайна.",
     profileTitle: "Профиль",
+    profileLogout: "Выйти",
     profileNote: "Страница профиля — отдельная задача, маршрут уже зарезервирован.",
+  },
+  // Signup/login forms (OLY-40, D9). Copy transcribed from the design of
+  // record (D11-A1 snapshot i18n.ts) except errorPassword: the snapshot says
+  // "не менее 4 символов" but the contract requires 8 (contract.signup.body).
+  auth: {
+    appSubtitle: "Олимпиадная математика, 5 класс",
+    signup: "Регистрация",
+    login: "Войти",
+    name: "Имя",
+    namePlaceholder: "Ваше имя",
+    contact: "Телефон или Email",
+    contactPlaceholder: "+998 90 123 45 67 или name@email.com",
+    contactHint: "Укажите телефон или email для входа в аккаунт.",
+    password: "Пароль",
+    passwordPlaceholder: "••••••",
+    startPractising: "Начать практику",
+    alreadyHaveAccount: "Уже есть аккаунт",
+    noAccountYet: "Где аккаунта нет",
+    errorName: "Введите ваше имя.",
+    errorContact: "Введите телефон или email.",
+    errorContactInvalid: "Введите корректный email.",
+    errorPassword: "Пароль — не менее 8 символов.",
+    errorPasswordRequired: "Введите пароль.",
+    errorGeneric: "Что-то пошло не так. Повторите попытку.",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

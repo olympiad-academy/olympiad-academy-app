@@ -19,9 +19,7 @@ export const detectIdentityKind = (value: string): IdentityKind => {
  * `.nullable().optional()` already accepts "absent" as valid, so there is
  * nothing a `null` would communicate that omission does not.
  */
-export const toIdentityFields = (
-  value: string,
-): { phone: string } | { email: string } => {
+export const toIdentityFields = (value: string): { phone: string } | { email: string } => {
   const trimmed = value.trim();
   return detectIdentityKind(trimmed) === "email" ? { email: trimmed } : { phone: trimmed };
 };
