@@ -37,6 +37,19 @@ export default defineConfig({
     {
       name: "chromium",
       use: devices["Desktop Chrome"],
+      testIgnore: /\.mobile\.spec\.ts$/,
+    },
+    /*
+     * The acceptance specs prove behaviour, which is viewport-independent, so
+     * they run once on desktop. Layout that only exists below a breakpoint
+     * cannot be proven there — CSS Modules are stubbed in unit tests and the
+     * desktop project never crosses the 640px line — so mobile-only specs get
+     * their own project.
+     */
+    {
+      name: "mobile-chrome",
+      use: devices["Pixel 5"],
+      testMatch: /\.mobile\.spec\.ts$/,
     },
   ],
 });
