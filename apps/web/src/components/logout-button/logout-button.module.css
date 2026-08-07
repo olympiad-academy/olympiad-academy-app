@@ -1,0 +1,19 @@
+/* Logout action (design of record: ProfileScreen header icon button,
+   simplified to a text button for the stub-era profile screen). Token-only
+   colours (D3). */
+
+.button {
+  padding: var(--oa-space-8) var(--oa-space-16);
+  border: 1px solid var(--oa-border);
+  border-radius: var(--oa-radius-12);
+  background: transparent;
+  color: var(--oa-text-subtle);
+  font-family: var(--oa-font-family-body);
+  font-size: var(--oa-font-size-14);
+  cursor: pointer;
+  transition: opacity 160ms ease;
+}
+
+.button:hover {
+  opacity: 0.7;
+}
