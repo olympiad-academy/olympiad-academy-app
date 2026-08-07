@@ -12,10 +12,7 @@ export const uz = {
   // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
   // screens land. Copy is ours (stubs are not in the design of record).
   stubs: {
-    signupTitle: "Ro'yxatdan o'tish",
-    loginTitle: "Kirish",
     topicsTitle: "Mavzular",
-    authNote: "To'liq shakl OLY-40 qadamida — marshrut allaqachon zaxiralangan.",
     topicsNote: "To'liq mavzular ekrani — alohida vazifa. Quyida dizayn ruhidagi ko'rik.",
     profileTitle: "Profil",
     profileNote: "Profil sahifasi — alohida vazifa, marshrut allaqachon band qilingan.",

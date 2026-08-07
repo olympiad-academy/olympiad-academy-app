@@ -12,10 +12,7 @@ export const ru = {
   // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
   // screens land. Copy is ours (stubs are not in the design of record).
   stubs: {
-    signupTitle: "Регистрация",
-    loginTitle: "Вход",
     topicsTitle: "Темы",
-    authNote: "Полная форма — на шаге OLY-40, маршрут уже зарезервирован.",
     topicsNote: "Полный экран тем — отдельная задача. Ниже — обзор в духе дизайна.",
     profileTitle: "Профиль",
     profileLogout: "Выйти",

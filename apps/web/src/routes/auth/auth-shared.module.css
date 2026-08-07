@@ -1,0 +1,41 @@
+/* Shared chrome for the signup/login screens (design of record). Token-only
+   colours (D3); the field/button pieces have their own modules. */
+
+.title {
+  font-family: var(--oa-font-family-display);
+  font-weight: var(--oa-font-weight-black);
+  font-size: var(--oa-font-size-30);
+  margin-bottom: var(--oa-space-8);
+}
+
+.subtitle {
+  font-size: var(--oa-font-size-14);
+  color: var(--oa-text-subtle);
+  margin-bottom: var(--oa-space-32);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--oa-space-12);
+}
+
+.formError {
+  padding: var(--oa-space-8) var(--oa-space-12);
+  border-radius: var(--oa-radius-8);
+  font-size: var(--oa-font-size-12);
+  color: var(--oa-wrong-text);
+  background: var(--oa-wrong-bg);
+}
+
+.switchLink {
+  margin-top: var(--oa-space-20);
+  text-align: center;
+  font-size: var(--oa-font-size-14);
+}
+
+.switchLink a {
+  color: var(--oa-text-subtle);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}

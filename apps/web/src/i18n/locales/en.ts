@@ -12,10 +12,7 @@ export const en = {
   // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
   // screens land. Copy is ours (stubs are not in the design of record).
   stubs: {
-    signupTitle: "Sign up",
-    loginTitle: "Log in",
     topicsTitle: "Topics",
-    authNote: "The full form arrives with OLY-40 — the route is already reserved.",
     topicsNote:
       "The full Topic List screen is a separate task. Below — a preview in the spirit of the design.",
     profileTitle: "Profile",

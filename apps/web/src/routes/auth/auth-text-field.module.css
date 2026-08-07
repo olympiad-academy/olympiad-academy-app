@@ -1,0 +1,50 @@
+/* One labelled input row (design of record). Token-only colours (D3). */
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--oa-space-6);
+}
+
+.label {
+  font-size: var(--oa-font-size-12);
+  font-weight: var(--oa-font-weight-bold);
+  color: var(--oa-text-muted);
+  padding: 0 var(--oa-space-4);
+}
+
+.input {
+  width: 100%;
+  padding: var(--oa-space-12) var(--oa-space-16);
+  border-radius: var(--oa-radius-12);
+  background: var(--oa-input-bg);
+  border: 1px solid var(--oa-input-border);
+  color: var(--oa-text);
+  font-family: var(--oa-font-family-body);
+  font-size: var(--oa-font-size-14);
+  outline: none;
+  transition: border-color 160ms ease;
+}
+
+.input:focus {
+  border-color: var(--oa-input-border-focus);
+}
+
+.input::placeholder {
+  opacity: 0.4;
+}
+
+.hint {
+  padding: 0 var(--oa-space-4);
+  font-size: var(--oa-font-size-11);
+  line-height: var(--oa-line-height-relaxed);
+  color: var(--oa-text-faint);
+}
+
+.error {
+  padding: var(--oa-space-6) var(--oa-space-8);
+  border-radius: var(--oa-radius-8);
+  font-size: var(--oa-font-size-12);
+  color: var(--oa-wrong-text);
+  background: var(--oa-wrong-bg);
+}

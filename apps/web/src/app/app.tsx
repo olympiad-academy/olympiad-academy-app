@@ -9,7 +9,8 @@ import {
 } from "react-router-dom";
 import { ROUTES } from "@/constants/routes.js";
 import { LandingRoute } from "@/routes/landing/landing.js";
-import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
+import { SignupRoute } from "@/routes/auth/signup/signup.js";
+import { LoginRoute } from "@/routes/auth/login/login.js";
 import { ProfileStubRoute } from "@/routes/stubs/profile-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 import { browserAuthSession } from "@/auth/auth-session.js";
@@ -70,15 +71,13 @@ const appRoutes: RouteObject[] = [
     element: <AppShell />,
     children: [
       { index: true, element: <LandingRoute /> },
-      // Auth screens sit behind the forward guard (D7); still stubs here —
-      // plan S4/S5 swap these for the real signup/login forms without
-      // touching this wiring. /topics and /profile moved to
-      // generatedProtectedRoutes below.
+      // Auth screens sit behind the forward guard (D7). /topics and
+      // /profile moved to generatedProtectedRoutes below.
       {
         element: <RedirectIfAuthenticated />,
         children: [
-          { path: ROUTES.SIGNUP, element: <AuthStubRoute kind="signup" /> },
-          { path: ROUTES.LOGIN, element: <AuthStubRoute kind="login" /> },
+          { path: ROUTES.SIGNUP, element: <SignupRoute /> },
+          { path: ROUTES.LOGIN, element: <LoginRoute /> },
         ],
       },
       ...generatedPublicRoutes(),
