@@ -1,19 +1,9 @@
 /* One labelled input row (design of record). Token-only colours (D3). */
 
 .field {
-  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--oa-space-6);
-  /* Reserved so a field-level error (rendered out-of-flow below, see
-     .error) never collides with the next field's label or the submit
-     button — review defect 5. Sized empirically: the longest error string
-     across all three locales renders at 31.5px tall (incl. its own
-     padding) at the narrowest tested viewport (Playwright's mobile-chrome
-     project, Pixel 5, 393px) without wrapping to a second line; combined
-     with .form's own space-12 gap and .error's own space-6 margin-top,
-     this clears it with headroom instead of relying on an exact fit. */
-  margin-bottom: var(--oa-space-24);
 }
 
 .label {
@@ -52,16 +42,14 @@
 }
 
 .error {
-  /* Out of flow (review defect 5): a field-level error mounting must not
-     push later fields or the submit button — a click aimed at the button
-     right after blur could land on stale coordinates. Positioned to sit
-     exactly where flow would have placed it (`.field` is the containing
-     block, `top: 100%` lands right below the last flowed child). */
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  margin-top: var(--oa-space-6);
+  /* In flow, as in the design of record (App.tsx: the auth form is a plain
+     `space-y-3` stack and its error paragraph is a normal child). An earlier
+     pass took the error out of flow so a mounting error could not shift the
+     submit button; that was withdrawn — keeping the button still requires
+     permanently reserving a message-sized gap under every field, which was
+     measured at 48px and left the three-field form visibly loose on every
+     screen, for every user, to spare an occasional double-click. The design
+     accepts the shift; so do we. */
   padding: var(--oa-space-6) var(--oa-space-8);
   border-radius: var(--oa-radius-8);
   font-size: var(--oa-font-size-12);
