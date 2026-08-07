@@ -28,13 +28,16 @@ export const SignupRoute = (): ReactElement => {
   const authApi = useAuthApi();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const { register, handleSubmit, formState, watch } = useForm<AuthFormValues, unknown, SignupBody>(
-    {
-      resolver: createAuthFormResolver(contract.signup.body, { language: i18n.language }),
-      mode: "onTouched",
-      reValidateMode: "onChange",
-    },
-  );
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm<AuthFormValues, unknown, SignupBody>({
+    resolver: createAuthFormResolver(contract.signup.body, { language: i18n.language }),
+    mode: "onTouched",
+    reValidateMode: "onChange",
+  });
 
   // Advisory only — never fed back into validation (AC7/D9). Watched rather
   // than read from formState so the meter tracks every keystroke, including
@@ -71,7 +74,7 @@ export const SignupRoute = (): ReactElement => {
           label={t("auth.name")}
           placeholder={t("auth.namePlaceholder")}
           autoComplete="name"
-          error={formState.errors.name}
+          error={errors.name}
           registration={register("name")}
         />
         <AuthTextField
@@ -80,7 +83,7 @@ export const SignupRoute = (): ReactElement => {
           placeholder={t("auth.contactPlaceholder")}
           hint={t("auth.contactHint")}
           autoComplete="username"
-          error={formState.errors.identity}
+          error={errors.identity}
           registration={register("identity")}
         />
         <AuthTextField
@@ -89,13 +92,13 @@ export const SignupRoute = (): ReactElement => {
           type="password"
           placeholder={t("auth.passwordPlaceholder")}
           autoComplete="new-password"
-          error={formState.errors.password}
+          error={errors.password}
           registration={register("password")}
           footer={<PasswordStrengthMeter strength={passwordStrength} />}
         />
-        {formState.errors.formError?.message !== undefined ? (
+        {errors.formError?.message !== undefined ? (
           <p className={styles["formError"]} role="alert">
-            {t(formState.errors.formError.message)}
+            {t(errors.formError.message)}
           </p>
         ) : null}
         {submitError !== null ? (
@@ -103,7 +106,7 @@ export const SignupRoute = (): ReactElement => {
             {t(submitError)}
           </p>
         ) : null}
-        <AuthSubmitButton label={t("auth.startPractising")} isSubmitting={formState.isSubmitting} />
+        <AuthSubmitButton label={t("auth.startPractising")} isSubmitting={isSubmitting} />
       </form>
       <div className={styles["switchLink"]}>
         <Link to={ROUTES.LOGIN}>{t("auth.alreadyHaveAccount")} →</Link>

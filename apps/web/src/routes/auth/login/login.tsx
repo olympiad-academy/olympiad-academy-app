@@ -31,7 +31,11 @@ export const LoginRoute = (): ReactElement => {
   const authApi = useAuthApi();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const { register, handleSubmit, formState } = useForm<AuthFormValues, unknown, LoginBody>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<AuthFormValues, unknown, LoginBody>({
     resolver: createAuthFormResolver(contract.login.body, {}),
     mode: "onTouched",
     reValidateMode: "onChange",
@@ -68,7 +72,7 @@ export const LoginRoute = (): ReactElement => {
           label={t("auth.contact")}
           placeholder={t("auth.contactPlaceholder")}
           autoComplete="username"
-          error={formState.errors.identity}
+          error={errors.identity}
           registration={register("identity")}
         />
         <AuthTextField
@@ -77,12 +81,12 @@ export const LoginRoute = (): ReactElement => {
           type="password"
           placeholder={t("auth.passwordPlaceholder")}
           autoComplete="current-password"
-          error={formState.errors.password}
+          error={errors.password}
           registration={register("password")}
         />
-        {formState.errors.formError?.message !== undefined ? (
+        {errors.formError?.message !== undefined ? (
           <p className={styles["formError"]} role="alert">
-            {t(formState.errors.formError.message)}
+            {t(errors.formError.message)}
           </p>
         ) : null}
         {submitError !== null ? (
@@ -90,7 +94,7 @@ export const LoginRoute = (): ReactElement => {
             {t(submitError)}
           </p>
         ) : null}
-        <AuthSubmitButton label={t("auth.login")} isSubmitting={formState.isSubmitting} />
+        <AuthSubmitButton label={t("auth.login")} isSubmitting={isSubmitting} />
       </form>
       <div className={styles["switchLink"]}>
         <Link to={ROUTES.SIGNUP}>{t("auth.signup")} →</Link>

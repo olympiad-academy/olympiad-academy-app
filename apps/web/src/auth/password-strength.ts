@@ -63,18 +63,11 @@ const sequentialPairShare = (password: string): number => {
  * a walk along the alphabet or the digits. Length alone would rate both as
  * strong, which would be actively misleading — a meter that calls
  * "abcdefghijklmnop" strong is worse than no meter.
- *
- * Written without naming the intermediate booleans on purpose: the repo's
- * naming-convention rule (eslint.config.mjs) pairs `prefix: ["is", ...]`
- * with `format: ["camelCase"]`, and the prefix is stripped before the
- * format is checked — so the remainder always starts uppercase and no
- * prefixed boolean variable can ever satisfy it. Inline expressions sidestep
- * a config bug that is not this slice's to fix.
  */
 const hasTrivialShape = (password: string): boolean => {
-  return (
-    new Set(password).size === 1 || sequentialPairShare(password) >= SEQUENTIAL_PAIR_SHARE_LIMIT
-  );
+  const isSingleRepeatedCharacter = new Set(password).size === 1;
+  const isSequenceWalk = sequentialPairShare(password) >= SEQUENTIAL_PAIR_SHARE_LIMIT;
+  return isSingleRepeatedCharacter || isSequenceWalk;
 };
 
 /**
