@@ -1,0 +1,50 @@
+/* Routing-skeleton stubs (D2/D8). Token-only colours (D3). */
+
+.page {
+  min-height: 100vh;
+  background: var(--oa-bg);
+  color: var(--oa-text);
+  font-family: var(--oa-font-family-body);
+  display: flex;
+  flex-direction: column;
+}
+
+.body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--oa-space-48) var(--oa-space-20);
+}
+
+.card,
+.topicsCard {
+  max-width: 560px;
+  width: 100%;
+  text-align: center;
+  border-radius: var(--oa-radius-24);
+  padding: var(--oa-space-48);
+  background: var(--oa-surface);
+  border: 1px solid var(--oa-border);
+}
+
+.title {
+  font-family: var(--oa-font-family-display);
+  font-weight: var(--oa-font-weight-black);
+  font-size: var(--oa-font-size-30);
+  margin-bottom: var(--oa-space-12);
+}
+
+.note {
+  font-size: var(--oa-font-size-14);
+  line-height: var(--oa-line-height-relaxed);
+  color: var(--oa-text-muted);
+  margin-bottom: var(--oa-space-24);
+}
+
+.topicsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--oa-space-8);
+  justify-content: center;
+}

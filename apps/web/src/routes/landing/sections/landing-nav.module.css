@@ -1,0 +1,124 @@
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--oa-nav-bg);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--oa-border2);
+}
+
+.inner {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: var(--oa-space-16) var(--oa-space-12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--oa-space-12);
+  /* Kept as a safety net below the breakpoint: the brand may still drop to its
+     own row on very narrow screens, which is preferable to horizontal scroll. */
+  flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+  .inner {
+    padding: var(--oa-space-16) var(--oa-space-20);
+  }
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--oa-space-10);
+  text-decoration: none;
+  color: inherit;
+}
+
+/*
+ * Below 640px the wordmark is hidden VISUALLY but kept in the accessibility
+ * tree, so the whole nav fits one row: the mark alone (32px) plus the controls
+ * (286px) and the gap come to 330px, inside the 351px a 375px screen offers,
+ * and it still fits a 360px device.
+ *
+ * Not `display: none` — the logo is `aria-hidden`, so removing this text would
+ * leave the home link with no accessible name at all (WCAG 2.4.4 Link Purpose,
+ * and the WCAG floor in docs/code-standards.md). Clipped instead: invisible,
+ * zero layout, still announced.
+ */
+.brandName {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  font-family: var(--oa-font-family-display);
+  font-weight: var(--oa-font-weight-black);
+  font-size: var(--oa-font-size-16);
+  letter-spacing: var(--oa-letter-spacing-tight);
+}
+
+@media (min-width: 640px) {
+  .brandName {
+    position: static;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip-path: none;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--oa-space-8);
+  flex-wrap: wrap;
+}
+
+/*
+ * Hidden below 640px. The four controls need 366px of the 335px a 375px screen
+ * offers, so the row wrapped and the sticky header grew to 167px — a fifth of
+ * the viewport. The design of record has no mobile treatment for this nav at
+ * all (no responsive classes, no wrap), so there was nothing to copy; recorded
+ * as a decision in docs/decisions/OLY-19-discovery-decisions.md.
+ *
+ * Login stays reachable: the hero renders the same link, and /login is a
+ * first-class route. Nothing else in the nav is duplicated elsewhere.
+ */
+.login {
+  display: none;
+  font-size: var(--oa-font-size-14);
+  font-weight: var(--oa-font-weight-bold);
+  color: var(--oa-text-subtle);
+  text-decoration: none;
+  padding: var(--oa-space-8) var(--oa-space-16);
+  border-radius: var(--oa-radius-12);
+}
+
+@media (min-width: 640px) {
+  .login {
+    display: inline-block;
+  }
+}
+
+.login:hover {
+  opacity: 0.7;
+}
+
+.cta {
+  font-family: var(--oa-font-family-display);
+  font-size: var(--oa-font-size-14);
+  font-weight: var(--oa-font-weight-black);
+  color: var(--oa-text-on-accent);
+  text-decoration: none;
+  padding: var(--oa-space-10) var(--oa-space-20);
+  border-radius: var(--oa-radius-12);
+  background: var(--oa-primary-gradient);
+}
+
+.cta:hover {
+  opacity: 0.9;
+}

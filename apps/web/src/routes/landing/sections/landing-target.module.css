@@ -1,0 +1,9 @@
+.kicker {
+  margin-bottom: var(--oa-space-24);
+}
+
+.text {
+  font-size: var(--oa-font-size-20);
+  line-height: var(--oa-line-height-relaxed);
+  color: var(--oa-text-muted);
+}

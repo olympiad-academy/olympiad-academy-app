@@ -1,0 +1,43 @@
+/* Segmented language control — mirrors the design of record's LangSwitcher
+ * (D11-A1 snapshot): a bordered pill with one segment per locale; the active
+ * segment is filled. All colours from generated tokens only (D3). */
+
+.root {
+  display: inline-flex;
+  border: 1px solid var(--oa-lang-border);
+  border-radius: var(--oa-radius-8);
+  overflow: hidden;
+}
+
+.item {
+  /* Buttons carry UA border/padding — without the reset each segment renders
+     as its own little box instead of one pill (design review 2026-08-06). */
+  appearance: none;
+  border: 0;
+  margin: 0;
+  padding: var(--oa-space-4) var(--oa-space-10);
+  font-family: var(--oa-font-family-display);
+  font-size: var(--oa-font-size-12);
+  font-weight: 700;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--oa-lang-inactive-color);
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.item:hover {
+  color: var(--oa-text);
+}
+
+.item[data-state="on"] {
+  background: var(--oa-lang-active-bg);
+  color: var(--oa-text);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--oa-primary-border);
+  outline-offset: -2px;
+}

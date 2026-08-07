@@ -37,3 +37,10 @@ data
 .vibe/evidence/**
 .vibe/work/**
 # vibe-engineer:local-qa-ignore:end
+
+# Agent worktrees are not project source
+.claude/
+
+# Playwright runner output
+test-results/
+playwright-report/

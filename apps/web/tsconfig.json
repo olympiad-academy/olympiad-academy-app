@@ -1,15 +1,23 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "rootDir": "src",
-    "outDir": "dist",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "noEmit": false,
+    // This config is typecheck- and tooling-only: the app builds with Vite
+    // and tests run through tsx, so no emit settings live here. One project
+    // covers src + test + e2e so typed ESLint and tsx apply the same strict
+    // options (incl. jsx: react-jsx) everywhere.
+    "noEmit": true,
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "jsx": "react-jsx",
-    "types": ["react", "react-dom"]
+    // "@/x" = "src/x" — no ../../../ climbing. Honoured by tsc, Vite
+    // (resolve.alias) and tsx (test runner) alike.
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "types": ["react", "react-dom", "node"],
+    // happy-dom's .d.ts references node:stream/web types newer than the
+    // installed @types/node; lib checking adds nothing to our own code.
+    "skipLibCheck": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "test/**/*.ts", "test/**/*.tsx", "e2e/**/*.ts"]
 }

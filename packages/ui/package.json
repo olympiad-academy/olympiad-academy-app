@@ -11,12 +11,17 @@
     "lint": "eslint .",
     "format:check": "prettier --check . --ignore-path ../../.prettierignore",
     "test:unit": "tsx --test test/*.test.ts",
+    "gen:tokens": "tsx src/tokens/generate-css.ts",
     "build": "tsc -p tsconfig.json",
     "quality:quick": "pnpm run typecheck && pnpm run lint && pnpm run format:check && pnpm run test:unit && pnpm run build"
+  },
+  "devDependencies": {
+    "prettier": "3.8.4"
   },
   "exports": {
     ".": "./src/index.ts",
     "./web": "./src/web/index.ts",
-    "./native": "./src/native/index.ts"
+    "./native": "./src/native/index.ts",
+    "./tokens.css": "./src/tokens/tokens.css"
   }
 }

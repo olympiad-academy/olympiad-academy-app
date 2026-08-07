@@ -1,0 +1,37 @@
+import type { ReactElement } from "react";
+import { Link } from "react-router-dom";
+import { APP_NAME } from "@/constants/app.js";
+import { ROUTES } from "@/constants/routes.js";
+import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
+import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
+import styles from "./auth-nav.module.css";
+
+/**
+ * Minimal nav for the auth screens (design of record, AuthScreen header):
+ * a back-chevron + brand text leading to the landing on the left, the two
+ * preference controls on the right. No bar background or bottom border —
+ * unlike the landing's sticky nav. Shared by the OLY-39 stubs now and the
+ * real signup/login screens in OLY-40.
+ */
+export const AuthNav = (): ReactElement => {
+  return (
+    <div className={styles["nav"]}>
+      <Link to={ROUTES.HOME} className={styles["back"]}>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path
+            d="M10 3L5 8l5 5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        {APP_NAME}
+      </Link>
+      <div className={styles["actions"]}>
+        <LanguageSwitcher />
+        <ThemeToggle />
+      </div>
+    </div>
+  );
+};

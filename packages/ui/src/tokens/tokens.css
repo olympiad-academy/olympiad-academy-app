@@ -1,0 +1,159 @@
+/* GENERATED FILE — do not edit by hand.
+ * Source: packages/ui/src/tokens/tokens.ts
+ * Regenerate: pnpm --filter @olympiad-academy-app/ui run gen:tokens
+ *
+ * :root is the dark mode (the design of record's default). Light mode is an
+ * override on [data-theme="light"], set on <html> before first paint (D12).
+ */
+:root {
+  color-scheme: dark;
+
+  --oa-bg: #0a0b14;
+  --oa-surface: rgba(247, 247, 251, 0.045);
+  --oa-surface2: rgba(247, 247, 251, 0.03);
+  --oa-surface-hover: rgba(247, 247, 251, 0.075);
+  --oa-nav-bg: rgba(10, 11, 20, 0.92);
+  --oa-text: #f7f7fb;
+  --oa-text-muted: rgba(247, 247, 251, 0.68);
+  --oa-text-subtle: rgba(247, 247, 251, 0.55);
+  --oa-text-faint: rgba(247, 247, 251, 0.48);
+  --oa-text-on-accent: #f8f7ff;
+  --oa-border: rgba(247, 247, 251, 0.09);
+  --oa-border2: rgba(247, 247, 251, 0.06);
+  --oa-divider: rgba(247, 247, 251, 0.075);
+  --oa-primary: #818cf8;
+  --oa-primary-strong: #6366f1;
+  --oa-primary-soft: rgba(129, 140, 248, 0.14);
+  --oa-primary-border: rgba(129, 140, 248, 0.38);
+  --oa-primary-gradient: linear-gradient(135deg, #5856e8, #9333ea);
+  --oa-focus-ring: rgba(129, 140, 248, 0.74);
+  --oa-glow-bg: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(99, 102, 241, 0.2) 0%,
+    transparent 70%
+  );
+  --oa-input-bg: rgba(247, 247, 251, 0.07);
+  --oa-input-border: rgba(247, 247, 251, 0.12);
+  --oa-input-border-focus: rgba(129, 140, 248, 0.74);
+  --oa-lang-active-bg: rgba(247, 247, 251, 0.15);
+  --oa-lang-inactive-color: rgba(247, 247, 251, 0.55);
+  --oa-lang-border: rgba(247, 247, 251, 0.14);
+  --oa-correct-bg: rgba(16, 185, 129, 0.09);
+  --oa-correct-border: rgba(52, 211, 153, 0.24);
+  --oa-correct-text: #6ee7b7;
+  --oa-correct-sub-text: rgba(110, 231, 183, 0.72);
+  --oa-wrong-bg: rgba(245, 158, 11, 0.09);
+  --oa-wrong-border: rgba(245, 158, 11, 0.26);
+  --oa-wrong-text: #fcd34d;
+  --oa-ask-why-bg: rgba(129, 140, 248, 0.08);
+  --oa-ask-why-border: rgba(129, 140, 248, 0.24);
+  --oa-ask-why-text: #a5b4fc;
+  --oa-ask-why-input-bg: rgba(247, 247, 251, 0.065);
+  --oa-stat-card-bg: rgba(247, 247, 251, 0.055);
+  --oa-progress-bg: rgba(247, 247, 251, 0.085);
+  --oa-brand-grad-from: #6366f1;
+  --oa-brand-grad-to: #a855f7;
+  --oa-brand-mark: #ffffff;
+
+  --oa-space-2: 2px;
+  --oa-space-4: 4px;
+  --oa-space-6: 6px;
+  --oa-space-8: 8px;
+  --oa-space-10: 10px;
+  --oa-space-12: 12px;
+  --oa-space-14: 14px;
+  --oa-space-16: 16px;
+  --oa-space-20: 20px;
+  --oa-space-24: 24px;
+  --oa-space-28: 28px;
+  --oa-space-32: 32px;
+  --oa-space-48: 48px;
+  --oa-space-56: 56px;
+  --oa-space-80: 80px;
+  --oa-space-96: 96px;
+  --oa-space-112: 112px;
+
+  --oa-radius-8: 8px;
+  --oa-radius-12: 12px;
+  --oa-radius-16: 16px;
+  --oa-radius-24: 24px;
+  --oa-radius-full: 9999px;
+
+  --oa-font-size-10: 10px;
+  --oa-font-size-11: 11px;
+  --oa-font-size-12: 12px;
+  --oa-font-size-14: 14px;
+  --oa-font-size-16: 16px;
+  --oa-font-size-18: 18px;
+  --oa-font-size-20: 20px;
+  --oa-font-size-24: 24px;
+  --oa-font-size-30: 30px;
+  --oa-font-size-48: 48px;
+  --oa-font-weight-medium: 500;
+  --oa-font-weight-semibold: 600;
+  --oa-font-weight-bold: 700;
+  --oa-font-weight-black: 900;
+  --oa-line-height-none: 1;
+  --oa-line-height-tight: 1.25;
+  --oa-line-height-snug: 1.375;
+  --oa-line-height-relaxed: 1.625;
+  --oa-letter-spacing-tight: -0.025em;
+  --oa-letter-spacing-wider: 0.05em;
+  --oa-letter-spacing-widest: 0.1em;
+
+  --oa-font-family-display:
+    "Plus Jakarta Sans Variable", "Plus Jakarta Sans", "Nunito Variable", "Nunito", system-ui,
+    sans-serif;
+  --oa-font-family-body: "Nunito Variable", "Nunito", system-ui, sans-serif;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --oa-bg: #f2f2f8;
+  --oa-surface: #ffffff;
+  --oa-surface2: rgba(15, 15, 26, 0.025);
+  --oa-surface-hover: rgba(15, 15, 26, 0.05);
+  --oa-nav-bg: rgba(242, 242, 248, 0.92);
+  --oa-text: #171722;
+  --oa-text-muted: rgba(23, 23, 34, 0.8);
+  --oa-text-subtle: rgba(23, 23, 34, 0.72);
+  --oa-text-faint: rgba(23, 23, 34, 0.62);
+  --oa-text-on-accent: #fafaff;
+  --oa-border: rgba(23, 23, 34, 0.1);
+  --oa-border2: rgba(23, 23, 34, 0.065);
+  --oa-divider: rgba(23, 23, 34, 0.08);
+  --oa-primary: #4f46e5;
+  --oa-primary-strong: #4338ca;
+  --oa-primary-soft: rgba(79, 70, 229, 0.1);
+  --oa-primary-border: rgba(79, 70, 229, 0.34);
+  --oa-primary-gradient: linear-gradient(135deg, #4f46e5, #9333ea);
+  --oa-focus-ring: rgba(79, 70, 229, 0.58);
+  --oa-glow-bg: radial-gradient(
+    ellipse 80% 50% at 50% -10%,
+    rgba(79, 70, 229, 0.12) 0%,
+    transparent 70%
+  );
+  --oa-input-bg: #ffffff;
+  --oa-input-border: rgba(23, 23, 34, 0.15);
+  --oa-input-border-focus: rgba(79, 70, 229, 0.58);
+  --oa-lang-active-bg: rgba(23, 23, 34, 0.1);
+  --oa-lang-inactive-color: rgba(23, 23, 34, 0.72);
+  --oa-lang-border: rgba(23, 23, 34, 0.14);
+  --oa-correct-bg: rgba(5, 150, 105, 0.08);
+  --oa-correct-border: rgba(5, 150, 105, 0.24);
+  --oa-correct-text: #047857;
+  --oa-correct-sub-text: #065f46;
+  --oa-wrong-bg: rgba(217, 119, 6, 0.08);
+  --oa-wrong-border: rgba(217, 119, 6, 0.25);
+  --oa-wrong-text: #92400e;
+  --oa-ask-why-bg: rgba(79, 70, 229, 0.075);
+  --oa-ask-why-border: rgba(79, 70, 229, 0.24);
+  --oa-ask-why-text: #4338ca;
+  --oa-ask-why-input-bg: #ffffff;
+  --oa-stat-card-bg: rgba(23, 23, 34, 0.045);
+  --oa-progress-bg: rgba(23, 23, 34, 0.09);
+  --oa-brand-grad-from: #6366f1;
+  --oa-brand-grad-to: #a855f7;
+  --oa-brand-mark: #ffffff;
+}

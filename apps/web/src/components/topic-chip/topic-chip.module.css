@@ -1,0 +1,11 @@
+/* Topic accent chip — tint derived from the runtime --topic-accent (D12). */
+
+.chip {
+  padding: var(--oa-space-6) var(--oa-space-12);
+  border-radius: var(--oa-radius-full);
+  font-size: var(--oa-font-size-12);
+  font-weight: var(--oa-font-weight-bold);
+  color: var(--topic-accent);
+  background: color-mix(in srgb, var(--topic-accent) 8%, transparent);
+  border: 1px solid color-mix(in srgb, var(--topic-accent) 19%, transparent);
+}

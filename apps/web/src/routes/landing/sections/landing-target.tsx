@@ -1,0 +1,20 @@
+import type { ReactElement } from "react";
+import { useTranslation } from "react-i18next";
+import { clsx } from "clsx";
+import shared from "./landing-shared.module.css";
+import styles from "./landing-target.module.css";
+
+/** «Who is it for» — centred target-audience statement. */
+export const LandingTarget = (): ReactElement => {
+  const { t } = useTranslation();
+  return (
+    <section className={shared["section"]}>
+      <div className={shared["sectionInnerNarrow"]}>
+        <div className={clsx(shared["sectionKicker"], styles["kicker"])}>
+          {t("landing.targetTitle")}
+        </div>
+        <p className={styles["text"]}>{t("landing.targetDesc")}</p>
+      </div>
+    </section>
+  );
+};

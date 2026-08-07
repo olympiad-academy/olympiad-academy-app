@@ -53,7 +53,11 @@ jobs:
         # actions/setup-node@v4.4.0
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with:
-          node-version: 22
+          # Read from .nvmrc rather than pinned here, so CI and developer
+          # machines cannot drift apart. package.json `engines` enforces the
+          # same floor, and .npmrc makes that enforcement hard — a pin below it
+          # would fail at install with ERR_PNPM_UNSUPPORTED_ENGINE.
+          node-version-file: .nvmrc
 
       - name: Install dependencies
         run: |
@@ -103,3 +107,38 @@ jobs:
           path: .vibe/evidence/ci
           if-no-files-found: warn
           retention-days: 14
+
+  # Blocking proof for the web acceptance criteria (OLY-39 V6): AC1/AC2 are
+  # evidenced ONLY by Playwright, so the suite runs in CI, not just locally.
+  # Frontend-only specs need no Postgres/API (playwright.config gates the API
+  # server behind E2E_API=1); specs that do must use test:e2e:api instead.
+  e2e-web:
+    name: web e2e (playwright)
+    # Pull requests only (operator, 2026-08-06): pushes to main are already
+    # gated by the merged PR's run — no need to spend the minutes twice.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        # actions/checkout@v4.3.1
+        uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5
+
+      - name: Setup pnpm
+        # pnpm/action-setup@v4.1.0
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
+
+      - name: Setup Node
+        # actions/setup-node@v4.4.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version-file: .nvmrc
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Chromium
+        run: pnpm --filter @olympiad-academy-app/web exec playwright install --with-deps chromium
+
+      - name: Run web e2e
+        run: pnpm --filter @olympiad-academy-app/web exec playwright test --config playwright.config.ts

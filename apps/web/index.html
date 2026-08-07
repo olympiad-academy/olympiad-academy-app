@@ -1,8 +1,37 @@
 <!doctype html>
-<html lang="en">
+<html lang="uz">
   <head>
     <meta charset="utf-8" />
-    <title>olympiad-academy-app — Web</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Brand mark as the favicon: same SVG as the Logo component. Modern
+         browsers render SVG favicons at any size; no PNG fallbacks needed
+         for the demo (all demo browsers are evergreen). -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Olympiad Academy</title>
+    <script>
+      /*
+       * Applies the stored colour mode before first paint (D12).
+       *
+       * Deliberately inline and un-bundled: any module script runs after the
+       * first paint, so importing apps/web/src/theme would show a dark flash to
+       * a light-mode user on every load. The cost is that the storage key, the
+       * attribute and the default are duplicated here — apps/web/test/theme.test.ts
+       * asserts this snippet still agrees with the module.
+       */
+      (function applyStoredThemeMode() {
+        var fallback = "dark";
+        var mode = fallback;
+        try {
+          var stored = localStorage.getItem("oa.theme");
+          if (stored === "dark" || stored === "light") {
+            mode = stored;
+          }
+        } catch {
+          /* storage can be unavailable (private mode, blocked cookies) */
+        }
+        document.documentElement.setAttribute("data-theme", mode);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

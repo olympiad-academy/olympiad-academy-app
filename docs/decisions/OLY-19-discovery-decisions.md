@@ -1,6 +1,6 @@
 # OLY-19: Discovery decisions — Sign Up / Login screen
 
-**Status:** proposed for team review (operator: helgazhizhka, locked 2026-08-04)
+**Status:** locked by operator (2026-08-04); **updated 2026-08-06** — D11 Amendment 1 (final copy from the design snapshot), D12 (two colour modes), follow-up statuses after backend auth landed in `main`
 **Scope:** OLY-19 ([3.1] Sign Up / Login screen) and its sub-issues OLY-39, OLY-40, OLY-42, OLY-41.
 **Source:** full decision register with alternatives and reopening conditions lives in the local workflow memory (`.vibe/work/oly-19/`, gitignored by starter convention). This document is the team-visible summary for review and challenge.
 
@@ -55,17 +55,36 @@ The contract Zod schema is the **only** source of validation rules (`zodResolver
 
 `UserSchema` requires `grade` (5–11), but the signup contract and §14 Screen 1 do not collect it. Decision: build the form strictly per §14 + contract — no grade field. **Team-lead follow-up:** decide where grade enters (signup extension vs onboarding step) before backend auth is implemented.
 
-### D11 — Landing scope: static blocks + CTA, placeholder copy
+### D11 — Landing scope: static blocks + CTA
 
-Landing `/` = static multi-block page per the Figma Make draft (several simple content blocks, no forms, CTA buttons → `/signup`, `/login`) + language switcher. Copy is placeholder in 3 locales until the design approval call; approved-design PNG exports are mandatory build-time evidence before OLY-39 visual steps. **Reopening condition:** if the approval call changes the landing concept materially, a forward-only amendment lands before OLY-39 build.
+Landing `/` = static multi-block page per the Figma Make draft (several simple content blocks, no forms, CTA buttons → `/signup`, `/login`) + language switcher.
+
+**D11 Amendment 1 (2026-08-05, updated 2026-08-06):** design of record is the Figma **Make** snapshot (file `SqHXE7vPridy3ZHWtDLpQV`), captured as evidence at `.vibe/evidence/oly-19/design/` (theme tokens, final i18n copy ×3 locales, reference implementation, README with provenance). **The snapshot is local to the frontend owner's machine** (operator decision, second pass 2026-08-06: sole frontend developer + design owner) — it is not committed; rebuild it from the documented source per `.vibe/evidence/README.md`. Copy is **final, taken from the snapshot** — the earlier "placeholder copy + mandatory PNG exports" clause is replaced: frame exports are impossible from Make, and the published live prototype (<https://cleat-boil-62436427.figma.site/>) supersedes them as the rendering reference. Full record in the register (D11-A1).
+
+### D12 — Two colour modes with a switcher
+
+New design fact from the snapshot: the design of record defines two complete colour modes (dark + light, 39 semantic tokens each — the snapshot's theme object has 41 fields; the other two are `hintBg`/`hintBorder`, which are runtime functions, not tokens) and a theme toggle in the navigation of every screen. Decision (2026-08-05): **ship both modes** with an explicit toggle next to the language switcher; choice persists in localStorage and applies before first paint. Dark is the default. Every OLY-39/40/42 screen is visually verified in both modes. Full record in the register (D12, incl. the `color-mix()` rule for topic-accent-derived tokens).
 
 ## Team-lead follow-ups (blocking nothing in OLY-39/40/42)
 
-1. Contract error schemas for signup/login (D6)
+1. Contract error schemas for signup/login (D6) — **updated 2026-08-06:** backend auth landed in `main` (PR #4) and the implementation does return 409 duplicate / 400 validation / 401 invalid credentials (also in Swagger). **But the contract still declares only `responses: { 200 }`** — no error schemas. The frontend will map HTTP codes to the `AuthResult` union against observed implementation behaviour (exactly what D6 prescribes), but response-body shapes are undefined anywhere. Please add error schemas to `contract.ts` — small PR, I can propose the shapes.
 2. Password-reset endpoint → unblocks OLY-41 (D4)
-3. `grade` collection point: signup vs onboarding (D10)
+3. `grade` collection point: signup vs onboarding (D10) — **updated 2026-08-06:** backend merged with a temporary hardcoded `DEFAULT_GRADE = 5` (flagged `FLAG (D10)` in code). Acceptable for demos; must be decided before any real user data exists.
 4. httpOnly-cookie auth when the real backend lands (D7)
+5. `parent_contact` field: the prototype's signup form collects it, but `contract.signup.body` does not accept it — frontend omits it. If product wants it, contract extension needed (design snapshot README, freezing notes)
 
 ## Stack confirmations
 
 - Team lead, 2026-08-04: «simple SPA React 18 is better for now, we don't need anything from Next or React 19» — DL-16 starter stack stands.
+
+## Post-review hardening record (2026-08-06) — visible justifications
+
+The full decision register lives in `.vibe/work/oly-19/` (local, gitignored by design). This section keeps the justifications a PR reviewer needs **inside** the committed tree:
+
+- **Starter scaffold routes removed** (`home`, `system-status`, S5). OLY-8's DoD evidence was «web consumes `createApiClient`» — that consumption is now load-bearing through `i18n/index.ts`, which derives the locale list from the contract's `LanguageSchema` (same api-client package). The scaffold screens were starter placeholders, not product screens; their deletion is recorded here and in the register (D2/D8/D11).
+- **Path-ownership expansion beyond the plan's `owned` list**, all review-driven and listed with reasons: `eslint.config.mjs` (operator rule: machine-checkable standards live in the linter — strict block scoped to `apps/web`), `AGENTS.md` (one pointer line to `docs/code-standards.md`), `.github/workflows/quality.yml` (e2e-web job proving AC1/AC2 in CI, PR-only), `apps/web/index.html` (`lang="uz"` + favicon link), `apps/web/public/favicon.svg` (below).
+- **favicon.svg hardcoded colours — recorded exception to the tokens-only rule (D3).** A favicon renders outside the document and cannot consume CSS custom properties, so the brand stops are literals; `apps/web/test/favicon.test.ts` pins them to `brandGradFrom`/`brandGradTo`/`brandMark` so any drift breaks the build.
+- **Dead `nav` i18n namespace removed** (2026-08-06): no consumers after the shell became nav-less per the design of record. OLY-40 re-adds exactly the keys it needs.
+- **Landing nav on phones: login link hidden and wordmark clipped below 640px** (operator, 2026-08-07). Measured at 375px: the four controls need 366px of the 335px available, so the row wrapped, the brand dropped to its own line and the sticky header grew to 167px — a fifth of the viewport. The design of record offers nothing to copy here: its nav carries no responsive classes and no wrap, so at this width the prototype would overflow sideways rather than stack. (The rest of the landing does carry responsive intent — `sm:grid-cols-3`, `lg:grid-cols-2`, `sm:flex-row` — and all of it was ported; the nav is the one place the design is silent.) Two changes: the nav's login link is hidden — it is duplicated in the hero and `/login` is a first-class route — and the wordmark is clipped rather than removed, because the logo is `aria-hidden` and dropping the text outright would leave the home link with no accessible name (WCAG 2.4.4). Result: 167px → 76px, everything on one row, no horizontal overflow, holds down to 360px and degrades to two rows below that instead of scrolling. The auth-screens nav was measured too (297px of 335px, single row) and needs no change. Guarded by `apps/web/e2e/landing-nav.mobile.spec.ts` in a dedicated `mobile-chrome` Playwright project, because unit tests stub CSS Modules away and the desktop project never crosses the breakpoint.
+- **Design deviations from the snapshot are deliberate** (D11-A2, D12-A1): 5 of 7 hero topic chips (explicit `HERO_TOPIC_IDS` list), ToggleGroup instead of Select for the switcher, 10 tokens raised to WCAG AA with a contrast test, no theme-switch animation. The full old→new token list lives in the local design snapshot README («Deviations») — the frontend owner runs the Figma sync from it.
+- **`/profile` stub beyond the S6 list** (operator, 2026-08-06): the profile page exists in the design of record (avatar in the post-auth header), so its route was reserved under the same D2 routing-skeleton rule as the other stubs — constant `ROUTES.PROFILE`, shared StubLayout, i18n ×3, unit tests.

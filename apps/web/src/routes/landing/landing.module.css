@@ -1,0 +1,8 @@
+/* Landing root — page chrome only; section styles live in sections/. */
+
+.page {
+  min-height: 100vh;
+  background: var(--oa-bg);
+  color: var(--oa-text);
+  font-family: var(--oa-font-family-body);
+}
