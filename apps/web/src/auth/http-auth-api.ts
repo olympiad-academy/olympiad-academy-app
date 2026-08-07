@@ -1,4 +1,5 @@
 import { contract, createApiClient } from "@olympiad-academy-app/api-client";
+import type { ZodType } from "zod";
 import type { AuthApi, AuthFieldIssue, AuthResult, LoginBody, SignupBody } from "./auth-api.js";
 import type { AuthSession } from "./auth-session.js";
 
@@ -53,11 +54,25 @@ const parseFieldIssues = (body: unknown): AuthFieldIssue[] => {
   return issues;
 };
 
-export const mapAuthHttpResponse = (status: number, body: unknown): AuthResult => {
+/**
+ * Both signup and login currently return the same shape
+ * (AuthSuccessResponseSchema), but that is today's implementation detail,
+ * not a rule this file should assume: the caller passes the schema for
+ * ITS OWN endpoint (contract.signup.responses[200] /
+ * contract.login.responses[200]) rather than this function reaching into
+ * `contract.signup` regardless of which endpoint actually responded
+ * (review defect 2). If the two response shapes ever diverge, each caller
+ * still validates against its own contract obligation.
+ */
+export const mapAuthHttpResponse = (
+  status: number,
+  body: unknown,
+  successSchema: ZodType<{ user_id: string; token: string }>,
+): AuthResult => {
   if (status === 200) {
     // The backend owns the 200 shape via the same contract; parsing it here
     // means a malformed success can never plant a garbage token.
-    const parsed = contract.signup.responses[200].safeParse(body);
+    const parsed = successSchema.safeParse(body);
     if (parsed.success) {
       return { ok: true, user_id: parsed.data.user_id, token: parsed.data.token };
     }
@@ -112,7 +127,7 @@ export const createHttpAuthApi = ({ baseUrl, session }: HttpAuthApiOptions): Aut
   const signup = async (body: SignupBody): Promise<AuthResult> => {
     try {
       const response = await client.signup({ body, extraHeaders: authHeaders() });
-      return mapAuthHttpResponse(response.status, response.body);
+      return mapAuthHttpResponse(response.status, response.body, contract.signup.responses[200]);
     } catch {
       return mapAuthTransportError();
     }
@@ -121,7 +136,7 @@ export const createHttpAuthApi = ({ baseUrl, session }: HttpAuthApiOptions): Aut
   const login = async (body: LoginBody): Promise<AuthResult> => {
     try {
       const response = await client.login({ body, extraHeaders: authHeaders() });
-      return mapAuthHttpResponse(response.status, response.body);
+      return mapAuthHttpResponse(response.status, response.body, contract.login.responses[200]);
     } catch {
       return mapAuthTransportError();
     }
