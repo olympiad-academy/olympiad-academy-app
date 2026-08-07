@@ -1,7 +1,4 @@
 export const uz = {
-  app: {
-    name: "Olimpiada Akademiyasi",
-  },
   languageSwitcher: {
     label: "Til",
     uz: "O'zbekcha",

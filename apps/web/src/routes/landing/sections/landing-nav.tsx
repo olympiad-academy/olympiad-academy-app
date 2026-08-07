@@ -1,7 +1,8 @@
 import type { ReactElement } from "react";
 import { Link } from "react-router-dom";
-import { ROUTES } from "@/constants/routes.js";
 import { useTranslation } from "react-i18next";
+import { APP_NAME } from "@/constants/app.js";
+import { ROUTES } from "@/constants/routes.js";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
 import { Logo } from "@/components/logo/logo.js";
 import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
@@ -15,7 +16,7 @@ export const LandingNav = (): ReactElement => {
       <div className={styles["inner"]}>
         <Link to={ROUTES.HOME} className={styles["brand"]}>
           <Logo size={32} />
-          <span className={styles["brandName"]}>Olympiad Academy</span>
+          <span className={styles["brandName"]}>{APP_NAME}</span>
         </Link>
         <div className={styles["actions"]}>
           <LanguageSwitcher />

@@ -61,12 +61,16 @@ describe("i18n module (D1)", () => {
     }
   });
 
+  // The canary is a key the landing actually renders, so this fails if the copy
+  // for a locale goes missing. A key nothing renders would keep passing while
+  // the screen showed raw key strings — which is exactly how the flowStep*
+  // rename slipped through once already.
   it("translates a core key in every locale (chrome strings exist)", async () => {
     const i18n = await createI18n({ storage: fakeStorage() });
     for (const locale of SUPPORTED_LOCALES) {
       const t = i18n.getFixedT(locale);
-      const value = t("app.name");
-      assert.ok(value.length > 0 && value !== "app.name", `missing app.name for ${locale}`);
+      const value = t("landing.hero");
+      assert.ok(value.length > 0 && value !== "landing.hero", `missing landing.hero for ${locale}`);
     }
   });
 });

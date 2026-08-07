@@ -1,7 +1,4 @@
 export const ru = {
-  app: {
-    name: "Олимпиадная Академия",
-  },
   languageSwitcher: {
     label: "Язык",
     uz: "O'zbekcha",

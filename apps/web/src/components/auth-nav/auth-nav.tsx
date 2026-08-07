@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { Link } from "react-router-dom";
+import { APP_NAME } from "@/constants/app.js";
 import { ROUTES } from "@/constants/routes.js";
 import { LanguageSwitcher } from "@/components/language-switcher/language-switcher.js";
 import { ThemeToggle } from "@/components/theme-toggle/theme-toggle.js";
@@ -25,7 +26,7 @@ export const AuthNav = (): ReactElement => {
             strokeLinejoin="round"
           />
         </svg>
-        Olympiad Academy
+        {APP_NAME}
       </Link>
       <div className={styles["actions"]}>
         <LanguageSwitcher />
