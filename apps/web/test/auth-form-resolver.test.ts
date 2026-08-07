@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { z } from "zod";
 import { createAuthFormResolver } from "@/auth/auth-form-resolver.js";
 import { contract } from "@olympiad-academy-app/api-client";
 
@@ -88,6 +89,58 @@ describe("createAuthFormResolver over contract.signup.body (D9)", () => {
       options,
     );
     assert.ok("identity" in result.errors);
+  });
+});
+
+/**
+ * Review defect 3: mapFieldName let ANY schema field name through as-is
+ * (returning "language", the raw path, etc.), but the form only renders errors
+ * for name/identity/password — an error on any other path was silently
+ * dropped: the user presses submit, nothing happens, no message anywhere.
+ * Unreachable through the real contract schemas today (language is
+ * constrained to LanguageSchema and always valid), but nothing enforced
+ * that, and the next field added to `extra` would reproduce it silently.
+ * A schema built for this test (not the real contract) exercises the path
+ * directly, independent of what the real contract currently allows.
+ */
+describe("createAuthFormResolver: fields the form does not render (review defect 3)", () => {
+  // The resolver maps form values to { name, phone|email, password, ...extra }
+  // BEFORE calling safeParseAsync (toIdentityFields), so a schema under test
+  // here validates that mapped shape, not the form's own field names.
+  const schemaWithAnUncoveredField = z
+    .object({ name: z.string().min(1), email: z.string(), password: z.string() })
+    .superRefine((_value, ctx) => {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "unreachable today",
+        path: ["language"],
+      });
+    });
+
+  it("an error on a field the form does not render is reported under formError, not silently dropped", async () => {
+    const resolver = createAuthFormResolver(schemaWithAnUncoveredField, {});
+    const result = await resolver(
+      { name: "Aziza", identity: "aziza@example.com", password: "longenough8" },
+      undefined,
+      options,
+    );
+    assert.equal("language" in result.errors, false);
+    assert.ok(result.errors.formError !== undefined);
+    assert.equal(typeof result.errors.formError?.message, "string");
+  });
+
+  const schemaWithARootIssue = z
+    .object({ name: z.string(), email: z.string(), password: z.string() })
+    .refine(() => false, { message: "unreachable today", path: [] });
+
+  it("an issue with an empty path (schema-level refine) is also reported under formError", async () => {
+    const resolver = createAuthFormResolver(schemaWithARootIssue, {});
+    const result = await resolver(
+      { name: "Aziza", identity: "aziza@example.com", password: "longenough8" },
+      undefined,
+      options,
+    );
+    assert.ok(result.errors.formError !== undefined);
   });
 });
 

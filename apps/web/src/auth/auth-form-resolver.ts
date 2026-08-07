@@ -28,10 +28,37 @@ export interface AuthFormValues extends FieldValues {
   name?: string;
   identity: string;
   password: string;
+  /**
+   * Form-level fallback for an issue on a path no visible field owns
+   * (review defect 3). NOT named "root": react-hook-form's own
+   * `handleSubmit` unconditionally deletes `errors.root` immediately
+   * before deciding whether the submission is valid (verified against
+   * react-hook-form 7.84's source — `ve(u.errors,"root")` runs, then
+   * `K(u.errors)` decides valid/invalid), so a resolver that reports its
+   * fallback under `root` has that error erased by the very call that
+   * would render it and the submission is treated as successful. Any
+   * other field name survives; `formError` is chosen to read clearly next
+   * to the existing `submitError` state in signup.tsx/login.tsx.
+   */
+  formError?: string;
 }
+
+/**
+ * The only names an error can render under (the fields this form's
+ * AuthTextFields actually read `formState.errors.<x>` for, plus
+ * `formError` for the form-level alert — see the AuthFormValues doc comment
+ * for why not "root"). Named as a union rather than `keyof AuthFormValues`
+ * so `mapFieldName`'s return type states the real constraint — review
+ * defect 3's cast (`field as keyof AuthFormValues`) asserted this same set
+ * without the compiler ever checking it, which is exactly what let an
+ * uncovered path through unnoticed.
+ */
+type RenderableAuthField = "name" | "identity" | "password" | "formError";
 
 /** Fields not present on the schema's own field set. */
 const IDENTITY_ALIASES = new Set(["phone", "email"]);
+
+const RENDERABLE_FIELDS = new Set<string>(["name", "identity", "password"]);
 
 /**
  * i18n key selection (D9: "keyed by issue code, not by Zod's English
@@ -39,7 +66,7 @@ const IDENTITY_ALIASES = new Set(["phone", "email"]);
  * contract schemas — signup's password min(8), login's password min(1),
  * name required, and the identity refine/format checks.
  */
-const errorKeyFor = (field: string, issue: ZodIssue): string => {
+const errorKeyFor = (field: RenderableAuthField, issue: ZodIssue): string => {
   if (field === "name") {
     return "auth.errorName";
   }
@@ -57,12 +84,24 @@ const errorKeyFor = (field: string, issue: ZodIssue): string => {
   return "auth.errorGeneric";
 };
 
-const mapFieldName = (path: (string | number)[]): string => {
+/**
+ * Review defect 3: any schema field name used to pass through unchanged
+ * (`return first`), including ones no AuthTextField reads — an error there
+ * rendered nowhere: the user pressed submit, nothing happened, no message
+ * anywhere. Every path that is not one of this form's three visible fields
+ * now collapses to "formError", which signup.tsx/login.tsx render in the
+ * existing form-level alert (same slot submitError uses; not "root" — see
+ * the AuthFormValues doc comment above).
+ */
+const mapFieldName = (path: (string | number)[]): RenderableAuthField => {
   const first = path[0];
   if (typeof first === "string" && IDENTITY_ALIASES.has(first)) {
     return "identity";
   }
-  return typeof first === "string" ? first : "root";
+  if (typeof first === "string" && RENDERABLE_FIELDS.has(first)) {
+    return first as RenderableAuthField;
+  }
+  return "formError";
 };
 
 /** Values merged into the mapped body that are not form fields (currently
@@ -97,9 +136,12 @@ export const createAuthFormResolver = <TBody extends FieldValues>(
     for (const issue of parsed.error.issues) {
       const field = mapFieldName(issue.path);
       // First issue per field wins — matches @hookform/resolvers' own
-      // zodResolver behaviour (one FieldError per path).
+      // zodResolver behaviour (one FieldError per path). No cast: `field` is
+      // RenderableAuthField, one of the four keys FieldErrors<AuthFormValues>
+      // actually declares (name/identity/password/root), so this assignment
+      // is checked, not asserted.
       const fieldError: FieldError = { type: issue.code, message: errorKeyFor(field, issue) };
-      errors[field as keyof AuthFormValues] ??= fieldError;
+      errors[field] ??= fieldError;
     }
     return { values: {}, errors };
   };

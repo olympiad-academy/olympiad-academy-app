@@ -83,6 +83,11 @@ export const SignupRoute = (): ReactElement => {
           error={formState.errors.password}
           registration={register("password")}
         />
+        {formState.errors.formError?.message !== undefined ? (
+          <p className={styles["formError"]} role="alert">
+            {t(formState.errors.formError.message)}
+          </p>
+        ) : null}
         {submitError !== null ? (
           <p className={styles["formError"]} role="alert">
             {t(submitError)}
