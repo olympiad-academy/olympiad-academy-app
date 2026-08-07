@@ -40,6 +40,15 @@ export const ru = {
     errorPassword: "Пароль — не менее 8 символов.",
     errorPasswordRequired: "Введите пароль.",
     errorGeneric: "Что-то пошло не так. Повторите попытку.",
+    // Advisory password meter (not in the design of record — the snapshot
+    // has no such control, so this copy is ours, like the stubs above).
+    // No advice line: the verdict alone is the affordance, and any wording
+    // there would risk implying a composition rule the contract does not
+    // have (the estimate is length-led).
+    passwordStrength: "Надёжность пароля:",
+    passwordStrengthWeak: "слабый",
+    passwordStrengthFair: "средний",
+    passwordStrengthStrong: "надёжный",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

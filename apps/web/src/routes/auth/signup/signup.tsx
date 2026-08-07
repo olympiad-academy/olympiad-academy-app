@@ -7,10 +7,12 @@ import { ROUTES } from "@/constants/routes.js";
 import { createAuthFormResolver, type AuthFormValues } from "@/auth/auth-form-resolver.js";
 import { useAuthApi } from "@/auth/auth-api-context.js";
 import { browserAuthSession } from "@/auth/auth-session.js";
+import { estimatePasswordStrength } from "@/auth/password-strength.js";
 import type { SignupBody } from "@/auth/auth-api.js";
 import { AuthLayout } from "../auth-layout.js";
 import { AuthTextField } from "../auth-text-field.js";
 import { AuthSubmitButton } from "../auth-submit-button.js";
+import { PasswordStrengthMeter } from "../password-strength-meter.js";
 import styles from "../auth-shared.module.css";
 
 /**
@@ -26,11 +28,18 @@ export const SignupRoute = (): ReactElement => {
   const authApi = useAuthApi();
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  const { register, handleSubmit, formState } = useForm<AuthFormValues, unknown, SignupBody>({
-    resolver: createAuthFormResolver(contract.signup.body, { language: i18n.language }),
-    mode: "onTouched",
-    reValidateMode: "onChange",
-  });
+  const { register, handleSubmit, formState, watch } = useForm<AuthFormValues, unknown, SignupBody>(
+    {
+      resolver: createAuthFormResolver(contract.signup.body, { language: i18n.language }),
+      mode: "onTouched",
+      reValidateMode: "onChange",
+    },
+  );
+
+  // Advisory only — never fed back into validation (AC7/D9). Watched rather
+  // than read from formState so the meter tracks every keystroke, including
+  // before the field is first blurred, which is when the advice is useful.
+  const passwordStrength = estimatePasswordStrength(watch("password"));
 
   const submitSignup = async (body: SignupBody): Promise<void> => {
     setSubmitError(null);
@@ -82,6 +91,7 @@ export const SignupRoute = (): ReactElement => {
           autoComplete="new-password"
           error={formState.errors.password}
           registration={register("password")}
+          footer={<PasswordStrengthMeter strength={passwordStrength} />}
         />
         {formState.errors.formError?.message !== undefined ? (
           <p className={styles["formError"]} role="alert">

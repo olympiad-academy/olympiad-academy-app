@@ -1,4 +1,4 @@
-import type { ReactElement } from "react";
+import type { ReactElement, ReactNode } from "react";
 import * as Label from "@radix-ui/react-label";
 import type { FieldError, UseFormRegisterReturn } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -14,6 +14,10 @@ export interface AuthTextFieldProps {
   hint?: string;
   error?: FieldError | undefined;
   registration: UseFormRegisterReturn;
+  /** Advisory content under the input (currently the password strength
+   * meter). Rendered inside `.field` and in flow, so it sits above the
+   * out-of-flow error and the space `.field` reserves for it still holds. */
+  footer?: ReactNode;
 }
 
 /**
@@ -34,6 +38,7 @@ export const AuthTextField = ({
   hint,
   error,
   registration,
+  footer,
 }: AuthTextFieldProps): ReactElement => {
   const { t } = useTranslation();
   const hintId = `${id}-hint`;
@@ -61,6 +66,7 @@ export const AuthTextField = ({
           {hint}
         </p>
       ) : null}
+      {footer}
       {error !== undefined ? (
         <p id={errorId} className={styles["error"]} role="alert">
           {t(error.message ?? "auth.errorGeneric")}

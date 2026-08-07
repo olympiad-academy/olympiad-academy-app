@@ -41,6 +41,15 @@ export const uz = {
     errorPassword: "Parol kamida 8 belgidan iborat bo'lishi kerak.",
     errorPasswordRequired: "Parolingizni kiriting.",
     errorGeneric: "Nimadir xato ketdi. Qaytadan urinib ko'ring.",
+    // Advisory password meter (not in the design of record — the snapshot
+    // has no such control, so this copy is ours, like the stubs above).
+    // No advice line: the verdict alone is the affordance, and any wording
+    // there would risk implying a composition rule the contract does not
+    // have (the estimate is length-led).
+    passwordStrength: "Parol ishonchliligi:",
+    passwordStrengthWeak: "zaif",
+    passwordStrengthFair: "o'rtacha",
+    passwordStrengthStrong: "ishonchli",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.
