@@ -1,5 +1,5 @@
 import { contract } from "@olympiad-academy-app/api-client";
-import { ZodError } from "zod";
+import type { ZodError } from "zod";
 import type { AuthApi, AuthFieldIssue, AuthResult, LoginBody, SignupBody } from "./auth-api.js";
 import { nextMockId } from "./mock-id.js";
 
@@ -14,6 +14,15 @@ import { nextMockId } from "./mock-id.js";
  * credentials, and a simulated network failure (reserved contact below).
  * Unit tests validate these fixtures against the contract schemas (AC5), so
  * the mock cannot drift from the contract silently.
+ *
+ * Bodies are checked with `safeParse` rather than `parse` in a try/catch:
+ * recognising a failure by `error instanceof ZodError` would depend on the
+ * mock and `packages/contracts` resolving to the same zod instance. They do
+ * today (one entry in the lockfile), but if they ever did not, the
+ * `instanceof` would be false, the mock would rethrow instead of returning
+ * `{ error: "validation" }`, and the submit would reject unhandled — a
+ * failure mode the AC5 drift guard cannot see. `safeParse` is immune: the
+ * failure arrives as a value, not as a thrown class.
  */
 
 /**
@@ -79,19 +88,15 @@ export const createMockAuthApi = (): AuthApi => {
   };
 
   const signup = (body: SignupBody): Promise<AuthResult> => {
-    let parsed: SignupBody;
-    try {
-      parsed = contract.signup.body.parse(body);
-    } catch (error: unknown) {
-      if (error instanceof ZodError) {
-        return Promise.resolve({
-          ok: false,
-          error: "validation",
-          fieldIssues: toFieldIssues(error),
-        });
-      }
-      throw error;
+    const result = contract.signup.body.safeParse(body);
+    if (!result.success) {
+      return Promise.resolve({
+        ok: false,
+        error: "validation",
+        fieldIssues: toFieldIssues(result.error),
+      });
     }
+    const parsed = result.data;
 
     const phone = normalizePhone(parsed.phone);
     const email = normalizeEmail(parsed.email);
@@ -114,19 +119,15 @@ export const createMockAuthApi = (): AuthApi => {
   };
 
   const login = (body: LoginBody): Promise<AuthResult> => {
-    let parsed: LoginBody;
-    try {
-      parsed = contract.login.body.parse(body);
-    } catch (error: unknown) {
-      if (error instanceof ZodError) {
-        return Promise.resolve({
-          ok: false,
-          error: "validation",
-          fieldIssues: toFieldIssues(error),
-        });
-      }
-      throw error;
+    const result = contract.login.body.safeParse(body);
+    if (!result.success) {
+      return Promise.resolve({
+        ok: false,
+        error: "validation",
+        fieldIssues: toFieldIssues(result.error),
+      });
     }
+    const parsed = result.data;
 
     const phone = normalizePhone(parsed.phone);
     const email = normalizeEmail(parsed.email);

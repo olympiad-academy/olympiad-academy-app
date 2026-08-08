@@ -1,4 +1,4 @@
-import { useState, type ReactElement } from "react";
+import type { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,9 @@ import type { SignupBody } from "@/auth/auth-api.js";
 import { AuthLayout } from "../auth-layout.js";
 import { AuthTextField } from "../auth-text-field.js";
 import { AuthSubmitButton } from "../auth-submit-button.js";
+import { AuthFormAlert } from "../auth-form-alert.js";
 import { PasswordStrengthMeter } from "../password-strength-meter.js";
+import { useAuthSubmit } from "../use-auth-submit.js";
 import styles from "../auth-shared.module.css";
 
 /**
@@ -26,7 +28,6 @@ export const SignupRoute = (): ReactElement => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const authApi = useAuthApi();
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -44,25 +45,14 @@ export const SignupRoute = (): ReactElement => {
   // before the field is first blurred, which is when the advice is useful.
   const passwordStrength = estimatePasswordStrength(watch("password"));
 
-  const submitSignup = async (body: SignupBody): Promise<void> => {
-    setSubmitError(null);
-    const result = await authApi.signup(body);
-    if (result.ok) {
+  const { onSubmit, submitErrorKey } = useAuthSubmit<SignupBody>({
+    handleSubmit,
+    submit: (body) => authApi.signup(body),
+    onSuccess: (result) => {
       browserAuthSession.setToken(result.token);
       void navigate(ROUTES.TOPICS, { replace: true });
-      return;
-    }
-    // OLY-42 owns the per-variant error UI (duplicate/invalid/network); this
-    // slice must not fail silently on a real backend error while that lands.
-    setSubmitError("auth.errorGeneric");
-  };
-
-  const submitHandler = handleSubmit((body): void => {
-    void submitSignup(body);
+    },
   });
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    void submitHandler(event);
-  };
 
   return (
     <AuthLayout>
@@ -96,16 +86,8 @@ export const SignupRoute = (): ReactElement => {
           registration={register("password")}
           footer={<PasswordStrengthMeter strength={passwordStrength} />}
         />
-        {errors.formError?.message !== undefined ? (
-          <p className={styles["formError"]} role="alert">
-            {t(errors.formError.message)}
-          </p>
-        ) : null}
-        {submitError !== null ? (
-          <p className={styles["formError"]} role="alert">
-            {t(submitError)}
-          </p>
-        ) : null}
+        <AuthFormAlert messageKey={errors.formError?.message} />
+        <AuthFormAlert messageKey={submitErrorKey} />
         <AuthSubmitButton label={t("auth.startPractising")} isSubmitting={isSubmitting} />
       </form>
       <div className={styles["switchLink"]}>

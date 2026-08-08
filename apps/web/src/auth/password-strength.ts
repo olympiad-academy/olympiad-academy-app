@@ -7,19 +7,20 @@
  * min(8) may still be a poor one — the submit button does not care what it
  * returns.
  *
- * The bands sit on the contract's own min(8) and separate by character
- * variety above it. The meter deliberately does not ask for a longer
- * password than the product requires: grading a contract-valid password as
- * "too short" would have the advice arguing with the rule the same form
- * enforces, and the length stays 8 (operator, 2026-08-07).
+ * The bands are a short-password floor (see SHORT_PASSWORD_LENGTH — the
+ * meter's own, deliberately not read from the contract) plus character
+ * variety above it. The meter does not ask for a longer password than the
+ * product requires: grading an acceptable password as "too short" would have
+ * the advice arguing with the rule the same form enforces, and the accepted
+ * length stays 8 (operator, 2026-08-07).
  *
  * PROVISIONAL. The real password rule is an open question with the team
  * lead; the stated direction is to keep min(8) and add composition
- * requirements, which is what the variety weighting anticipates. If it
- * lands as something else — a longer minimum, a breached-password check —
- * these bands follow the contract, they do not compete with it. No class of
- * character is required here either way: this file only describes, it never
- * rejects.
+ * requirements, which is what the variety weighting anticipates. If it lands
+ * as something else — a longer minimum, a breached-password check — the
+ * bands are re-tuned here, and nothing about validation changes, because
+ * this file has no say in it. No class of character is required either way:
+ * it only describes, it never rejects.
  *
  * Deliberately dependency-free: a real estimator (zxcvbn and friends) ships
  * a dictionary measured in hundreds of kilobytes, which is not a trade this
@@ -29,13 +30,25 @@
 
 export type PasswordStrength = "weak" | "fair" | "strong";
 
-/** Mirrors `contract.signup.body`'s min(8); a copy would drift, so this is
- * only used to describe bands below/above it, never to accept or reject. */
-const CONTRACT_MINIMUM = 8;
+/**
+ * The meter's own floor, NOT a copy of `contract.signup.body`'s min(8) — it
+ * happens to be the same number today, which is why it is spelled out here
+ * rather than imported from anywhere.
+ *
+ * The two are independent by design and cannot drift into disagreement. Any
+ * strength meter calls a four-character password weak whatever a contract
+ * permits, so this threshold is a judgement about strength, not a rule about
+ * acceptance. Nothing here rejects: if the contract's minimum rose to 12, the
+ * form would reject a 9-character password with its own message while this
+ * still rated it — "weak", never "acceptable" — and if the minimum dropped to
+ * 6, a 6-character password would be accepted and rated weak. Neither case
+ * contradicts the other, because only one of them decides anything (AC7).
+ */
+const SHORT_PASSWORD_LENGTH = 8;
 
-/** Character classes present, counted above the contract length to separate
- * the bands. Not a requirement: nothing here rejects a password, and no
- * single class is ever demanded on its own. */
+/** Character classes present, counted above the short-password floor to
+ * separate the bands. Not a requirement: nothing here rejects a password,
+ * and no single class is ever demanded on its own. */
 const FAIR_CLASSES = 2;
 const STRONG_CLASSES = 3;
 
@@ -92,7 +105,7 @@ export const estimatePasswordStrength = (password: string | undefined): Password
   if (password === undefined || password.length === 0) {
     return null;
   }
-  if (password.length < CONTRACT_MINIMUM || hasTrivialShape(password)) {
+  if (password.length < SHORT_PASSWORD_LENGTH || hasTrivialShape(password)) {
     return "weak";
   }
   const classes = countCharacterClasses(password);

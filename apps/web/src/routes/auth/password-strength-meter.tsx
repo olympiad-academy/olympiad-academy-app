@@ -20,34 +20,53 @@ import styles from "./password-strength-meter.module.css";
  * to the input's aria-describedby for the same reason — describedby is
  * re-announced wholesale on refocus.
  */
-const STRENGTH_LABEL_KEYS: Record<PasswordStrength, string> = {
-  weak: "auth.passwordStrengthWeak",
-  fair: "auth.passwordStrengthFair",
-  strong: "auth.passwordStrengthStrong",
-};
+/**
+ * Everything that varies with the verdict, in one place. Four parallel
+ * `Record<PasswordStrength, …>` lookups travelled together and had to be
+ * kept in step by hand; one entry per verdict makes adding a band a single
+ * edit and an incomplete one a type error.
+ *
+ * `segmentClass` and `textClass` stay separate fields on purpose: a filled
+ * bar segment takes the colour as a background, the verdict word as text
+ * colour, and one shared class put a highlighter swatch behind the word.
+ */
+interface StrengthPresentation {
+  labelKey: string;
+  filledSegments: number;
+  segmentClass: string;
+  textClass: string;
+}
 
 const SEGMENT_COUNT = 3;
-const FILLED_SEGMENTS: Record<PasswordStrength, number> = { weak: 1, fair: 2, strong: 3 };
 
-/** Separate class sets: a filled bar segment is coloured by background, the
- * verdict word by text colour. Sharing one class gave the word a swatch. */
-const SEGMENT_CLASS: Record<PasswordStrength, string> = {
-  weak: "segmentWeak",
-  fair: "segmentFair",
-  strong: "segmentStrong",
+const PRESENTATION: Record<PasswordStrength, StrengthPresentation> = {
+  weak: {
+    labelKey: "auth.passwordStrengthWeak",
+    filledSegments: 1,
+    segmentClass: "segmentWeak",
+    textClass: "textWeak",
+  },
+  fair: {
+    labelKey: "auth.passwordStrengthFair",
+    filledSegments: 2,
+    segmentClass: "segmentFair",
+    textClass: "textFair",
+  },
+  strong: {
+    labelKey: "auth.passwordStrengthStrong",
+    filledSegments: 3,
+    segmentClass: "segmentStrong",
+    textClass: "textStrong",
+  },
 };
 
-const TEXT_CLASS: Record<PasswordStrength, string> = {
-  weak: "textWeak",
-  fair: "textFair",
-  strong: "textStrong",
-};
+export interface PasswordStrengthMeterProps {
+  strength: PasswordStrength | null;
+}
 
 export const PasswordStrengthMeter = ({
   strength,
-}: {
-  strength: PasswordStrength | null;
-}): ReactElement | null => {
+}: PasswordStrengthMeterProps): ReactElement | null => {
   const { t } = useTranslation();
 
   // Nothing typed yet: render no meter at all rather than announcing "weak"
@@ -56,7 +75,7 @@ export const PasswordStrengthMeter = ({
     return null;
   }
 
-  const filled = FILLED_SEGMENTS[strength];
+  const presentation = PRESENTATION[strength];
 
   return (
     <div className={styles["meter"]}>
@@ -66,13 +85,16 @@ export const PasswordStrengthMeter = ({
         {Array.from({ length: SEGMENT_COUNT }, (_unused, index) => (
           <span
             key={index}
-            className={clsx(styles["segment"], index < filled && styles[SEGMENT_CLASS[strength]])}
+            className={clsx(
+              styles["segment"],
+              index < presentation.filledSegments && styles[presentation.segmentClass],
+            )}
           />
         ))}
       </div>
       <p className={styles["verdict"]} aria-live="polite">
         {t("auth.passwordStrength")}{" "}
-        <span className={styles[TEXT_CLASS[strength]]}>{t(STRENGTH_LABEL_KEYS[strength])}</span>
+        <span className={styles[presentation.textClass]}>{t(presentation.labelKey)}</span>
       </p>
     </div>
   );

@@ -35,6 +35,10 @@ const parseFieldIssues = (body: unknown): AuthFieldIssue[] => {
     if (typeof entry !== "object" || entry === null) {
       continue;
     }
+    // Cast justified: it only widens `object` to "an object that may carry
+    // these three keys, each still unknown". It asserts nothing about the
+    // values — every one of them is type-checked on the next lines, and an
+    // entry failing any check is dropped rather than trusted.
     const candidate = entry as { path?: unknown; code?: unknown; message?: unknown };
     if (
       Array.isArray(candidate.path) &&

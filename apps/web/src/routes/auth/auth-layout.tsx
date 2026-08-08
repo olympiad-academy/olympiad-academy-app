@@ -9,7 +9,11 @@ import styles from "./auth-layout.module.css";
  * is D2/D8 routing-skeleton scaffolding for screens that do not exist yet,
  * this one is the permanent home for screens that do.
  */
-export const AuthLayout = ({ children }: { children: ReactNode }): ReactElement => {
+export interface AuthLayoutProps {
+  children: ReactNode;
+}
+
+export const AuthLayout = ({ children }: AuthLayoutProps): ReactElement => {
   return (
     <div className={styles["page"]}>
       <AuthNav />

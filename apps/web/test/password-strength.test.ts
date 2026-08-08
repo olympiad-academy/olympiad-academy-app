@@ -52,4 +52,22 @@ describe("estimatePasswordStrength (advisory)", () => {
     assert.equal(estimatePasswordStrength("abcdefghijklmnop"), "weak");
     assert.equal(estimatePasswordStrength("12345678901234"), "weak");
   });
+
+  /**
+   * The floor is the meter's own judgement, not a mirror of the contract's
+   * min(8) — the two are independent and neither reads the other. Pinned as
+   * a test because the numbers coincide today, which is exactly what makes
+   * the coupling look real to the next reader.
+   *
+   * Whatever the contract does, the verdicts here stay a description of
+   * strength: they never say "acceptable", only how good a password is, so
+   * a contract change cannot put the two in contradiction.
+   */
+  it("only ever describes strength — no verdict claims a password is acceptable", () => {
+    const verdicts = ["weak", "fair", "strong"];
+    for (const password of ["a", "abcdefgh", "Olympia8", "Ab1!efgh", "x".repeat(40)]) {
+      const verdict = estimatePasswordStrength(password);
+      assert.ok(verdict !== null && verdicts.includes(verdict), `unexpected verdict: ${verdict}`);
+    }
+  });
 });

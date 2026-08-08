@@ -28,7 +28,7 @@ export default defineConfig({
       // the /api namespace exists only in the browser and is stripped here.
       "/api": {
         target: apiTarget,
-        rewrite: (path) => path.replace(/^\/api/, ""),
+        rewrite: (path): string => path.replace(/^\/api/, ""),
       },
     },
   },

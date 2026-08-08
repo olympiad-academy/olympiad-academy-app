@@ -58,7 +58,20 @@ type RenderableAuthField = "name" | "identity" | "password" | "formError";
 /** Fields not present on the schema's own field set. */
 const IDENTITY_ALIASES = new Set(["phone", "email"]);
 
-const RENDERABLE_FIELDS = new Set<string>(["name", "identity", "password"]);
+/** The three fields an AuthTextField actually renders an error under. */
+const RENDERABLE_FIELDS = ["name", "identity", "password"] as const;
+
+/**
+ * Type predicate rather than a membership test plus a cast: the compiler
+ * checks the narrowing here, so `mapFieldName` returns a real
+ * RenderableAuthField instead of asserting one. Asserting this exact set
+ * without a check is what this file already blames for letting an uncovered
+ * path through unnoticed (see the RenderableAuthField comment above), so it
+ * should not be how the set is consulted either.
+ */
+const isRenderableField = (value: string): value is RenderableAuthField => {
+  return RENDERABLE_FIELDS.some((field) => field === value);
+};
 
 /**
  * i18n key selection (D9: "keyed by issue code, not by Zod's English
@@ -98,8 +111,8 @@ const mapFieldName = (path: (string | number)[]): RenderableAuthField => {
   if (typeof first === "string" && IDENTITY_ALIASES.has(first)) {
     return "identity";
   }
-  if (typeof first === "string" && RENDERABLE_FIELDS.has(first)) {
-    return first as RenderableAuthField;
+  if (typeof first === "string" && isRenderableField(first)) {
+    return first;
   }
   return "formError";
 };
@@ -116,7 +129,7 @@ export interface AuthFormResolverExtra {
  * @param extra See {@link AuthFormResolverExtra}.
  */
 export const createAuthFormResolver = <TBody extends FieldValues>(
-  schema: ZodType<unknown>,
+  schema: ZodType<TBody>,
   extra: AuthFormResolverExtra,
 ): Resolver<AuthFormValues, unknown, TBody> => {
   return async (values: AuthFormValues) => {
@@ -129,7 +142,11 @@ export const createAuthFormResolver = <TBody extends FieldValues>(
 
     const parsed = await schema.safeParseAsync(body);
     if (parsed.success) {
-      return { values: parsed.data as TBody, errors: {} };
+      // No cast: `schema` is typed as producing TBody, so `parsed.data`
+      // already is one. Typing the parameter `ZodType<unknown>` and
+      // asserting the result here would have moved the same claim from a
+      // place the compiler checks to one it does not.
+      return { values: parsed.data, errors: {} };
     }
 
     const errors: FieldErrors<AuthFormValues> = {};
@@ -138,8 +155,8 @@ export const createAuthFormResolver = <TBody extends FieldValues>(
       // First issue per field wins — matches @hookform/resolvers' own
       // zodResolver behaviour (one FieldError per path). No cast: `field` is
       // RenderableAuthField, one of the four keys FieldErrors<AuthFormValues>
-      // actually declares (name/identity/password/root), so this assignment
-      // is checked, not asserted.
+      // actually declares (name/identity/password/formError), so this
+      // assignment is checked, not asserted.
       const fieldError: FieldError = { type: issue.code, message: errorKeyFor(field, issue) };
       errors[field] ??= fieldError;
     }

@@ -10,13 +10,12 @@ import { browserAuthApi } from "./browser-auth-api.js";
  */
 const AuthApiContext = createContext<AuthApi | null>(null);
 
-export const AuthApiProvider = ({
-  value,
-  children,
-}: {
+export interface AuthApiProviderProps {
   value: AuthApi;
   children: ReactNode;
-}): ReactElement => {
+}
+
+export const AuthApiProvider = ({ value, children }: AuthApiProviderProps): ReactElement => {
   return <AuthApiContext.Provider value={value}>{children}</AuthApiContext.Provider>;
 };
 

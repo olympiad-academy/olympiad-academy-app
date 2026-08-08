@@ -1,4 +1,4 @@
-import { useState, type ReactElement } from "react";
+import type { ReactElement } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -11,11 +11,32 @@ import type { LoginBody } from "@/auth/auth-api.js";
 import { AuthLayout } from "../auth-layout.js";
 import { AuthTextField } from "../auth-text-field.js";
 import { AuthSubmitButton } from "../auth-submit-button.js";
+import { AuthFormAlert } from "../auth-form-alert.js";
+import { useAuthSubmit } from "../use-auth-submit.js";
 import styles from "../auth-shared.module.css";
 
-interface ProtectedRouteState {
-  from?: string;
-}
+/**
+ * Where ProtectedRoutes recorded the user was heading before it bounced
+ * them here (app.tsx sets `state={{ from: location.pathname }}`).
+ *
+ * Read with a check rather than a cast: history state is attacker-editable
+ * (`history.pushState({from: "https://elsewhere"}, ...)` from any script) and
+ * survives a reload, so asserting its shape would let an arbitrary value
+ * reach `navigate()`. Only an in-app absolute path is accepted; anything
+ * else falls back to the default destination.
+ */
+const readRedirectTarget = (state: unknown): string | null => {
+  if (typeof state !== "object" || state === null || !("from" in state)) {
+    return null;
+  }
+  const { from } = state;
+  // A single leading slash: "/topics" yes, "//evil.example" and
+  // "https://evil.example" no — protocol-relative URLs are navigable.
+  if (typeof from !== "string" || !from.startsWith("/") || from.startsWith("//")) {
+    return null;
+  }
+  return from;
+};
 
 /**
  * Login screen (plan S5, D9): the same resolver machinery as signup, over
@@ -29,7 +50,6 @@ export const LoginRoute = (): ReactElement => {
   const navigate = useNavigate();
   const location = useLocation();
   const authApi = useAuthApi();
-  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const {
     register,
@@ -41,26 +61,14 @@ export const LoginRoute = (): ReactElement => {
     reValidateMode: "onChange",
   });
 
-  const submitLogin = async (body: LoginBody): Promise<void> => {
-    setSubmitError(null);
-    const result = await authApi.login(body);
-    if (result.ok) {
+  const { onSubmit, submitErrorKey } = useAuthSubmit<LoginBody>({
+    handleSubmit,
+    submit: (body) => authApi.login(body),
+    onSuccess: (result) => {
       browserAuthSession.setToken(result.token);
-      const from = (location.state as ProtectedRouteState | null)?.from;
-      void navigate(from ?? ROUTES.TOPICS, { replace: true });
-      return;
-    }
-    // OLY-42 owns the per-variant error UI (invalid/network); this slice
-    // must not fail silently on a real backend error while that lands.
-    setSubmitError("auth.errorGeneric");
-  };
-
-  const submitHandler = handleSubmit((body): void => {
-    void submitLogin(body);
+      void navigate(readRedirectTarget(location.state) ?? ROUTES.TOPICS, { replace: true });
+    },
   });
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-    void submitHandler(event);
-  };
 
   return (
     <AuthLayout>
@@ -84,16 +92,8 @@ export const LoginRoute = (): ReactElement => {
           error={errors.password}
           registration={register("password")}
         />
-        {errors.formError?.message !== undefined ? (
-          <p className={styles["formError"]} role="alert">
-            {t(errors.formError.message)}
-          </p>
-        ) : null}
-        {submitError !== null ? (
-          <p className={styles["formError"]} role="alert">
-            {t(submitError)}
-          </p>
-        ) : null}
+        <AuthFormAlert messageKey={errors.formError?.message} />
+        <AuthFormAlert messageKey={submitErrorKey} />
         <AuthSubmitButton label={t("auth.login")} isSubmitting={isSubmitting} />
       </form>
       <div className={styles["switchLink"]}>

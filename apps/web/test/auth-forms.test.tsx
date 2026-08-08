@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
+import type { ReactElement } from "react";
 import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index.js";
 import { AuthApiProvider } from "@/auth/auth-api-context.js";
 import { createMockAuthApi, MOCK_SEEDED_ACCOUNT } from "@/auth/mock-auth-api.js";
@@ -30,6 +31,24 @@ const fakeLocaleStorage = (initial: Record<string, string> = {}): LocaleStorage 
   };
 };
 
+/**
+ * Renders the router's current path so AC3's "lands on /topics" half can be
+ * asserted at the unit level too, not only end-to-end: without this the
+ * unit test could only prove the token was stored, and a form that stored a
+ * token but navigated nowhere would still pass.
+ */
+const LOCATION_PROBE_PREFIX = "path:";
+
+const LocationProbe = (): ReactElement => {
+  const location = useLocation();
+  return <span>{`${LOCATION_PROBE_PREFIX}${location.pathname}`}</span>;
+};
+
+const currentPath = (): string => {
+  const probe = screen.getByText(new RegExp(`^${LOCATION_PROBE_PREFIX}`));
+  return (probe.textContent ?? "").slice(LOCATION_PROBE_PREFIX.length);
+};
+
 const renderWithProviders = async (
   element: React.ReactElement,
   options: { authApi?: AuthApi; locale?: string } = {},
@@ -43,7 +62,10 @@ const renderWithProviders = async (
   render(
     <I18nextProvider i18n={i18n}>
       <AuthApiProvider value={authApi}>
-        <MemoryRouter initialEntries={["/signup"]}>{element}</MemoryRouter>
+        <MemoryRouter initialEntries={["/signup"]}>
+          {element}
+          <LocationProbe />
+        </MemoryRouter>
       </AuthApiProvider>
     </I18nextProvider>,
   );
@@ -106,8 +128,10 @@ describe("SignupRoute realtime validation (AC4, D9)", () => {
     screen.getByText("Telefon raqam yoki elektron pochta manzilini kiriting.");
   });
 
-  it("a valid signup stores the token (AC3, mock half)", async () => {
+  it("a valid signup stores the token AND lands on /topics (AC3, mock half)", async () => {
     await renderWithProviders(<SignupRoute />);
+    assert.equal(currentPath(), "/signup");
+
     fireEvent.change(screen.getByLabelText("Ism"), { target: { value: "Aziza" } });
     fireEvent.change(screen.getByLabelText("Telefon yoki Email"), {
       target: { value: "aziza@example.com" },
@@ -122,6 +146,25 @@ describe("SignupRoute realtime validation (AC4, D9)", () => {
     });
 
     assert.equal(window.localStorage.getItem(AUTH_TOKEN_STORAGE_KEY) !== null, true);
+    // The other half of AC3's unit proof: storing a token without navigating
+    // would leave the student on the form, and the token check alone cannot
+    // tell the two apart.
+    assert.equal(currentPath(), "/topics");
+  });
+
+  // AC4 says the message renders "in the active locale". uz and ru are
+  // covered above; without this, `en` could hold an empty or missing string
+  // and every test would stay green — i18next returns the key on a miss and
+  // the key-parity test only compares key sets, never values.
+  it("renders the contract's password error in English when en is active", async () => {
+    await renderWithProviders(<SignupRoute />, { locale: "en" });
+    const passwordInput = screen.getByLabelText("Password");
+    await act(async () => {
+      fireEvent.focus(passwordInput);
+      fireEvent.change(passwordInput, { target: { value: "short" } });
+      fireEvent.blur(passwordInput);
+    });
+    screen.getByText("Password must be at least 8 characters.");
   });
 });
 

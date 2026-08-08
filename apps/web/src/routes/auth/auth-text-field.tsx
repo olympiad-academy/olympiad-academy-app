@@ -15,8 +15,8 @@ export interface AuthTextFieldProps {
   error?: FieldError | undefined;
   registration: UseFormRegisterReturn;
   /** Advisory content under the input (currently the password strength
-   * meter). Rendered inside `.field` and in flow, so it sits above the
-   * out-of-flow error and the space `.field` reserves for it still holds. */
+   * meter). Rendered inside `.field`, after the hint and before the error,
+   * so the error stays the last thing under the field. */
   footer?: ReactNode;
 }
 
