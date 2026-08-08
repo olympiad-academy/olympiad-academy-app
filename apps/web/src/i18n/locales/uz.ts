@@ -12,13 +12,44 @@ export const uz = {
   // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
   // screens land. Copy is ours (stubs are not in the design of record).
   stubs: {
-    signupTitle: "Ro'yxatdan o'tish",
-    loginTitle: "Kirish",
     topicsTitle: "Mavzular",
-    authNote: "To'liq shakl OLY-40 qadamida — marshrut allaqachon zaxiralangan.",
     topicsNote: "To'liq mavzular ekrani — alohida vazifa. Quyida dizayn ruhidagi ko'rik.",
     profileTitle: "Profil",
     profileNote: "Profil sahifasi — alohida vazifa, marshrut allaqachon band qilingan.",
+    profileLogout: "Chiqish",
+  },
+  // Signup/login forms (OLY-40, D9). Copy transcribed from the design of
+  // record (D11-A1 snapshot i18n.ts) except errorPassword: the snapshot says
+  // "4 belgidan" but the contract requires 8 (contract.signup.body), and D9
+  // requires error copy to match the contract, never the snapshot.
+  auth: {
+    appSubtitle: "5-sinf olimpiada matematikasi",
+    signup: "Ro'yxatdan o'tish",
+    login: "Kirish",
+    name: "Ism",
+    namePlaceholder: "Ismingiz",
+    contact: "Telefon yoki Email",
+    contactPlaceholder: "+998 90 123 45 67 yoki ism@email.com",
+    contactHint: "Hisobingizga kirish uchun telefon yoki emailingizni kiriting.",
+    password: "Parol",
+    passwordPlaceholder: "••••••",
+    startPractising: "Mashqni boshlash",
+    alreadyHaveAccount: "Hisobim bor",
+    errorName: "Ismingizni kiriting.",
+    errorContact: "Telefon raqam yoki elektron pochta manzilini kiriting.",
+    errorContactInvalid: "Email manzilini to'g'ri kiriting.",
+    errorPassword: "Parol kamida 8 belgidan iborat bo'lishi kerak.",
+    errorPasswordRequired: "Parolingizni kiriting.",
+    errorGeneric: "Nimadir xato ketdi. Qaytadan urinib ko'ring.",
+    // Advisory password meter (not in the design of record — the snapshot
+    // has no such control, so this copy is ours, like the stubs above).
+    // No advice line: the verdict alone is the affordance, and any wording
+    // there would risk implying a composition rule the contract does not
+    // have (the estimate is length-led).
+    passwordStrength: "Parol ishonchliligi:",
+    passwordStrengthWeak: "zaif",
+    passwordStrengthFair: "o'rtacha",
+    passwordStrengthStrong: "ishonchli",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

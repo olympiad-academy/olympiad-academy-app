@@ -12,13 +12,43 @@ export const ru = {
   // Routing-skeleton stubs (D2/D8): i18n'ed placeholders until the real
   // screens land. Copy is ours (stubs are not in the design of record).
   stubs: {
-    signupTitle: "Регистрация",
-    loginTitle: "Вход",
     topicsTitle: "Темы",
-    authNote: "Полная форма — на шаге OLY-40, маршрут уже зарезервирован.",
     topicsNote: "Полный экран тем — отдельная задача. Ниже — обзор в духе дизайна.",
     profileTitle: "Профиль",
+    profileLogout: "Выйти",
     profileNote: "Страница профиля — отдельная задача, маршрут уже зарезервирован.",
+  },
+  // Signup/login forms (OLY-40, D9). Copy transcribed from the design of
+  // record (D11-A1 snapshot i18n.ts) except errorPassword: the snapshot says
+  // "не менее 4 символов" but the contract requires 8 (contract.signup.body).
+  auth: {
+    appSubtitle: "Олимпиадная математика, 5 класс",
+    signup: "Регистрация",
+    login: "Войти",
+    name: "Имя",
+    namePlaceholder: "Ваше имя",
+    contact: "Телефон или Email",
+    contactPlaceholder: "+998 90 123 45 67 или name@email.com",
+    contactHint: "Укажите телефон или email для входа в аккаунт.",
+    password: "Пароль",
+    passwordPlaceholder: "••••••",
+    startPractising: "Начать практику",
+    alreadyHaveAccount: "Уже есть аккаунт",
+    errorName: "Введите ваше имя.",
+    errorContact: "Введите телефон или email.",
+    errorContactInvalid: "Введите корректный email.",
+    errorPassword: "Пароль — не менее 8 символов.",
+    errorPasswordRequired: "Введите пароль.",
+    errorGeneric: "Что-то пошло не так. Повторите попытку.",
+    // Advisory password meter (not in the design of record — the snapshot
+    // has no such control, so this copy is ours, like the stubs above).
+    // No advice line: the verdict alone is the affordance, and any wording
+    // there would risk implying a composition rule the contract does not
+    // have (the estimate is length-led).
+    passwordStrength: "Надёжность пароля:",
+    passwordStrengthWeak: "слабый",
+    passwordStrengthFair: "средний",
+    passwordStrengthStrong: "надёжный",
   },
   // Landing copy — transcribed from the design of record (D11-A1 snapshot
   // i18n.ts). This is the approved text, not placeholder.

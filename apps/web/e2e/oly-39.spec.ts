@@ -3,8 +3,11 @@ import { expect, test } from "@playwright/test";
 /**
  * OLY-39 acceptance proofs (work brief AC1 + AC2, plan S7).
  * AC1: language switcher re-renders chrome and persists across reload.
- * AC2: the routing skeleton (`/`, `/signup`, `/login`, `/topics`) renders
- * i18n'ed content. Form behaviour is OLY-40 scope and is not asserted here.
+ * AC2: the routing skeleton (`/`, `/signup`, `/login`) renders i18n'ed
+ * content. `/topics` moved behind the auth guard in OLY-40 (plan S3, D7);
+ * its unauthenticated-render proof lives here as a redirect assertion, and
+ * its authenticated render is covered by oly-40.spec.ts (AC3). Form
+ * behaviour is OLY-40 scope and is not asserted here.
  */
 
 test.describe("AC1 — language switcher on the landing (D1)", () => {
@@ -30,7 +33,7 @@ test.describe("AC1 — language switcher on the landing (D1)", () => {
 });
 
 test.describe("AC2 — routing skeleton (D2/D8)", () => {
-  test("all four routes render their i18n'ed content", async ({ page }) => {
+  test("landing, signup and login render their i18n'ed content", async ({ page }) => {
     await page.goto("/");
     await expect(page.getByRole("heading", { level: 1 })).toContainText("Olimpiada matematikasini");
 
@@ -39,9 +42,14 @@ test.describe("AC2 — routing skeleton (D2/D8)", () => {
 
     await page.goto("/login");
     await expect(page.getByRole("heading", { level: 1 })).toHaveText("Kirish");
+  });
 
+  test("/topics requires a session (D7): unauthenticated visits redirect to /login", async ({
+    page,
+  }) => {
     await page.goto("/topics");
-    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Mavzular");
+    await expect(page).toHaveURL(/\/login$/);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText("Kirish");
   });
 
   test("landing CTAs navigate into the skeleton", async ({ page }) => {

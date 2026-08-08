@@ -1,12 +1,10 @@
 import "./helpers/dom.js";
 import type { ReactElement } from "react";
-import assert from "node:assert/strict";
 import { afterEach, describe, it } from "node:test";
 import { cleanup, render, screen } from "@testing-library/react";
 import { I18nextProvider } from "react-i18next";
 import { MemoryRouter } from "react-router-dom";
 import { createI18n, LOCALE_STORAGE_KEY, type LocaleStorage } from "@/i18n/index.js";
-import { AuthStubRoute } from "@/routes/stubs/auth-stub.js";
 import { ProfileStubRoute } from "@/routes/stubs/profile-stub.js";
 import { TopicsStubRoute } from "@/routes/stubs/topics-stub.js";
 
@@ -34,30 +32,6 @@ const renderStub = async (element: ReactElement, locale?: string): Promise<void>
 afterEach(() => cleanup());
 
 describe("Routing skeleton stubs (D2/D8, AC2)", () => {
-  it("signup stub renders an i18n'ed placeholder; nav links back to the landing per the design", async () => {
-    await renderStub(<AuthStubRoute kind="signup" />);
-
-    screen.getByRole("heading", { level: 1, name: "Ro'yxatdan o'tish" });
-    screen.getByText(/OLY-40/);
-    // The design of record's auth nav: chevron + brand text leading back to
-    // the landing (not a bare logo).
-    const back = screen.getByRole("link", { name: "Olympiad Academy" });
-    assert.equal(back.getAttribute("href"), "/");
-  });
-
-  it("login stub renders an i18n'ed placeholder", async () => {
-    await renderStub(<AuthStubRoute kind="login" />);
-
-    screen.getByRole("heading", { level: 1, name: "Kirish" });
-    screen.getByText(/OLY-40/);
-  });
-
-  it("stubs localise — ru stored locale renders Russian copy", async () => {
-    await renderStub(<AuthStubRoute kind="signup" />, "ru");
-
-    screen.getByRole("heading", { level: 1, name: "Регистрация" });
-  });
-
   it("topics stub carries the topic list in the spirit of the Topic List design (D8)", async () => {
     await renderStub(<TopicsStubRoute />);
 

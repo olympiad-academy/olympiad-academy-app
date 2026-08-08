@@ -166,7 +166,21 @@ export default tseslint.config(
         {
           selector: "variable",
           types: ["boolean"],
-          format: ["camelCase"],
+          // `format` is checked against the name with the prefix already
+          // removed, so `isSubmitting` is judged as `Submitting`. The letter
+          // after the prefix must be capitalised for the prefix to read as
+          // one, which means the remainder is always PascalCase — listing
+          // camelCase made the rule impossible to satisfy, since every
+          // correctly-prefixed boolean failed and destructuring one
+          // (`const { isSubmitting } = formState`) had to be avoided rather
+          // than fixed.
+          //
+          // PascalCase alone rather than both: keeping camelCase would also
+          // admit a lowercase single-word remainder (`isok`), which is the
+          // one spelling nobody writes and the only one the broken config
+          // ever accepted. The prefix requirement is untouched — a bare
+          // `submitting` is still an error.
+          format: ["PascalCase"],
           prefix: ["is", "has", "should", "can"],
         },
       ],

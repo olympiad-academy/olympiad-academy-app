@@ -24,7 +24,12 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      "/api": apiTarget,
+      // The API has no global prefix (its routes are /auth/*, /health/*), so
+      // the /api namespace exists only in the browser and is stripped here.
+      "/api": {
+        target: apiTarget,
+        rewrite: (path): string => path.replace(/^\/api/, ""),
+      },
     },
   },
 });

@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { useTranslation } from "react-i18next";
+import { LogoutButton } from "@/components/logout-button/logout-button.js";
 import { StubLayout } from "./stub-layout.js";
 import styles from "./stubs.module.css";
 
@@ -15,6 +16,7 @@ export const ProfileStubRoute = (): ReactElement => {
       <div className={styles["card"]}>
         <h1 className={styles["title"]}>{t("stubs.profileTitle")}</h1>
         <p className={styles["note"]}>{t("stubs.profileNote")}</p>
+        <LogoutButton />
       </div>
     </StubLayout>
   );
