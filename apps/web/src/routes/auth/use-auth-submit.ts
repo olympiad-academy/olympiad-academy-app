@@ -47,10 +47,17 @@ export const useAuthSubmit = <TBody extends FieldValues>({
     setSubmitErrorKey("auth.errorGeneric");
   };
 
-  const submitHandler = handleSubmit((body): void => {
-    void run(body);
-  });
+  // Returns the promise rather than firing and forgetting it: react-hook-form
+  // holds `formState.isSubmitting` true exactly as long as this callback's
+  // promise is pending, and that flag is what disables the submit button. A
+  // `void run(body)` here reported the submission as finished the moment the
+  // request started, so the button re-enabled mid-flight and a second click
+  // sent a duplicate — on signup, racing a success against a
+  // duplicate-account error for the same person.
+  const submitHandler = handleSubmit((body) => run(body));
 
+  // `void` belongs here and only here: the DOM's submit handler must return
+  // undefined, not a promise.
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     void submitHandler(event);
   };
