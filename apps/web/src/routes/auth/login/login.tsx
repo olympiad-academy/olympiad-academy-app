@@ -7,6 +7,7 @@ import { ROUTES } from "@/constants/routes.js";
 import { createAuthFormResolver, type AuthFormValues } from "@/auth/auth-form-resolver.js";
 import { useAuthApi } from "@/auth/auth-api-context.js";
 import { browserAuthSession } from "@/auth/auth-session.js";
+import { readRedirectTarget } from "@/auth/redirect-target.js";
 import type { LoginBody } from "@/auth/auth-api.js";
 import { AuthLayout } from "../auth-layout.js";
 import { AuthTextField } from "../auth-text-field.js";
@@ -14,29 +15,6 @@ import { AuthSubmitButton } from "../auth-submit-button.js";
 import { AuthFormAlert } from "../auth-form-alert.js";
 import { useAuthSubmit } from "../use-auth-submit.js";
 import styles from "../auth-shared.module.css";
-
-/**
- * Where ProtectedRoutes recorded the user was heading before it bounced
- * them here (app.tsx sets `state={{ from: location.pathname }}`).
- *
- * Read with a check rather than a cast: history state is attacker-editable
- * (`history.pushState({from: "https://elsewhere"}, ...)` from any script) and
- * survives a reload, so asserting its shape would let an arbitrary value
- * reach `navigate()`. Only an in-app absolute path is accepted; anything
- * else falls back to the default destination.
- */
-const readRedirectTarget = (state: unknown): string | null => {
-  if (typeof state !== "object" || state === null || !("from" in state)) {
-    return null;
-  }
-  const { from } = state;
-  // A single leading slash: "/topics" yes, "//evil.example" and
-  // "https://evil.example" no — protocol-relative URLs are navigable.
-  if (typeof from !== "string" || !from.startsWith("/") || from.startsWith("//")) {
-    return null;
-  }
-  return from;
-};
 
 /**
  * Login screen (plan S5, D9): the same resolver machinery as signup, over

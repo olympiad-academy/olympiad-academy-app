@@ -104,6 +104,11 @@ New design fact from the snapshot: the design of record defines two complete col
 5. **Password rule beyond length** (raised 2026-08-07). `password: z.string().min(8)` checks length only. Worth deciding deliberately rather than by default: a rule enforced only in the browser is not a security control (a direct `POST` bypasses the form), so the real rule has to be server-side. Note that current guidance (NIST SP 800-63B) moved away from composition requirements — mandatory digit/symbol/uppercase pushes people toward predictable shapes — and toward length plus a breached-password check. The frontend ships an advisory strength meter meanwhile (see the hardening record below); it blocks nothing and follows whatever the contract lands on.
 6. **httpOnly-cookie auth (D7)** — the reopening condition has fired but nothing is built on either side; see the status check under D7 for what was verified.
 
+### Open — repo hygiene, no product decision needed
+
+7. **Two zod ranges declared** — `apps/web` asks for `^3.25.76`, `packages/contracts` for `^3.24.1`. The lockfile resolves both to one instance today, so nothing is broken; OLY-40 also removed the one place that depended on that being true (the mock recognised validation failures by `error instanceof ZodError`, which is false across two instances — it uses `safeParse` now). Recorded because a future second instance would be a silent trap and nobody would think to look here. Aligning the ranges touches `packages/contracts`, which was read-only for this slice.
+8. **`prefers-reduced-motion` is not honoured anywhere** — not a regression from OLY-40: the transitions it adds are colour and opacity rather than movement, and the pre-existing components (`auth-nav`, `theme-toggle`, the landing sections) are the same. Guarding only the newest ones would be inconsistent, so it belongs in one repo-wide pass. `docs/code-standards.md` lists it under the WCAG floor, so today the standard is stated but unmet.
+
 ### Resolved
 
 - **Password-reset endpoint (D4)** — not being pursued for now (operator, 2026-08-07). OLY-41 is deferred, not blocked; nothing is expected from the backend.
